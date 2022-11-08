@@ -70,7 +70,8 @@ if(isset($_REQUEST['process']))
         foreach($carts as $cart){
             $orderdetail = new Orderdetail();
             $orderdetail->Orderid = $oder->Id;
-            $orderdetail->Productid = $cart['Pricesale'];
+            $orderdetail->Productid = $cart['Id'];
+            $orderdetail->Price = $cart['Price'];
             $orderdetail->Quantity = $cart['qty'];
             $orderdetail->Amount = $cart['amount'];
             $orderdetail->save();
