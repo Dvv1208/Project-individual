@@ -2,9 +2,10 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
 use App\Models\User;
 
-$row = (isset($_SESSION['user'])) ?  $_SESSION['user']: [];
+$row = (isset($_SESSION['user'])) ?  $_SESSION['user'] : [];
 
 ?>
 <!DOCTYPE html>
@@ -23,102 +24,102 @@ $row = (isset($_SESSION['user'])) ?  $_SESSION['user']: [];
     <script src="public/js/bootstrap.bundle.min.js"></script>
 </head>
 
-<body>
+<body class="o_connected_user">
     <header class="header">
-        <section class="header">
-            <div class="container my-3">
-                <div class="row">
-                    <div class="col-md-2">
-                        <img src="public/images/logo2.jpg" class="img-fluid" alt="logo">
-                    </div>
-                    <div class="col-md-6">
-                        <div class="input-group mb-3 my-3">
-                            <select name="" class="form-select border-right-0" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <option value="">Danh mục sản phẩm</option>
-                                <option value="">Điện thoại Iphone</option>
-                                <option value="">Điện thoại Samsung</option>
-                                <option value="">Điện thoại Nokia</option>
-                                <option value="">Điện thoại Vivo</option>
-                                <option value="">Điện thoại Xiaomi</option>
-                                <option value="">Điện thoại Oppo</option>
-                                <option value="">Điện thoại Realme</option>
-                            </select>
-                            <input type="text" class="form-control" aria-label="Text input with dropdown button">
-                            <button type="submit" class="input-group-text" id="basic-addon2">
-                                <i class="fas fa-search"></i>
-                            </button>
+        <div id="wrapwrap" class="">
+            <header id="top" data-anchor="true" data-name="Header" class="o_header_standard o_top_fixed_element">
+                <nav data-name="Navbar" class="navbar navbar-expand-lg navbar-light o_colored_level o_cc shadow-sm">
+                    <div id="top_menu_container" class="container justify-content-start justify-content-lg-between">
+                        <a href="/" class="navbar-brand logo mr-4">
+                            <span data-oe-model="website" data-oe-id="1" data-oe-field="logo" data-oe-type="image" data-oe-expression="website.logo" role="img" aria-label="Logo of My Website" title="My Website"><img src="/web/image/website/1/logo/My%20Website?unique=3e7f044" class="img img-fluid" alt="My Website" loading="lazy"></span>
+                        </a>
+                        <button type="button" data-toggle="collapse" data-target="#top_menu_collapse" data-oe-model="ir.ui.view" data-oe-id="4965" data-oe-field="arch" data-oe-xpath="/t[1]/button[1]" class="navbar-toggler ml-auto">
+                            <span class="navbar-toggler-icon o_not_editable"></span>
+                        </button>
+                        <div id="top_menu_collapse" class="collapse navbar-collapse order-last order-lg-0" aria-expanded="false">
+                            <ul id="top_menu" class="nav navbar-nav flex-grow-1">
+                                <li class="nav-item">
+                                    <a role="menuitem" href="/" class="nav-link ">
+                                        <span data-oe-model="website.menu" data-oe-id="5" data-oe-field="name" data-oe-type="char" data-oe-expression="submenu.name">Home</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a role="menuitem" href="index.php" class="nav-link active">
+                                        <span data-oe-model="website.menu" data-oe-id="10" data-oe-field="name" data-oe-type="char" data-oe-expression="submenu.name">Shop</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a role="menuitem" href="/contactus" class="nav-link ">
+                                        <span data-oe-model="website.menu" data-oe-id="6" data-oe-field="name" data-oe-type="char" data-oe-expression="submenu.name">Contact us</span>
+                                    </a>
+                                </li>
+
+                                <li class="o_wsale_my_cart nav-item mx-lg-3">
+                                    <?php
+                                    $count_cart = 0;
+                                    if (isset($_SESSION['cart'])) {
+                                        $cart = $_SESSION['cart'];
+                                        $count_cart = count($cart);
+                                    }
+                                    ?>
+                                    <a href="index.php?option=cart" class="nav-link" data-original-title="" title="">
+                                        <i class="fa fa-shopping-cart"></i>
+
+                                        <sup class="badge bg-danger rounded-pill"><?php echo $count_cart; ?></sup>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="oe_structure oe_structure_solo" id="oe_structure_header_default_1">
+                            <section class="s_text_block" data-snippet="s_text_block" data-name="Text">
+                                <div class="container">
+                                    <ul id="top_menu" class="nav navbar-nav flex-grow-1">
+                                        <?php if (isset($_SESSION['user'])) : ?>
+                                            <ul class="nav-item dropdown ml-lg-auto o_no_autohide_item">
+                                                <a href="#" role="button" data-bs-toggle="dropdown" class="dropdown-toggle nav-link font-weight-bold" aria-expanded="false">
+                                                    <span class=""><?php echo $_SESSION['user'] ?></span>
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                    <li>
+                                                        <a class="dropdown-item" href="index.php?option=customer&logout">Đăng
+                                                            xuất</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item" href="index.php?option=customer&protife">Thông tin
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </ul>
+                                        <?php else : ?>
+
+                                            <ul class="nav-item dropdown ml-lg-auto o_no_autohide_item">
+                                                <a class="nav-link dropdown-toggle text-dark" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tài khoản
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                    <li>
+                                                        <a class="dropdown-item" href="index.php?option=customer&login">Đăng
+                                                            nhập</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item" href="index.php?option=customer&register">Đăng
+                                                            ký</a>
+                                                    </li>
+                                                </ul>
+                                            </ul>
+                                        <?php endif; ?>
+                                    </ul>
+                                </div>
+                            </section>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <ul class="nav justify-content-end">
-                            <?php
-                            $count_cart=0;
-                            if(isset($_SESSION['cart']))
-                            {
-                                $cart = $_SESSION['cart'];
-                                $count_cart=count($cart);
-                            }   
-                            ?>
-                            <div class="col mt-3 text-center">
-                                <a href="index.php?option=cart" class="text-decoration-none text-dark">
-                                    <i class="fa-solid fa-cart-shopping fs-3 ms-3"></i>
-                                    <span class="badge bg-danger rounded-pill"><?php echo $count_cart;?></span>
-                                    <br>
-                                    <h6 class="my-2">
-                                        <a style="text-decoration: none" class="text-dark"
-                                            href="index.php?option=cart"><b>Giỏ
-                                                hàng</b>
-                                        </a>
-                                    </h6>
-                                </a>
-                            </div>
-                            <div class="col mt-3 text-center">
-                                <?php if(isset($_SESSION['user'])) :?>
-                                <i class="fa-solid fa-user fs-3 ms-4 "></i>
-                                <ul class="">
-                                    <a class="nav-link dropdown-toggle text-dark" href="" id="navbarDropdown"
-                                        role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false"><b><?php echo $_SESSION['user']?></b>
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li>
-                                            <a class="dropdown-item" href="index.php?option=customer&logout">Đăng
-                                                xuất</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="index.php?option=customer&protife">Thông tin
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </ul>
-                                <?php else:?>
-                                <i class="fa-solid fa-user fs-3 ms-4 "></i>
-                                <ul class="">
-                                    <a class="nav-link dropdown-toggle text-dark" href="" id="navbarDropdown"
-                                        role="button" data-bs-toggle="dropdown" aria-expanded="false"><b>Tài khoản</b>
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li>
-                                            <a class="dropdown-item" href="index.php?option=customer&login">Đăng
-                                                nhập</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="index.php?option=customer&register">Đăng
-                                                ký</a>
-                                        </li>
-                                    </ul>
-                                </ul>
-                                <?php endif;?>
-                            </div>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+                </nav>
+            </header>
+        </div>
+    </header>
+</body>
 
-        <section class="mainmenu clearfix bg-mainmenu">
-            <div class="container">
-                <?php require_once('views/frontend/mod_mainmenu.php') ?>
-            </div>
-        </section>
+<section class="mainmenu clearfix">
+    <div class="container">
+        <?php require_once('views/frontend/mod_mainmenu.php') ?>
+    </div>
+</section>

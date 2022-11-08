@@ -11,16 +11,20 @@ use App\Libraries\Myclass;
 <?php
 if(isset($_REQUEST['login']))
 {
-    header("location:index.php?option=login");
+    require_once("views/frontend/customer-login.php");
 }
 if(isset($_REQUEST['register']))
 {
-    header("location:index.php?option=register");
+    require_once("views/frontend/customer-register.php");
 }
 if(isset($_REQUEST['logout']))
 {
     unset($_SESSION['user']);
     // unset($_SESSION['userid']);
     header("location:index.php");
+}
+if(isset($_REQUEST['profile']))
+{
+    require_once("views/frontend/customer-profile.php");
 }
 ?>

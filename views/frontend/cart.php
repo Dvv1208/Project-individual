@@ -1,7 +1,8 @@
 <?php
 use App\Models\Product;
 use App\Libraries\Cart;
-use App\Libraries\Myclass;
+use App\Models\Order;
+use App\Models\User;
 
 $product = Product::where([['Status', '=', '1']])->orderBy('CreatedAt','desc')->get();
 
@@ -25,6 +26,11 @@ if(isset($_REQUEST['addcart']))
     Cart::addCart($row_cart);
     header("location:index.php");
 }
+
+if(isset($_SESSION['contentcart'])){
+    $row_cart = $_SESSION['contentcart'];
+}
+
 if(isset($_REQUEST['delcart'])){
     
     $id = $_REQUEST['delcart'];
@@ -42,4 +48,22 @@ if($page=="view")
 {
     $list_content = Cart::contentCart();
     require_once'views/frontend/cart_view.php';
+}
+
+if(isset($_REQUEST['process']))
+{
+    $user = User::find($_SESSION['user_id']);
+    $data = getdate();
+    $oder = new Order();
+    $oder->Code = $data[0];
+    $oder->User_id = $_SESSION['user_id'];
+    $oder->CreatedAt = date('Y-m-d H:i:s');
+    $oder->Diachi = (isset($_POST['Diachi'])?$_POST['Diachi']:$user['Address']);
+    $oder->Name = (isset($_POST['Name'])?$_POST['Name']:$user['Fullname']);
+    $oder->Phone = (isset($_POST['Phone'])?$_POST['Phone']:$user['Phone']);
+    $oder->Email = (isset($_POST['Email'])?$_POST['Email']:$user['Email']);
+    $oder->Status = 1;
+    $oder->save();
+    // Order::insert($data);
+    //header("location:index.php?option=cart-process-detail");
 }

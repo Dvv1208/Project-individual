@@ -68,7 +68,6 @@ $row = Order::find($id);
                         <?php if($list_content != null):?>
                         <table class="table table-borderd">
                             <tr>
-                                <th class="text-center">Id sản phẩm</th>
                                 <th class="text-center" style="width:100px">Hình ảnh</th>
                                 <th class="text-center">Tên sản phẩm</th>
                                 <th class="text-center">Giá</th>
@@ -77,7 +76,6 @@ $row = Order::find($id);
                             </tr>
                             <?php foreach($list_content as $rcart):?>
                             <tr>
-                                <td class="text-center"><?php echo $rcart['Id'] ?></td>
                                 <td class="text-center">
                                     <img src="public/images/product/<?php echo $rcart['Img'];?>" class="img-fluid"
                                         alt="<?php echo $rcart['Img'];?>">
@@ -91,9 +89,7 @@ $row = Order::find($id);
                             </tr>
                             <?php endforeach;?>
                             <tr>
-                                <td colspan="5">
-                                    <!-- <a class="btn btn-danger" href="index.php?option=cart&pay_view=all">Xóa tất cả</a> -->
-                                    <!-- <button type="submit" class="btn btn-info">Cập nhật</button>-->
+                                <td colspan="4">
                                 </td>
                                 <td colspan="2" class="text-end">
                                     <?php echo "Tổng tiền: ".number_format($totalMoney);?><sup>đ</sup>

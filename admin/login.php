@@ -33,6 +33,7 @@ use App\Models\User;
     {
         $username = $_POST['username'];
         $password = sha1($_POST['password']);
+        // $data['password'] = $password;
         if (filter_var($username, FILTER_VALIDATE_EMAIL))
         {
             $args = [
@@ -46,29 +47,25 @@ use App\Models\User;
             $args = [
                 ['Status','=','1'],
                 ['Username','=',$username],
-                ['Roles','=','0']
+                ['Roles','=','1']
             ];
         }
-        $user = User::first();
+        $user = User::where($args)->first();
         //Bẫy lỗi
         $error='';
-        if($user == null)
-        {
-            $error='<div class="text-danger">Tên đăng nhập không tồn tại !</div>';
-        }
-        else
-        {
-            if($password==$user['Password'])
-            {
+        if($user != null) {
+            if($password==$user['Password']) {
                 $_SESSION['useradmin']=$username;
                 $_SESSION['userid']=$user['Id'];
                 header("location:index.php");
             }
-            else
-            {
+            else {
                 $error='<div class="text-danger">Mật khẩu không chính xác !</div>';
             } 
-        } 
+            
+        } else {
+                $error='<div class="text-danger">Tên đăng nhập không tồn tại !</div>';
+            }
     }
     ?>
     <div class="login-box">
