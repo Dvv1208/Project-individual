@@ -3,6 +3,7 @@ use App\Models\Product;
 use App\Libraries\Cart;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Orderdetail;
 
 $product = Product::where([['Status', '=', '1']])->orderBy('CreatedAt','desc')->get();
 
@@ -63,7 +64,18 @@ if(isset($_REQUEST['process']))
     $oder->Phone = (isset($_POST['Phone'])?$_POST['Phone']:$user['Phone']);
     $oder->Email = (isset($_POST['Email'])?$_POST['Email']:$user['Email']);
     $oder->Status = 1;
-    $oder->save();
+    if($oder->save())
+    {
+        $carts = $list_content ;
+        foreach($carts as $cart){
+            $orderdetail = new Orderdetail();
+            $orderdetail->Orderid = $oder->Id;
+            $orderdetail->Productid = $cart['Pricesale'];
+            $orderdetail->Quantity = $cart['qty'];
+            $orderdetail->Amount = $cart['amount'];
+            $orderdetail->save();
+        }
+    }
     // Order::insert($data);
     //header("location:index.php?option=cart-process-detail");
 }
