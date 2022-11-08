@@ -5,7 +5,7 @@ use App\Libraries\Cart;
 
 $title = 'Thanh toán';
 
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['logincustomer'])) {
     header('location:index.php?option=customer-login');
 }
 

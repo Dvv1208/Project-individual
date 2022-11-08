@@ -5,7 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 use App\Models\User;
 
-$row = (isset($_SESSION['user'])) ?  $_SESSION['user'] : [];
+$row = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
 
 ?>
 <!DOCTYPE html>
@@ -74,10 +74,10 @@ $row = (isset($_SESSION['user'])) ?  $_SESSION['user'] : [];
                             <section class="s_text_block" data-snippet="s_text_block" data-name="Text">
                                 <div class="container">
                                     <ul id="top_menu" class="nav navbar-nav flex-grow-1">
-                                        <?php if (isset($_SESSION['user'])) : ?>
+                                        <?php if (isset($_SESSION['logincustomer'])) : ?>
                                             <ul class="nav-item dropdown ml-lg-auto o_no_autohide_item">
                                                 <a href="#" role="button" data-bs-toggle="dropdown" class="dropdown-toggle nav-link font-weight-bold" aria-expanded="false">
-                                                    <span class=""><?php echo $_SESSION['user'] ?></span>
+                                                    <span class=""><?php echo $_SESSION['logincustomer'] ?></span>
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                     <li>

@@ -11,16 +11,17 @@ if (isset($_POST['DANGNHAP'])) {
     $username = $_POST['username'];
     $password = sha1($_POST['password']);
     $message_alert = "";
+    $args = null;
     if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
         $args = [
-            ['Status', '=', '1'],
             ['Email', '=', $username],
+            ['Password', '=', $password],
             ['Roles', '=', '1']
         ];
     } else {
         $args = [
-            ['Status', '=', '1'],
             ['Username', '=', $username],
+            ['Password', '=', $password],
             ['Roles', '=', '1']
         ];
     }
@@ -30,7 +31,7 @@ if (isset($_POST['DANGNHAP'])) {
         $message_alert = "Tên đăng nhập không tồn tại";
     } else {
         if ($user != null) {
-            $_SESSION['user'] = $username;
+            $_SESSION['logincustomer'] = $username;
             $_SESSION['user_id'] = $user->Id;
             $message_alert = "Đăng nhập thành công";
         } else {
