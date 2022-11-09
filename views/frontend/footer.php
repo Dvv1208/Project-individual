@@ -29,12 +29,10 @@
                 <div class="col-md">
                     <h5><i class="fa-solid fa-location-dot"></i> Địa Điểm Chi Nhánh Các Cửa Hàng</h5>
                     <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted ">Cơ Sở 1: Số 97 đường số
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted ">Trụ sở chính: Số 97 đường số
                                 11, Phường Trường Thọ,
                                 Tp.Thủ Đức, Tp.HCM </a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Cơ Sở 2: Số 20 Tăng Nhơn
-                                Phú A, Phường Phước
-                                Long B, Tp.Thủ Đức, Tp.HCM
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">
                             </a></li>
 
                     </ul>
@@ -99,7 +97,7 @@
 
     <section class="copyright clearfix border-top py-3 bg-mainmenu">
         <div class="container text-center">
-            Thiết kế bởi <strong>Nhóm 3</strong> &copy 2022
+            Thiết kế bởi <strong>Võ Văn Dương</strong> &copy 2022
         </div>
     </section>
     </footer>

@@ -82,7 +82,7 @@ $list_slider = Slider::where([['Position', '=', 'slideshow'], ['Status', '=', '1
                                                             ?>
                                                         </h5>
                                                         <div class="row">
-                                                            <div class="btn-group w-100" role="group" aria-label="Basic example">
+                                                            <div class="btn-group w-100" data-autohide="false" role="group" aria-label="Basic example">
                                                                 <a href="index.php?option=product&id=<?php echo $row_product['Slug']; ?>" class="btn btn-outline-success"><i class="far fa-eye"></i> </a>
                                                                 <a href="index.php?option=cart&addcart=<?php echo $row_product['Id']; ?>" class="btn btn-outline-info"><i class="fas fa-shopping-cart"></i> </a>
                                                             </div>

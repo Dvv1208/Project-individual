@@ -19,7 +19,7 @@ if(isset($_REQUEST['register']))
 }
 if(isset($_REQUEST['logout']))
 {
-    unset($_SESSION['user']);
+    unset($_SESSION['logincustomer']);
     // unset($_SESSION['userid']);
     header("location:index.php");
 }

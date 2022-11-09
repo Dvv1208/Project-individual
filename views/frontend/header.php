@@ -22,9 +22,13 @@ $row = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
     <link rel="stylesheet" href="public/css/all.min.css">
     <link rel="stylesheet" href="public/css/layoutsite.css">
     <script src="public/js/bootstrap.bundle.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
 </head>
 
 <body class="o_connected_user">
+
     <header class="header">
         <div id="wrapwrap" class="">
             <header id="top" data-anchor="true" data-name="Header" class="o_header_standard o_top_fixed_element">
@@ -40,17 +44,17 @@ $row = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
                             <ul id="top_menu" class="nav navbar-nav flex-grow-1">
                                 <li class="nav-item">
                                     <a role="menuitem" href="/" class="nav-link ">
-                                        <span data-oe-model="website.menu" data-oe-id="5" data-oe-field="name" data-oe-type="char" data-oe-expression="submenu.name">Home</span>
+                                        <span>Trang chủ</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a role="menuitem" href="index.php" class="nav-link active">
-                                        <span data-oe-model="website.menu" data-oe-id="10" data-oe-field="name" data-oe-type="char" data-oe-expression="submenu.name">Shop</span>
+                                        <span>Cửa hàng</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a role="menuitem" href="/contactus" class="nav-link ">
-                                        <span data-oe-model="website.menu" data-oe-id="6" data-oe-field="name" data-oe-type="char" data-oe-expression="submenu.name">Contact us</span>
+                                    <a role="menuitem" href="index.php?option=contact" class="nav-link ">
+                                        <span>Liên hệ</span>
                                     </a>
                                 </li>
 
@@ -91,7 +95,6 @@ $row = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
                                                 </ul>
                                             </ul>
                                         <?php else : ?>
-
                                             <ul class="nav-item dropdown ml-lg-auto o_no_autohide_item">
                                                 <a class="nav-link dropdown-toggle text-dark" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tài khoản
                                                 </a>

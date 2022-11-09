@@ -6,8 +6,6 @@ use App\Libraries\Cart;
 $title = 'Đặt hàng thành công';
 $list_order = Order::where('Status', '!=', '0')->orderBy('CreatedAt', 'desc')->get();
 
-$id = $_REQUEST['addcart'];
-$row = Order::find($id);
 ?>
 
 <?php require_once('views/frontend/header.php'); ?>

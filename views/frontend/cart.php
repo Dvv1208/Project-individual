@@ -26,10 +26,7 @@ if(isset($_REQUEST['addcart']))
     );
     Cart::addCart($row_cart);
     header("location:index.php");
-}
-
-if(isset($_SESSION['contentcart'])){
-    $row_cart = $_SESSION['contentcart'];
+    exit;
 }
 
 if(isset($_REQUEST['delcart'])){
@@ -43,40 +40,20 @@ if(isset($_REQUEST['delcart'])){
        Cart::removeCart($id);
     }
     header("location:index.php?option=cart");
+    exit;
 }
 
 if($page=="view")
 {
     $list_content = Cart::contentCart();
-    require_once'views/frontend/cart_view.php';
+    require_once('views/frontend/cart_view.php');
+    exit;
 }
 
-if(isset($_REQUEST['process']))
-{
-    $user = User::find($_SESSION['user_id']);
-    $data = getdate();
-    $oder = new Order();
-    $oder->Code = $data[0];
-    $oder->User_id = $_SESSION['user_id'];
-    $oder->CreatedAt = date('Y-m-d H:i:s');
-    $oder->Diachi = (isset($_POST['Diachi'])?$_POST['Diachi']:$user['Address']);
-    $oder->Name = (isset($_POST['Name'])?$_POST['Name']:$user['Fullname']);
-    $oder->Phone = (isset($_POST['Phone'])?$_POST['Phone']:$user['Phone']);
-    $oder->Email = (isset($_POST['Email'])?$_POST['Email']:$user['Email']);
-    $oder->Status = 1;
-    if($oder->save())
-    {
-        $carts = $list_content ;
-        foreach($carts as $cart){
-            $orderdetail = new Orderdetail();
-            $orderdetail->Orderid = $oder->Id;
-            $orderdetail->Productid = $cart['Id'];
-            $orderdetail->Price = $cart['Price'];
-            $orderdetail->Quantity = $cart['qty'];
-            $orderdetail->Amount = $cart['amount'];
-            $orderdetail->save();
-        }
-    }
-    // Order::insert($data);
-    //header("location:index.php?option=cart-process-detail");
-}
+// if(isset($_REQUEST['process'])){
+//     require_once('views/frontend/cart-pay_view.php');
+// }else{
+//     require_once('views/frontend/cart_view.php');
+// }
+
+?>

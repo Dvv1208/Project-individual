@@ -1,99 +1,132 @@
-<?php require_once('views/frontend/header.php'); ?>
 <?php
+require_once("vendor/autoload.php");
+require_once("config/database.php");
 
 use App\Models\User;
-use App\Libraries\MyClass;
+
 
 ?>
 
-<?php
-if (isset($_POST['DANGNHAP'])) {
-    $username = $_POST['username'];
-    $password = sha1($_POST['password']);
-    $message_alert = "";
-    $args = null;
-    if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
-        $args = [
-            ['Email', '=', $username],
-            ['Password', '=', $password],
-            ['Roles', '=', '1']
-        ];
-    } else {
-        $args = [
-            ['Username', '=', $username],
-            ['Password', '=', $password],
-            ['Roles', '=', '1']
-        ];
-    }
-    $user = User::where($args)->first();
-    //Bẫy lỗi
-    if ($user == null) {
-        $message_alert = "Tên đăng nhập không tồn tại";
-    } else {
-        if ($user != null) {
-            $_SESSION['logincustomer'] = $username;
-            $_SESSION['user_id'] = $user->Id;
-            $message_alert = "Đăng nhập thành công";
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Đăng Nhập</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="public/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="public/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="public/dist/css/adminlte.min.css">
+</head>
+
+<body class="hold-transition login-page">
+    <?php
+    if (isset($_POST['DANGNHAP'])) {
+        $username = $_POST['username'];
+        $password = sha1($_POST['password']);
+        $message_alert = "";
+        $args = null;
+        if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
+            $args = [
+                ['Email', '=', $username],
+                ['Password', '=', $password],
+                ['Roles', '=', '1']
+            ];
         } else {
-            $message_alert = "Mật khẩu không chính xác";
+            $args = [
+                ['Username', '=', $username],
+                ['Password', '=', $password],
+                ['Roles', '=', '1']
+            ];
+        }
+        $user = User::where($args)->first();
+        //Bẫy lỗi
+        if ($user == null) {
+            $message_alert = "Tên đăng nhập không tồn tại";
+        } else {
+            if ($user != null) {
+                $_SESSION['logincustomer'] = $username;
+                $_SESSION['user_id'] = $user->Id;
+                $message_alert = "Đăng nhập thành công";
+                header("location:index.php");
+            } else {
+                $message_alert = "Mật khẩu không chính xác";
+            }
         }
     }
-}
-?>
-<section class="maincontent">
-    <form action="index.php?option=customer&login" method="post">
-        <div class="container">
-            <div class="row my-3">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <?php if (!isset($_SESSION['user'])) : ?>
-                        <h2>
-                            <p class="text-center">Thông tin đăng nhập</p>
-                        </h2>
+    ?>
 
-                        <div class="mb-3">
-                            <label for="username">Tên đăng nhập</label>
-                            <input name="username" type="text" required class="form-control" placeholder="Tên Đăng Nhập hoặc Email">
-                        </div>
-                        <div class="mb-3">
-                            <label for="password">Mật khẩu</label>
-                            <input name="password" type="password" required class="form-control" placeholder="Mật Khẩu">
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="mb-3">
-                                <button name="DANGNHAP" type="submit" class="btn btn-primary btn-block">Đăng Nhập</button>
-                            </div>
-
-                        </div>
-                    <?php endif; ?>
-                    <?php if (isset($message_alert)) : ?>
-                        <div class="col-12">
-                            <div class="alert alert-info">
-                                <?= $message_alert; ?>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-
-                </div>
+    <?php if (isset($message_alert)) : ?>
+        <div class="col-12">
+            <div class="alert alert-info">
+                <?= $message_alert; ?>
             </div>
         </div>
-        </div>
-    </form>
-    <!-- /.social-auth-links -->
-    </div>
-    <!-- /.card-body -->
-    </div>
-    <!-- /.card -->
-    </div>
-    </div>
-</section>
-<!-- /.login-box -->
-<?php require_once('views/frontend/footer.php'); ?>
+    <?php endif; ?>
+    <div class="login-box">
+        <!-- /.login-logo -->
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="#" class="h1"><b>Đăng Nhập</b></a>
+            </div>
+            <div class="card-body">
+                <p class="login-box-msg">Thông tin đăng nhập</p>
 
-<!-- jQuery -->
-<script src="public/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="public/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="public/dist/js/adminlte.min.js"></script>
+                <form action="" name="from1" method="post">
+                    <div class="input-group mb-3">
+                        <input name="username" type="text" required class="form-control" placeholder="Tên Đăng Nhập hoặc Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input name="password" type="password" required class="form-control" placeholder="Mật Khẩu">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button name="DANGNHAP" type="submit" class="btn btn-primary btn-block">Đăng Nhập</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <?php if (isset($error)) : ?>
+                            <div class="col-12">
+                                <?= $error; ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="container signin my-3 text-center">
+                        <p>Bạn chưa có tài khoản?</p>
+                        <a href="index.php?option=customer&register">Đăng ký</a>
+                    </div>
+                </form>
+                <!-- /.social-auth-links -->
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.login-box -->
+
+    <!-- jQuery -->
+    <script src="public/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="public/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="public/dist/js/adminlte.min.js"></script>
+</body>
+
+</html>

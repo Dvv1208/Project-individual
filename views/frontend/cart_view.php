@@ -7,21 +7,18 @@ $title = "Giỏ hàng";
 ?>
 
 <?php require_once('views/frontend/header.php'); ?>
+<form action="index.php?option=cart" method="post">
+    <section class="clearfix main mt-2">
+        <div class="container my-3 mb-3">
+            <div class="row">
+                <div class="col-md-9">
+                    <h3>GIỎ HÀNG</h3>
+                    <?php $totalMoney = 0; ?>
+                    <?php
+                    $list_content = Cart::contentCart();
+                    ?>
+                    <?php if ($list_content != null) : ?>
 
-<section class="clearfix main mt-2">
-    <div class="container my-3 mb-3">
-        <div class="row">
-            <!-- <div class="col-md-3">
-                <?php require_once('views/frontend/mod_slider.php'); ?>
-            </div> -->
-            <div class="col-md-9">
-                <h3>GIỎ HÀNG</h3>
-                <?php $totalMoney = 0; ?>
-                <?php
-                $list_content = Cart::contentCart();
-                ?>
-                <?php if ($list_content != null) : ?>
-                    <form name="form" action="index.php?option=cart&updatecart=true" method="post">
                         <table class="table table-borderd">
                             <tr>
                                 <th>ID</th>
@@ -41,7 +38,7 @@ $title = "Giỏ hàng";
                                     <td><?php echo $rcart['Name'] ?></td>
                                     <td><?php echo number_format($rcart['Price']); ?><sup>đ</sup></td>
                                     <td>
-                                        <input style="width:90px" max="10" min="1" type="number" name="qty[]" value="<?php echo $rcart['qty'] ?>" />
+                                        <input style="width:90px" max="10" min="1" type="number" name="qty[<?= $rcart['Id']; ?>]" value="<?php echo $rcart['qty'] ?>" />
                                     </td>
                                     <td><?php echo number_format($rcart['amount'] * $rcart['qty']) ?><sup>đ</sup></td>
                                     <td>
@@ -56,7 +53,7 @@ $title = "Giỏ hàng";
                             <tr>
                                 <td colspan="5">
                                     <a class="btn btn-danger" href="index.php?option=cart&delcart=all">Xóa tất cả</a>
-                                    <!-- <button type="submit" class="btn btn-success">Cập nhật</button> -->
+                                    <!-- <button type="submit" name="updateCart" class="btn btn-success">Cập nhật</button> -->
                                 </td>
                                 <td colspan="2" class="text-end">
                                     <?php echo "Tổng tiền: " . number_format($totalMoney); ?><sup>đ</sup>
@@ -73,13 +70,14 @@ $title = "Giỏ hàng";
 
                             </tr>
                         </table>
-                    </form>
-                <?php else : ?>
-                    GIỎ HÀNG CỦA BẠN CHƯA CÓ SẢN PHẨM NÀO
-                <?php endif; ?>
+
+                    <?php else : ?>
+                        GIỎ HÀNG CỦA BẠN CHƯA CÓ SẢN PHẨM NÀO
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</form>
 <!--section content-->
 <?php require_once('views/frontend/footer.php'); ?>
