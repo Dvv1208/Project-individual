@@ -1,5 +1,6 @@
 <?php
 use App\Models\Category;
+use App\Libraries\MyClass;
 
 $category = new Category();
 $id = $_REQUEST['id'];

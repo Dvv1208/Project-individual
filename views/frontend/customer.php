@@ -20,7 +20,7 @@ if(isset($_REQUEST['register']))
 if(isset($_REQUEST['logout']))
 {
     unset($_SESSION['logincustomer']);
-    // unset($_SESSION['userid']);
+    unset($_SESSION['user_id']);
     header("location:index.php");
 }
 if(isset($_REQUEST['profile']))

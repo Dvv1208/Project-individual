@@ -54,6 +54,7 @@ use App\Models\User;
             if ($user != null) {
                 $_SESSION['logincustomer'] = $username;
                 $_SESSION['user_id'] = $user->Id;
+
                 $message_alert = "Đăng nhập thành công";
                 header("location:index.php");
             } else {

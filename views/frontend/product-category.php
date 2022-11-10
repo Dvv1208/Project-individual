@@ -45,9 +45,9 @@ $total = Product::where('Status', '=', '1')->whereIn('Catid', $listcatid)->count
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <?php require_once('views/frontend/mod_listcategory.php'); ?>
+                <!-- <?php require_once('views/frontend/mod_listcategory.php'); ?> -->
             </div>
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="product_category my-3">
                     <h3 class="my-3 text-center">
                         <?php echo $title; ?>

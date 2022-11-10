@@ -5,7 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 use App\Models\User;
 
-$row = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
+$user = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
 
 ?>
 <!DOCTYPE html>
@@ -30,7 +30,7 @@ $row = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
 <body class="o_connected_user">
 
     <header class="header">
-        <div id="wrapwrap" class="">
+        <div id="wrapwrap" class="container">
             <header id="top" data-anchor="true" data-name="Header" class="o_header_standard o_top_fixed_element">
                 <nav data-name="Navbar" class="navbar navbar-expand-lg navbar-light o_colored_level o_cc shadow-sm">
                     <div id="top_menu_container" class="container justify-content-start justify-content-lg-between">
@@ -43,7 +43,7 @@ $row = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
                         <div id="top_menu_collapse" class="collapse navbar-collapse order-last order-lg-0" aria-expanded="false">
                             <ul id="top_menu" class="nav navbar-nav flex-grow-1">
                                 <li class="nav-item">
-                                    <a role="menuitem" href="/" class="nav-link ">
+                                    <a role="menuitem" href="../frontend/gioithieu.php" class="nav-link ">
                                         <span>Trang chủ</span>
                                     </a>
                                 </li>
@@ -79,9 +79,10 @@ $row = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
                                 <div class="container">
                                     <ul id="top_menu" class="nav navbar-nav flex-grow-1">
                                         <?php if (isset($_SESSION['logincustomer'])) : ?>
+                                            <?php $username = User::find($_SESSION['user_id']); ?>
                                             <ul class="nav-item dropdown ml-lg-auto o_no_autohide_item">
                                                 <a href="#" role="button" data-bs-toggle="dropdown" class="dropdown-toggle nav-link font-weight-bold" aria-expanded="false">
-                                                    <span class=""><?php echo $_SESSION['logincustomer'] ?></span>
+                                                    <span class=""><?php echo $username->Fullname ?></span>
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                     <li>
@@ -89,7 +90,7 @@ $row = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
                                                             xuất</a>
                                                     </li>
                                                     <li>
-                                                        <a class="dropdown-item" href="index.php?option=customer&protife">Thông tin
+                                                        <a class="dropdown-item" href="index.php?option=customer&profile">Thông tin
                                                         </a>
                                                     </li>
                                                 </ul>

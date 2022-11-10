@@ -35,7 +35,7 @@ $list_menu = Menu::where([['ParentId', '=', '0'], ['Status', '=', '1']])
                 <?php endforeach; ?>
 
             </ul>
-            <form class="d-flex" action="index.php?option=search" role="search" method="post">
+            <form class="d-flex" action="index.php?option=search" autocomplete="off" role="search" method="post">
                 <input id="keyword" name="keyword" class="form-control me-2" type="search" placeholder="Bạn cần tìm gì?">
                 <button class="btn btn-outline-success btn-light text-dark" type="submit">Tìm</button>
             </form>

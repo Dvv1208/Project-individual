@@ -40,8 +40,6 @@
             </footer>
         </div>
     </div>
-</section>
-<section class="footer_logo ">
     <div class="container border-top py-3 my-3">
         <div class="row ">
             <div class="col-md-3 col-sm-12 flex-row">
@@ -90,14 +88,9 @@
             </div>
         </div>
     </div>
-
-    </div>
-    </div>
-    <!-- section footer-->
-
-    <section class="copyright clearfix border-top py-3 bg-mainmenu">
+    <div class="container border-top py-3 my-3 bg-mainmenu">
         <div class="container text-center">
             Thiết kế bởi <strong>Võ Văn Dương</strong> &copy 2022
         </div>
-    </section>
-    </footer>
+    </div>
+</section>
