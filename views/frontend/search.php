@@ -61,11 +61,11 @@ $title = 'Tìm kiếm';
                                                     <h5 class="text-center text-danger">
                                                         <?php
                                                         if ($p['Price'] > $p['Pricesale']) {
-                                                            echo number_format($p['Pricesale']) . "<sup>đ</sup>";
+                                                            echo number_format($p['Pricesale'], 0, ',', '.') . "<sup>đ</sup>";
 
-                                                            echo "<del class='text-success'>" . number_format($p['Price']) . "</del><sup class='text-danger'>đ</sup>";
+                                                            echo "<del class='text-success'>" . number_format($p['Price'], 0, ',', '.') . "</del><sup class='text-danger'>đ</sup>";
                                                         } else {
-                                                            echo number_format($p['Price']) . "<sup>đ</sup>";
+                                                            echo number_format($p['Price'], 0, ',', '.') . "<sup>đ</sup>";
                                                         }
                                                         ?>
                                                     </h5>

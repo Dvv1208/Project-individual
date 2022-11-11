@@ -70,12 +70,12 @@ $total = Product::where('Status', '=', '1')->whereIn('Catid', $listcatid)->count
                                         <?php
                                         if ($row_product['Price']>$row_product['Pricesale'])
                                         {
-                                            echo number_format($row_product['Pricesale']) ."<sup>đ</sup>";
+                                            echo number_format($row_product['Pricesale'], 0, ',', '.') ."<sup>đ</sup>";
 
-                                            echo "<del class='text-danger'>" .number_format($row_product['Price'])."</del><sup class='text-danger'>đ</sup>";
+                                            echo "<del class='text-danger'>" .number_format($row_product['Price'], 0, ',', '.')."</del><sup class='text-danger'>đ</sup>";
                                         }
                                         else {
-                                            echo number_format($row_product['Price'])."<sup>đ</sup>";
+                                            echo number_format($row_product['Price'], 0, ',', '.')."<sup>đ</sup>";
                                         }
                                         ?>
                                     </h6>

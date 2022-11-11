@@ -36,17 +36,17 @@ $title = "Giỏ hàng";
                                         <img src="public/images/product/<?php echo $rcart['Img']; ?>" class="img-fluid" alt="<?php echo $rcart['Img']; ?>">
                                     </td>
                                     <td><?php echo $rcart['Name'] ?></td>
-                                    <td><?php echo number_format($rcart['Price']); ?><sup>đ</sup></td>
+                                    <td><?php echo number_format($rcart['Price'],0,',','.'); ?><sup>đ</sup></td>
                                     <td>
                                         <input style="width:90px" max="10" min="1" type="number" name="qty[<?= $rcart['Id']; ?>]" value="<?php echo $rcart['qty'] ?>" />
                                     </td>
-                                    <td><?php echo number_format($rcart['amount'] * $rcart['qty']) ?><sup>đ</sup></td>
+                                    <td><?php echo number_format($rcart['amount'] * $rcart['qty'],0,',','.') ?><sup>đ</sup></td>
                                     <td>
                                         <a href="index.php?option=cart&delcart=<?php echo $rcart['Id'] ?>">
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
-                                    <?php $totalMoney += $rcart['amount'] * $rcart['qty']; ?>
+                                    <?php $totalMoney += ($rcart['amount'] * $rcart['qty']); ?>
                                 </tr>
                             <?php endforeach; ?>
 
@@ -56,7 +56,7 @@ $title = "Giỏ hàng";
                                     <!-- <button type="submit" name="updateCart" class="btn btn-success">Cập nhật</button> -->
                                 </td>
                                 <td colspan="2" class="text-end">
-                                    <?php echo "Tổng tiền: " . number_format($totalMoney); ?><sup>đ</sup>
+                                    <?php echo "Tổng tiền: " . number_format($totalMoney,0,',','.'); ?><sup>đ</sup>
                                 </td>
                             </tr>
                             <tr>

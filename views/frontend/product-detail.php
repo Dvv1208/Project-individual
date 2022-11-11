@@ -46,13 +46,13 @@ $list_product = Product::where('Status', '=', '1')
                 <h3><?php echo $row_pro['Name']; ?></h3>
                 <h5>Giá:
                     <del><strong class="text-success">
-                            <?php echo number_format($row_pro['Price']); ?> <sup>đ</sup>
+                            <?php echo number_format($row_pro['Price'], 0, ',', '.'); ?> <sup>đ</sup>
                         </strong>
                     </del>
                 </h5>
                 <h5>Giá sale:
                     <span class="text-danger">
-                        <?php echo number_format($row_pro['Pricesale']); ?>
+                        <?php echo number_format($row_pro['Pricesale'], 0, ',', '.'); ?>
                     </span><sup>đ</sup>
                 </h5>
                 <div class="input-group input-group-sm mb-3">
@@ -109,11 +109,11 @@ $list_product = Product::where('Status', '=', '1')
                                 <h5 class="text-center text-danger">
                                     <?php
                                     if ($row_product['Price'] > $row_product['Pricesale']) {
-                                        echo number_format($row_product['Pricesale']) . "<sup>đ</sup>";
+                                        echo number_format($row_product['Pricesale'], 0, ',', '.') . "<sup>đ</sup>";
 
-                                        echo "<del class='text-success'>" . number_format($row_product['Price']) . "</del><sup class='text-danger'>đ</sup>";
+                                        echo "<del class='text-success'>" . number_format($row_product['Price'], 0, ',', '.') . "</del><sup class='text-danger'>đ</sup>";
                                     } else {
-                                        echo number_format($row_product['Price']) . "<sup>đ</sup>";
+                                        echo number_format($row_product['Price'], 0, ',', '.') . "<sup>đ</sup>";
                                     }
                                     ?>
                                 </h5>

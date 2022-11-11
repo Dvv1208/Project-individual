@@ -39,26 +39,15 @@ if (!isset($_SESSION['logincustomer'])) {
                 </form>
                 <h4 class="mb-3">Hình thức thanh toán</h4>
                 <div class="d-block my-3" required>
-                    <div class="custom-control custom-radio">
-                        <input id="tttienmat" name="tienmat" type="radio" class="custom-control-input" value="tienmat">
-                        <label class="custom-control-label" for="httt-1">Tiền mặt</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                        <input id="ttchuyenkhoan" name="chuyenkhoan" type="radio" class="custom-control-input" value="chuyenkhoan">
-                        <label class="custom-control-label" for="httt-2">Chuyển khoản</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                        <input id="ttvnpay" name="vnpay" type="radio" class="custom-control-input" value="vnpay">
-                        <label class="custom-control-label" for="httt-3">Vnpay</label>
-                    </div>
+                    <p><input type="radio" name="phuongthuctt" value="ck"> Chuyển khoản</p>
+                    <p><input type="radio" name="phuongthuctt" value="khinhan"> Khi nhận hàng</p>
                     <form class="" method="POST" target="_blank" enctype="application/x-www-form-urlencoded" action="index.php?option=init_payment">
-                        <input id="momo" name="momo" type="submit" class="custom-control-input" value="Thanh toán momo QRCode">
+                        <p><input id="momo" name="phuongthuctt" type="submit" class="custom-control-input" value="Thanh toán momo QRCode"></p>
                     </form>
                 </div>
 
                 <div class="col-md-4 order-md-2 mb-4">
                 </div>
-
                 <form action="index.php?option=cart-process" method="post">
                     <div class="form-group">
                         <div class="col-md-12 order-md-2 mb-4 text-end">
@@ -95,10 +84,10 @@ if (!isset($_SESSION['logincustomer'])) {
                                         <img src="public/images/product/<?php echo $rcart['Img']; ?>" class="img-fluid" alt="<?php echo $rcart['Img']; ?>">
                                     </td>
                                     <td class="text-center"><?php echo $rcart['Name'] ?></td>
-                                    <td class="text-center"><?php echo number_format($rcart['Price']); ?><sup>đ</sup></td>
+                                    <td class="text-center"><?php echo number_format($rcart['Price'],0,',','.'); ?><sup>đ</sup></td>
                                     <td class="text-center"><?php echo $rcart['qty'] ?></td>
                                     <td class="text-center">
-                                        <?php echo number_format($rcart['amount'] * $rcart['qty']) ?><sup>đ</sup></td>
+                                        <?php echo number_format($rcart['amount'] * $rcart['qty'],0,',','.') ?><sup>đ</sup></td>
                                     <?php $totalMoney += $rcart['amount'] * $rcart['qty']; ?>
                                 </tr>
                             <?php endforeach; ?>
@@ -106,7 +95,7 @@ if (!isset($_SESSION['logincustomer'])) {
                                 <td colspan="4">
                                 </td>
                                 <td colspan="2" class="text-end">
-                                    <?php echo "Tổng tiền: " . number_format($totalMoney); ?><sup>đ</sup>
+                                    <?php echo "Tổng tiền: " . number_format($totalMoney,0,',','.'); ?><sup>đ</sup>
                                 </td>
                             </tr>
                         </table>

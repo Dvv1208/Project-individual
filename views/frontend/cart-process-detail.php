@@ -4,12 +4,12 @@ use App\Models\Order;
 use App\Models\Orderdetail;
 use App\Libraries\Cart;
 use App\Models\Product;
+use App\Models\User;
+
 
 $title = 'Đặt hàng thành công';
-$data = getdate();
-$product = Product::find($_SESSION['user_id']);
-$order = Order::find($_SESSION['user_id']);
-$orderdetail = Orderdetail::where('Productid', '=', $order->Code)->find($_SESSION['user_id']);
+$user = User::find($_SESSION['user_id']);
+$order = Order::where('Code', '=', $_SESSION['order_id'])->with('products')->first();
 
 ?>
 
@@ -67,19 +67,22 @@ $orderdetail = Orderdetail::where('Productid', '=', $order->Code)->find($_SESSIO
                                 <th class="text-center" style="width:100px">Hình ảnh</th>
                                 <th class="text-center">Tên sản phẩm</th>
                                 <th class="text-center">Mã đơn hàng</th>
+                                <th class="text-center">Số lượng</th>
                                 <th class="text-center">Thành tiền</th>
                             </tr>
-                            <tr>
-                                <td class="text-center">
-                                    <img src="public/images/product/<?php echo $product->Img; ?>" class="img-fluid" alt="<?php echo $product->Img; ?>">
-                                </td>
-                                <td class="text-center"><?php echo $product->Name; ?></td>
-                                <td class="text-center"><?php echo $product->Name; ?></td>
-
-                                <td class="text-center">
-                                    <?php echo $orderdetail->Amount; ?>
-                                </td>
-                            </tr>
+                            <?php foreach ($order->products as $product) : ?>
+                                <tr>
+                                    <td class="text-center">
+                                        <img src="public/images/product/<?php echo $product->Img; ?>" class="img-fluid" alt="<?php echo $product->Img; ?>">
+                                    </td>
+                                    <td class="text-center"><?php echo $product->Name; ?></td>
+                                    <td class="text-center"><?php echo $product->pivot->Orderid; ?></td>
+                                    <td class="text-center"><?php echo $product->pivot->Quantity; ?></td>
+                                    <td class="text-center">
+                                        <?php echo number_format($product->pivot->Amount, 0, ',', '.') . "<sup>đ</sup>"; ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </table>
                     </div>
                     <hr class="mb-4">

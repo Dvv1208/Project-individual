@@ -45,9 +45,9 @@ $total = Product::where('Status', '=', '1')->count();
                                             <?php
                                             if ($row_product['Price'] > $row_product['Pricesale']) {
                                                 echo "<del >" . number_format($row_product['Price']) . "</del><sup>đ</sup>";
-                                                echo number_format($row_product['Pricesale']) . "<sup>đ</sup>";
+                                                echo number_format($row_product['Pricesale'], 0, ',', '.') . "<sup>đ</sup>";
                                             } else {
-                                                echo number_format($row_product['Price']) . "<sup>đ</sup>";
+                                                echo number_format($row_product['Price'], 0, ',', '.') . "<sup>đ</sup>";
                                             }
                                             ?>
                                         </h5>

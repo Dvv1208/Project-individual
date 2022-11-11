@@ -3,13 +3,15 @@
 use App\Models\Order;
 use App\Models\Orderdetail;
 use App\Models\User;
-use App\Libraries\Cart;
 
 $title = 'Thông tin của tôi';
 
 $username = User::find($_SESSION['user_id']);
+$orders = Order::where('User_id', '=', $_SESSION['user_id'])->with('products')->get();
 
-$list_orderdetail = new Orderdetail();
+// echo '<pre>';
+// var_dump(count($order));
+// echo '</pre>';
 
 ?>
 
@@ -34,6 +36,36 @@ $list_orderdetail = new Orderdetail();
             </div>
         </div>
         <div class="col-md-9">
+            <div class="col-md-9">
+                <h3>Đơn hàng đã mua</h3>
+                <?php if ($orders != null) : ?>
+                    <table class="table table-borderd">
+                        <tr>
+                            <th class="text-center">Mã đơn hàng</th>
+                            <th class="text-center">Thành tiền</th>
+                        </tr>
+
+                        <?php foreach ($orders as $order) : ?>
+                            <?php 
+                                $totalMoney = 0; 
+                                foreach ($order->products as $product) {
+                                    $totalMoney += $product->pivot->Amount;
+                                }
+                            ?>
+
+                        <tr>
+                            <td class="text-center"><?php echo $order->Code; ?></td>
+                            <td class="text-center">
+                                <?php echo number_format($totalMoney, 0, ',', '.') . "<sup>đ</sup>"; ?>
+                            </td>
+                        </tr>
+
+                        <?php endforeach; ?>
+                    </table>
+                <?php else : ?>
+                    Bạn chưa có đơn hàng nào
+                <?php endif; ?>
+            </div>
         </div>
         <hr class="mb-4">
         <div class="col-md-4 order-md-2 mb-4">
