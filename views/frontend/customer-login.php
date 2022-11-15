@@ -4,7 +4,6 @@ require_once("config/database.php");
 
 use App\Models\User;
 
-
 ?>
 
 <!DOCTYPE html>
@@ -16,14 +15,23 @@ use App\Models\User;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Đăng Nhập</title>
 
-    <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="public/plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
     <link rel="stylesheet" href="public/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- Theme style -->
     <link rel="stylesheet" href="public/dist/css/adminlte.min.css">
+    <style>
+        .btn-facebook {
+            color: #fff;
+            background-color: #3b5998;
+            border-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-google {
+            color: #fff;
+            background-color: #EE6363;
+            border-color: rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
 
 <body class="hold-transition login-page">
@@ -72,14 +80,12 @@ use App\Models\User;
         </div>
     <?php endif; ?>
     <div class="login-box">
-        <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="#" class="h1"><b>Đăng Nhập</b></a>
+                <a class="h1"><b>Đăng Nhập</b></a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Thông tin đăng nhập</p>
-
                 <form action="" name="from1" method="post">
                     <div class="input-group mb-3">
                         <input name="username" type="text" required class="form-control" placeholder="Tên Đăng Nhập hoặc Email">
@@ -102,6 +108,12 @@ use App\Models\User;
                             <button name="DANGNHAP" type="submit" class="btn btn-primary btn-block">Đăng Nhập</button>
                         </div>
                     </div>
+                    <a href="index.php?option=google" class="btn btn-google btn-user btn-block my-3">
+                        <i class="fab fa-google fa-fw"></i> Đăng nhập với Google
+                    </a>
+                    <a href="index.php?option=facebook" class="btn btn-facebook btn-user btn-facebook btn-block my-3">
+                        <i class="fab fa-facebook fa-fw"></i> Đăng nhập với Facebook
+                    </a>
                     <div class="row">
                         <?php if (isset($error)) : ?>
                             <div class="col-12">
@@ -114,19 +126,11 @@ use App\Models\User;
                         <a href="index.php?option=customer&register">Đăng ký</a>
                     </div>
                 </form>
-                <!-- /.social-auth-links -->
             </div>
-            <!-- /.card-body -->
         </div>
-        <!-- /.card -->
     </div>
-    <!-- /.login-box -->
-
-    <!-- jQuery -->
     <script src="public/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
     <script src="public/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
     <script src="public/dist/js/adminlte.min.js"></script>
 </body>
 

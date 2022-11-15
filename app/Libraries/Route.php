@@ -3,23 +3,23 @@
 namespace App\Libraries;
 
 class Route
+
 {
     function __construct($page = 'site')
     {
-        switch($page)
-        {
-            case 'site':{
-                $this->route_site();
-                break;
-            }
+        switch ($page) {
+            case 'site': {
+                    $this->route_site();
+                    break;
+                }
             case 'admin': {
-                $this->route_admin();
-                break;
-            }
+                    $this->route_admin();
+                    break;
+                }
             default: {
-                $this->route_site();
-                break;
-            }
+                    $this->route_site();
+                    break;
+                }
         }
     }
     function route_site()
@@ -29,37 +29,32 @@ class Route
 
             $pathView .= $_REQUEST['option'];
             if (isset($_REQUEST['id'])) {
-                $pathView .='-detail.php';
+                $pathView .= '-detail.php';
             } else {
-                if(isset($_REQUEST['cat'])) {
-                    $pathView .='-category.php';
+                if (isset($_REQUEST['cat'])) {
+                    $pathView .= '-category.php';
+                } else {
+                    $pathView .= '.php';
+                }
             }
-            else
-            {
-                $pathView .= '.php';
-            }
-        }
         } else {
             $pathView .= 'home.php';
         }
-        require_once( $pathView);
+        require_once($pathView);
     }
     function route_admin()
     {
         $pathView = '../views/backend/';
-        if(isset($_REQUEST['option'])){
-            $pathView .= $_REQUEST['option'].'/';
-            if(isset($_REQUEST['cat'])){
-                $pathView .= $_REQUEST['cat']. '.php';   
-            }
-            else
-            {
+        if (isset($_REQUEST['option'])) {
+            $pathView .= $_REQUEST['option'] . '/';
+            if (isset($_REQUEST['cat'])) {
+                $pathView .= $_REQUEST['cat'] . '.php';
+            } else {
                 $pathView .= 'index.php';
             }
-        }
-        else{
+        } else {
             $pathView .= 'dashboard/index.php';
         }
-        require_once( $pathView);
+        require_once($pathView);
     }
 }

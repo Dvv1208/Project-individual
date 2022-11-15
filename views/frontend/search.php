@@ -10,7 +10,7 @@ if (isset($_POST['keyword']) && $_POST['keyword'] != '') {
 // var_dump($keyword);
 // $product = Product::where('Status', '!=', '0')->orderBy('CreatedAt', 'desc')->get()->toArray();
 // $list_product = Product::find($keyword);
-$list_post = Product::where('Name', 'like', '%' . $keyword . '%')->get();
+$list_pro = Product::where([['Status', '!=', '0'],['Name', 'like', '%' . $keyword . '%']])->orderBy('CreatedAt', 'desc')->get();
 $title = 'Tìm kiếm';
 
 ?>
@@ -32,7 +32,7 @@ $title = 'Tìm kiếm';
     <div class="container">
         <div class="col-md-3">
             <div class="area alert-info">Kết quả tìm kiếm "<?php echo $keyword; ?>" là:
-                <?php echo (count($list_post)) ?>
+                <?php echo (count($list_pro)) ?>
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@ $title = 'Tìm kiếm';
                         <div class="col-md-12">
                             <div class="product_category my-3">
                                 <div class="row">
-                                    <?php foreach ($list_post as $p) : ?>
+                                    <?php foreach ($list_pro as $p) : ?>
                                         <div class="col-md-3 mb-3">
                                             <div class="card" style="width: 100%;">
                                                 <a href="index.php?option=product&id=<?php echo $p['Slug']; ?>">

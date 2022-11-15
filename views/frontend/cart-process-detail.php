@@ -37,7 +37,7 @@ $order = Order::where('Code', '=', $_SESSION['order_id'])->with('products')->fir
                         </thead>
                         <tbody>
                             <tr>
-                                <td><?php echo $username->Fullname; ?></td>
+                                <td><?php echo $order->Name; ?></td>
                                 <td><?php echo $username->Address; ?></td>
                                 <td><?php echo $username->Phone; ?></td>
                                 <td><?php echo $username->Email; ?></td>
@@ -47,16 +47,7 @@ $order = Order::where('Code', '=', $_SESSION['order_id'])->with('products')->fir
                     <h4 class="mb-3">Hình thức thanh toán</h4>
                     <div class="d-block my-3">
                         <div class="custom-control custom-radio">
-                            <input id="httt-1" name="httt_ma" type="radio" class="custom-control-input" required="" value="1">
-                            <label class="custom-control-label" for="httt-1">Tiền mặt</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                            <input id="httt-2" name="httt_ma" type="radio" class="custom-control-input" required="" value="2">
-                            <label class="custom-control-label" for="httt-2">Chuyển khoản</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                            <input id="httt-3" name="httt_ma" type="radio" class="custom-control-input" required="" value="3">
-                            <label class="custom-control-label" for="httt-3">Ship COD</label>
+                            <label><?php echo $order->Pttt ?></label>
                         </div>
                     </div>
                     <div class="col-md-9">
@@ -87,7 +78,7 @@ $order = Order::where('Code', '=', $_SESSION['order_id'])->with('products')->fir
                     </div>
                     <hr class="mb-4">
                     <div class="col-md-4 order-md-2 mb-4">
-                        <a class="btn btn-info" href="index.php?option=cart">Tiếp tục mua sắm</a>
+                        <a class="btn btn-info" href="index.php">Tiếp tục mua sắm</a>
                     </div>
                 </div>
             </div>

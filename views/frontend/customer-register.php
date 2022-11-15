@@ -1,11 +1,6 @@
-<?php 
+<?php
 
 use App\Models\User;
-
-if(isset($_POST['DANGKY']))
-{
-    
-}
 
 ?>
 
@@ -16,8 +11,7 @@ if(isset($_POST['DANGKY']))
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Đăng ký thành viên</title>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="public/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
@@ -26,10 +20,9 @@ if(isset($_POST['DANGKY']))
 
 <body class="hold-transition login-page">
     <?php
-if(isset($_POST['DANGKY']))
-    {
+    if (isset($_POST['DANGKY'])) {
         $data = $_POST['data'];
-        $data['Status']=1;
+        $data['Status'] = 1;
         $data['CreatedAt'] = date('y-m-d H:i:s');
         $data['Password'] = sha1($_POST['password']);
         User::insert($data);
@@ -49,7 +42,7 @@ if(isset($_POST['DANGKY']))
                 </div>
                 <div class="form-group">
                     <label for="name"><b>Giới tính :</b></label>&nbsp &nbsp
-                    <input name="data[Gender]" class="form-check" type="radio" value="1" required/>Nam &nbsp &nbsp
+                    <input name="data[Gender]" class="form-check" type="radio" value="1" required />Nam &nbsp &nbsp
                     <input name="data[Gender]" class="form-check" type="radio" value="0" />Nữ
                 </div>
                 <div class="form-group">

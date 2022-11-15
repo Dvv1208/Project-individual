@@ -1,5 +1,6 @@
 <?php
 use App\Models\Product;
+use App\Libraries\MyClass;
 
 $product = new Product();
 $id = $_REQUEST['id'];
