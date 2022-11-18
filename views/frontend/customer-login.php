@@ -72,7 +72,7 @@ use App\Models\User;
         $user = User::where($args)->first();
         //Bẫy lỗi
         if ($user == null) {
-            $message_alert = '<div class="text-danger text-center">Mật khẩu không chính xác !</div>';
+            $message_alert = '<div class="text-danger text-center">Tên đăng nhập không tồn tại !</div>';
         } else {
             if ($user != null) {
                 $_SESSION['logincustomer'] = $username;
