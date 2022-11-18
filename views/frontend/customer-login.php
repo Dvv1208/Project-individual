@@ -4,6 +4,7 @@ require_once("config/database.php");
 
 use App\Models\User;
 
+
 ?>
 
 <!DOCTYPE html>
@@ -14,11 +15,25 @@ use App\Models\User;
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Đăng Nhập</title>
-
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+    <script src="js/jtoast.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="public/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="public/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="public/dist/css/adminlte.min.css">
+    <script>
+        $.toast({
+            heading: 'Positioning',
+            text: 'Use the predefined ones, or specify a custom position object.',
+            position: 'top-right',
+            stack: false
+        })
+        $(document).ready(function() {
+            $("#btnDn").click(function() {
+                $.toast.show('thành công');
+            });
+        });
+    </script>
     <style>
         .btn-facebook {
             color: #fff;
@@ -45,19 +60,19 @@ use App\Models\User;
             $args = [
                 ['Email', '=', $username],
                 ['Password', '=', $password],
-                ['Roles', '=', '1']
+                ['Status', '=', '1'],
             ];
         } else {
             $args = [
                 ['Username', '=', $username],
                 ['Password', '=', $password],
-                ['Roles', '=', '1']
+                ['Status', '=', '1'],
             ];
         }
         $user = User::where($args)->first();
         //Bẫy lỗi
         if ($user == null) {
-            $message_alert = "Tên đăng nhập không tồn tại";
+            $message_alert = '<div class="text-danger text-center">Mật khẩu không chính xác !</div>';
         } else {
             if ($user != null) {
                 $_SESSION['logincustomer'] = $username;
@@ -66,19 +81,11 @@ use App\Models\User;
                 $message_alert = "Đăng nhập thành công";
                 header("location:index.php");
             } else {
-                $message_alert = "Mật khẩu không chính xác";
+                $message_alert = '<div class="text-danger text-center">Mật khẩu không chính xác !</div>';
             }
         }
     }
     ?>
-
-    <?php if (isset($message_alert)) : ?>
-        <div class="col-12">
-            <div class="alert alert-info">
-                <?= $message_alert; ?>
-            </div>
-        </div>
-    <?php endif; ?>
     <div class="login-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
@@ -105,7 +112,7 @@ use App\Models\User;
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button name="DANGNHAP" type="submit" class="btn btn-primary btn-block">Đăng Nhập</button>
+                            <button name="DANGNHAP" id="btnDn" type="submit" class="btn btn-primary btn-block">Đăng Nhập</button>
                         </div>
                     </div>
                     <a href="index.php?option=google" class="btn btn-google btn-user btn-block my-3">
@@ -114,18 +121,18 @@ use App\Models\User;
                     <a href="index.php?option=facebook" class="btn btn-facebook btn-user btn-facebook btn-block my-3">
                         <i class="fab fa-facebook fa-fw"></i> Đăng nhập với Facebook
                     </a>
-                    <div class="row">
-                        <?php if (isset($error)) : ?>
-                            <div class="col-12">
-                                <?= $error; ?>
-                            </div>
-                        <?php endif; ?>
-                    </div>
                     <div class="container signin my-3 text-center">
                         <p>Bạn chưa có tài khoản?</p>
                         <a href="index.php?option=customer&register">Đăng ký</a>
                     </div>
                 </form>
+            </div>
+            <div class="row">
+                <?php if (isset($message_alert)) : ?>
+                    <div class="col-12">
+                        <?= $message_alert; ?>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>

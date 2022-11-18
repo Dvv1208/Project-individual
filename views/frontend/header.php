@@ -42,11 +42,17 @@ $user = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
                         </button>
                         <div id="top_menu_collapse" class="collapse navbar-collapse order-last order-lg-0" aria-expanded="false">
                             <ul id="top_menu" class="nav navbar-nav flex-grow-1">
-                                <li class="nav-item">
-                                    <a role="menuitem" href="../frontend/gioithieu.php" class="nav-link ">
-                                        <span>Trang chủ</span>
-                                    </a>
-                                </li>
+                                <?php if (isset($_SESSION['logincustomer'])) : ?>
+                                    <?php $username = User::find($_SESSION['user_id']); ?>
+                                    <?php if ($username['Roles'] == 1) : ?>
+                                        <li class="nav-item">
+                                            <a role="menuitem" href="admin" class="nav-link ">
+                                                <span class="">Trang Admin</span>
+                                            </a>
+                                        </li>
+                                    <? else : ?>
+                                    <?php endif ?>
+                                <?php endif ?>
                                 <li class="nav-item">
                                     <a role="menuitem" href="index.php" class="nav-link active">
                                         <span>Cửa hàng</span>

@@ -36,12 +36,12 @@ $order = Order::where('Code', '=', $_SESSION['order_id'])->with('products')->fir
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><?php echo $order->Name; ?></td>
-                                <td><?php echo $username->Address; ?></td>
-                                <td><?php echo $username->Phone; ?></td>
-                                <td><?php echo $username->Email; ?></td>
-                            </tr>
+                                <tr>
+                                    <td><?php echo $order->Name; ?></td>
+                                    <td><?php echo $order->Diachi; ?></td>
+                                    <td><?php echo $order->Phone; ?></td>
+                                    <td><?php echo $order->Email; ?></td>
+                                </tr>
                         <tbody>
                     </table>
                     <h4 class="mb-3">Hình thức thanh toán</h4>
@@ -83,13 +83,5 @@ $order = Order::where('Code', '=', $_SESSION['order_id'])->with('products')->fir
                 </div>
             </div>
     </form>
-
-    </div>
-    </main>
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/popperjs/popper.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../assets/js/app.js"></script>
-    </body>
-
-    </html>
+    
+    <?php require_once('views/frontend/footer.php'); ?>

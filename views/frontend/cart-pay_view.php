@@ -1,9 +1,11 @@
 <?php
 
-use App\Models\Order;
+use App\Models\User;
 use App\Libraries\Cart;
 
+
 $title = 'Thanh toán';
+$username = User::find($_SESSION['user_id']);
 
 if (!isset($_SESSION['logincustomer'])) {
     header('location:index.php?option=customer-login');
@@ -21,19 +23,20 @@ if (!isset($_SESSION['logincustomer'])) {
                     <div class="form-group">
                         <div class="col-md-12">
                             <label for="fullname">Họ tên</label>
-                            <input type="text" name="Name" class="form-control">
+                            <input type="text" name="Name" placeholder="<?php echo $username->Fullname; ?>" class="form-control">
                         </div>
                         <div class="col-md-12">
                             <label for="diachi">Địa chỉ</label>
-                            <input type="text" name="Diachi" class="form-control">
+                            <input type="text" name="Diachi" placeholder="<?php echo $username->Address; ?>" class="form-control">
                         </div>
                         <div class="col-md-12">
                             <label for="phone">Điện thoại</label>
-                            <input type="text" name="Phone" class="form-control">
+                            <input type="text" name="Phone" placeholder="<?php echo $username->Phone; ?>" class="form-control">
                         </div>
                         <div class="col-md-12">
                             <label for="email">Email</label>
-                            <input type="text" name="Email" class="form-control">
+                            <input type="text" name="Email" placeholder="<?php echo $username->Email; ?>" class="form-control">
+                            <input name="OrderStatus" value="1" type="hidden" />
                         </div>
                     </div>
                     <h4 class="mb-3">Hình thức thanh toán</h4>

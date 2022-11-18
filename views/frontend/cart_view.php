@@ -64,7 +64,7 @@ $title = "Giỏ hàng";
                                     <a class="btn btn-info" href="index.php">Tiếp tục mua sắm</a>
                                 </td>
                                 <td colspan="7" class="text-end">
-                                    <a class="btn btn-success" href="index.php?option=cart-pay_view">Thanh toán</a>
+                                    <a class="btn btn-success" name="btnTt" href="index.php?option=cart-pay_view">Thanh toán</a>
                                     <!-- <button type="submit" class="btn btn-info">Cập nhật</button>-->
                                 </td>
 

@@ -17,8 +17,7 @@ use App\Models\User;
     <title>Đăng Nhập</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../public/plugins/fontawesome-free/css/all.min.css">
     <!-- icheck bootstrap -->
@@ -29,43 +28,37 @@ use App\Models\User;
 
 <body class="hold-transition login-page">
     <?php
-    if(isset($_POST['DANGNHAP']))
-    {
+    if (isset($_POST['DANGNHAP'])) {
         $username = $_POST['username'];
         $password = sha1($_POST['password']);
         // $data['password'] = $password;
-        if (filter_var($username, FILTER_VALIDATE_EMAIL))
-        {
+        if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
             $args = [
-                ['Status','=','1'],
-                ['Email','=',$username],
-                ['Roles','=','1']
+                ['Status', '=', '1'],
+                ['Email', '=', $username],
+                ['Roles', '=', '1']
             ];
-        }
-        else
-        {
+        } else {
             $args = [
-                ['Status','=','1'],
-                ['Username','=',$username],
-                ['Roles','=','1']
+                ['Status', '=', '1'],
+                ['Username', '=', $username],
+                ['Roles', '=', '1']
             ];
         }
         $user = User::where($args)->first();
         //Bẫy lỗi
-        $error='';
-        if($user != null) {
-            if($password==$user['Password']) {
-                $_SESSION['useradmin']=$username;
-                $_SESSION['userid']=$user['Id'];
+        $error = '';
+        if ($user != null) {
+            if ($password == $user['Password']) {
+                $_SESSION['useradmin'] = $username;
+                $_SESSION['userid'] = $user['Id'];
                 header("location:index.php");
+            } else {
+                $error = '<div class="text-danger">Mật khẩu không chính xác !</div>';
             }
-            else {
-                $error='<div class="text-danger">Mật khẩu không chính xác !</div>';
-            } 
-            
         } else {
-                $error='<div class="text-danger">Tên đăng nhập không tồn tại !</div>';
-            }
+            $error = '<div class="text-danger">Tên đăng nhập không tồn tại !</div>';
+        }
     }
     ?>
     <div class="login-box">
@@ -79,8 +72,7 @@ use App\Models\User;
 
                 <form action="" name="from1" method="post">
                     <div class="input-group mb-3">
-                        <input name="username" type="text" required class="form-control"
-                            placeholder="Tên Đăng Nhập hoặc Email">
+                        <input name="username" type="text" required class="form-control" placeholder="Tên Đăng Nhập hoặc Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -101,11 +93,11 @@ use App\Models\User;
                         </div>
                     </div>
                     <div class="row">
-                        <?php if(isset($error)): ?>
-                        <div class="col-12">
-                            <?= $error; ?>
-                        </div>
-                        <?php endif;?>
+                        <?php if (isset($error)) : ?>
+                            <div class="col-12">
+                                <?= $error; ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </form>
                 <!-- /.social-auth-links -->

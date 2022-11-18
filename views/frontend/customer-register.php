@@ -35,7 +35,7 @@ use App\Models\User;
                 <a class="h1"><b>Đăng Ký</b></a>
             </div>
             <form action="index.php?option=register" method="post" id="form-register">
-                <input name="data[Roles]" value="1" type="hidden" />
+                <input name="data[Roles]" value="0" type="hidden" />
                 <div class="form-group">
                     <label for="name"><b>Họ Tên :</b></label>
                     <input type="text" class="form-input" placeholder="" name="data[FullName]" id=fullname required>
