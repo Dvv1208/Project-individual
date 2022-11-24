@@ -12,6 +12,18 @@ $orders = Order::where('User_id', '=', $_SESSION['user_id'])->with('products')->
 ?>
 
 <?php require_once('views/frontend/header.php'); ?>
+<section class="breadcrumb p-0 m-0">
+    <div class="container">
+        <div class="row">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb my-3">
+                    <li class="breadcrumb-item"><a style="text-decoration: none" href="index.php">Trang chủ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><?php echo $title; ?></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</section>
 <section class="clearfix main mt-2">
     <div class="container">
         <div class="card-header">
@@ -90,7 +102,7 @@ $orders = Order::where('User_id', '=', $_SESSION['user_id'])->with('products')->
                 <?php endif; ?>
             </div>
         </div>
-        
+
         <hr class="mb-4">
         <div class="col-md-4 order-md-2 mb-4">
             <a class="btn btn-info" href="index.php">Quay về trang chủ</a>

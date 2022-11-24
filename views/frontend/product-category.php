@@ -38,6 +38,18 @@ $total = Product::where('Status', '=', '1')->whereIn('Catid', $listcatid)->count
 ?>
 
 <?php require_once('views/frontend/header.php'); ?>
+<section class="breadcrumb p-0 m-0">
+    <div class="container">
+        <div class="row">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb my-3">
+                    <li class="breadcrumb-item"><a style="text-decoration: none" href="index.php">Trang chủ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><?php echo $title; ?></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</section>
 <section class="maincontent">
     <div class="container">
         <div class="row">
@@ -50,38 +62,45 @@ $total = Product::where('Status', '=', '1')->whereIn('Catid', $listcatid)->count
                         <?php echo $title; ?>
                     </h3>
                     <div class="row">
-                        <?php foreach ($list_product as $row_product) : ?>
-                            <div class="col-md-3 mb-3">
-                                <div class="card" style="width: 100%;">
-                                    <a href="index.php?option=product&id=<?php echo $row_product['Slug']; ?>">
-                                        <img src="public/images/product/<?php echo $row_product['Img']; ?>" class="card-img-top" alt="<?php echo $row_product['Img']; ?>">
-                                    </a>
-                                    <div class="card-body">
-                                        <h5 class="card-title text-center ">
-                                            <a href="index.php?option=product&id=<?php echo $row_product['Slug']; ?>">
-                                                <?php echo $row_product['Name']; ?>
-                                            </a>
-                                        </h5>
-                                        <h5 class="text-center text-danger">
-                                            <?php
-                                            if ($row_product['Price'] > $row_product['Pricesale']) {
-                                                echo number_format($row_product['Pricesale'], 0, ',', '.') . "<sup>đ</sup>";
-
-                                                echo "<del class='text-success'>" . number_format($row_product['Price'], 0, ',', '.') . "</del><sup class='text-danger'>đ</sup>";
-                                            } else {
-                                                echo number_format($row_product['Price'], 0, ',', '.') . "<sup>đ</sup>";
-                                            }
-                                            ?>
-                                        </h5>
-                                        <div class="btn-group w-100" role="group" aria-label="Basic example">
-                                            <a href="index.php?option=cart&addcart=<?php echo $row_product['Id']; ?>" class="btn btn-outline-info"><i class="fas fa-shopping-cart"></i> </a>
-
-                                            <a href="index.php?option=product&id=<?php echo $row_product['Slug']; ?>" class="btn btn-outline-success"><i class="far fa-eye"></i> </a>
+                        <div class="products-tabs">
+                            <div id="tab1" class="tab-pane active">
+                                <div class="products-slick" data-nav="#slick-nav-1">
+                                    <?php foreach ($list_product as $row_product) : ?>
+                                        <div class="product">
+                                            <div class="product-img">
+                                                <a href="index.php?option=product&id=<?php echo $row_product['Slug']; ?>">
+                                                    <img src="public/images/product/<?php echo $row_product['Img']; ?>" class="card-img-top" alt="<?php echo $row_product['Img']; ?>">
+                                                </a>
+                                                <!-- <div class="product-label">
+                                                    <span class="sale">-30%</span>
+                                                    <span class="new">NEW</span>
+                                                </div> -->
+                                            </div>
+                                            <div class="product-body">
+                                                <h3 class="product-name">
+                                                    <h5>
+                                                        <a style="text-decoration: none" href="index.php?option=product&id=<?php echo $row_product['Slug']; ?>">
+                                                            <?php echo $row_product['Name']; ?>
+                                                        </a>
+                                                    </h5>
+                                                </h3>
+                                                <h5 class="product-price"><?php echo number_format($row_product['Pricesale'], 0, ',', '.') . "<sup>đ</sup>"; ?>
+                                                    <del class="product-old-price"><?php echo number_format($row_product['Price'], 0, ',', '.') . "<sup>đ</sup>"; ?></del>
+                                                </h5>
+                                                <div class="product-rating">
+                                                </div>
+                                                <div class="product-btns" role="group" aria-label="Basic example">
+                                                    <a href="index.php?option=cart&addcart=<?php echo $row_product['Id']; ?>" class="btn btn-outline-danger"><i class="fas fa-heart"></i> </a>
+                                                    <a href="index.php?option=cart&addcart=<?php echo $row_product['Id']; ?>" class="btn btn-outline-info"><i class="fas fa-shopping-cart"></i> </a>
+                                                    <a href="index.php?option=product&id=<?php echo $row_product['Slug']; ?>" class="btn btn-outline-success"><i class="far fa-eye"></i> </a>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    <?php endforeach; ?>
                                 </div>
+                                <div id="slick-nav-1" class="products-slick-nav"></div>
                             </div>
-                        <?php endforeach; ?>
+                        </div>
                     </div>
                     <div><?= Pagination::pageLinks($total, $page, $limit, 'index.php?option=product&cat=' . $slug); ?></div>
                 </div>

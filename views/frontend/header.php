@@ -25,10 +25,10 @@ $user = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
 </head>
 
 <body class="o_connected_user">
-
     <header class="header">
         <div id="wrapwrap" class="container">
             <header id="top" data-anchor="true" data-name="Header" class="o_header_standard o_top_fixed_element">
@@ -64,7 +64,22 @@ $user = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
                                     </a>
                                 </li>
 
-                                <li class="o_wsale_my_cart nav-item mx-lg-3">
+                                <li class="nav-item mx-lg-3">
+                                    <?php
+                                    $count_heart = 0;
+                                    if (isset($_SESSION['heart'])) {
+                                        $heart = $_SESSION['heart'];
+                                        $count_heart = count($heart);
+                                    }
+                                    ?>
+                                    <a href="index.php?option=heart" class="nav-link" data-original-title="" title="Thêm vào yêu thích">
+                                        <i class="fas fa-heart"></i>
+
+                                        <sup class="badge bg-danger rounded-pill"><?php echo $count_heart; ?></sup>
+                                    </a>
+                                </li>
+
+                                <li class="o_wsale_my_cart nav-item">
                                     <?php
                                     $count_cart = 0;
                                     if (isset($_SESSION['cart'])) {

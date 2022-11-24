@@ -67,35 +67,35 @@ switch ($_POST['action']) {
             . "<br> Số điện thoại: " . $phone . "\n\n"
             . "<br> Hình thức thanh toán: " . $pay . "\n\n"
             . "<br><br> Thông tin sản phẩm: " . "\n\n";
-            foreach ($order->products as $key => $pro) {
-                $path = "C:/JavaScript/php/public/images/product/$pro->Img";
-                $type = pathinfo($path, PATHINFO_EXTENSION);
-                $data = file_get_contents($path);
-                $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-                // $message .= "<br>" . "Base" . $base64;
-                $message .= "<br>
+        foreach ($order->products as $key => $pro) {
+            $path = "C:/JavaScript/php/public/images/product/$pro->Img";
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+            // $message .= "<br>" . "Base" . $base64;
+            $message .= "<br>
                         <html>
                             <body>
                                 <table>" .
-                                    "<tr class='text-center'>" .
-                                        "<th rowspan='4' style='width:100px'>"."<img src='$base64' style='width:100px' alt='$pro->Img'>"."</th>" .
-                                        "<td class='text-center'>$pro->Name</td>" .
-                                    "</tr>";
-                        
-                            $message .=
-                                    "<tr>" .
-                                        "<td class='text-center'>"."Mã đơn hàng: "."$order->Code</td>" .
-                                    "</tr>" .
-                                    "<tr>" .
-                                        "<td class='text-center'>"."Số lượng: "."$orderdetail->Quantity</td>" .
-                                    "</tr>" .
-                                    "<tr>" .
-                                        "<td class='text-center'>"."Thành tiền: "."$orderdetail->Amount<sup>đ</sup>"."</td>" .
-                                    "</tr>" .
-                                "</table>
+                "<tr class='text-center'>" .
+                "<th rowspan='4' style='width:100px'>" . "<img src='$base64' style='width:100px' alt='$pro->Img'>" . "</th>" .
+                "<td class='text-center'>$pro->Name</td>" .
+                "</tr>";
+
+            $message .=
+                "<tr>" .
+                "<td class='text-center'>" . "Mã đơn hàng: " . "$order->Code</td>" .
+                "</tr>" .
+                "<tr>" .
+                "<td class='text-center'>" . "Số lượng: " . "$orderdetail->Quantity</td>" .
+                "</tr>" .
+                "<tr>" .
+                "<td class='text-center'>" . "Thành tiền: " . "$orderdetail->Amount<sup>đ</sup>" . "</td>" .
+                "</tr>" .
+                "</table>
                             </body>
                         </html>";
-                }
+        }
         $message .= "<br> Chúng tôi sẽ gửi thông báo sau cho bạn. " . "\n\n"
             . "<br><br>Cảm ơn &Trân trọng," . "\n" . "<br><br>Admin"
             . "<br>Tell: 0985781353" . "<br>Email: vovanduong175@gmail.com";

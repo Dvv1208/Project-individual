@@ -2,40 +2,29 @@
     <div class="container">
         <div class="container">
             <footer class="row row-cols-5 py-3 my-3 border-top">
-                <div class="col-md-3">
-                    <h5>Giới Thiệu</h5>
-                    <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Liên hệ</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Tuyển dụng</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Tìm hiểu về trả góp</a>
-                        </li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Thời gian bảo hành</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h5>Chính Sách</h5>
-                    <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Chính sách bán hàng</a>
-                        </li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Chính sách bảo hành</a>
-                        </li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Chính sách bảo mật</a>
-                        </li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Phương thức thanh toán</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md">
-                    <h5><i class="fa-solid fa-location-dot"></i> Địa Điểm Chi Nhánh Các Cửa Hàng</h5>
-                    <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted ">Trụ sở chính: Số 97 đường số
-                                11, Phường Trường Thọ,
-                                Tp.Thủ Đức, Tp.HCM </a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">
-                            </a></li>
-
-                    </ul>
+                <div class="col-md-12">
+                    <div class="newsletter">
+                        <form>
+                            <table>
+                                <input class="input" type="email" placeholder="Enter Your Email">
+                                <button class="newsletter-btn"><i class="fa fa-envelope"></i> Đăng ký</button>
+                            </table>
+                        </form>
+                        <ul class="newsletter-follow">
+                            <li>
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fab fa-pinterest"></i></a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </footer>
         </div>
@@ -94,3 +83,13 @@
         </div>
     </div>
 </section>
+
+<link type="text/css" rel="stylesheet" href="public/home/css/slick.css" />
+<link type="text/css" rel="stylesheet" href="public/home/css/slick-theme.css" />
+<link type="text/css" rel="stylesheet" href="public/home/css/nouislider.min.css" />
+<link type="text/css" rel="stylesheet" href="public/home/css/style.css" />
+<script src="public/home/js/jquery.min.js"></script>
+<script src="public/home/js/slick.min.js"></script>
+<script src="public/home/js/nouislider.min.js"></script>
+<script src="public/home/js/jquery.zoom.min.js"></script>
+<script src="public/home/js/main.js"></script>

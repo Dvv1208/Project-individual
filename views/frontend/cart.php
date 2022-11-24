@@ -1,50 +1,46 @@
 <?php
+
 use App\Models\Product;
 use App\Libraries\Cart;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\Orderdetail;
 
-$product = Product::where([['Status', '=', '1']])->orderBy('CreatedAt','desc')->get();
+$product = Product::where([['Status', '=', '1']])->orderBy('CreatedAt', 'desc')->get();
 
 $cart = new Cart();
-$page="view";
+$page = "view";
 
-if(isset($_REQUEST['addcart']))
-{
-    $qty= 1;
+if (isset($_REQUEST['addcart'])) {
+    $qty = 1;
     $id = $_REQUEST['addcart'];
-    $row_product = Product::where([['Id', '=', $id],['Status', '=', '1']])->first();
+    $row_product = Product::where([['Id', '=', $id], ['Status', '=', '1']])->first();
 
     $row_cart = array(
-        'Id'=> $id,
+        'Id' => $id,
         'Img' => $row_product['Img'],
-        'Name'=>$row_product['Name'],
-        'Price'=>$row_product['Pricesale'],
-        'qty'=>$qty,
-        'amount'=>$row_product['Pricesale']*$qty,
+        'Name' => $row_product['Name'],
+        'Price' => $row_product['Pricesale'],
+        'qty' => $qty,
+        'amount' => $row_product['Pricesale'] * $qty,
     );
     Cart::addCart($row_cart);
     header("location:index.php");
     exit;
 }
+if (isset($_REQUEST['delcart'])) {
 
-if(isset($_REQUEST['delcart'])){
-    
     $id = $_REQUEST['delcart'];
-    if($id == 'all'){
+    if ($id == 'all') {
         unset($_SESSION['cart']);
-    }
-    else
-    {
-       Cart::removeCart($id);
+    } else {
+        Cart::removeCart($id);
     }
     header("location:index.php?option=cart");
     exit;
 }
 
-if($page=="view")
-{
+if ($page == "view") {
     $list_content = Cart::contentCart();
     require_once('views/frontend/cart_view.php');
     exit;
@@ -55,5 +51,3 @@ if($page=="view")
 // }else{
 //     require_once('views/frontend/cart_view.php');
 // }
-
-?>

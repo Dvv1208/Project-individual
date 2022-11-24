@@ -19,11 +19,20 @@ $total = Post::where('Status', '=', '1')->count();
 <?php require_once('views/frontend/header.php'); ?>
 <section class="maincontent">
     <?php require_once('views/frontend/mod_slider.php'); ?>
-    <div class="row">
-        <div class="col-md-3">
-            <?php require_once('views/frontend/mod_listpost.php'); ?>
+    <section class="breadcrumb p-0 m-0">
+        <div class="container">
+            <div class="row">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb my-3">
+                        <li class="breadcrumb-item"><a style="text-decoration: none" href="index.php">Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><?php echo $title; ?></li>
+                    </ol>
+                </nav>
+            </div>
         </div>
-        <div class="col-md-9">
+    </section>
+    <div class="container">
+        <div class="row">
             <div class="container">
                 <div class="product_category my-3">
                     <h3 class="my-3 text-light text-center bg-mainmenu">
@@ -48,7 +57,7 @@ $total = Post::where('Status', '=', '1')->count();
                             </div>
                         </div>
                     <?php endforeach; ?>
-                    <div><?= Pagination::pageLinks($total, $page, $limit, 'index.php?option=post'); ?></div>
+                    <div><?= Pagination::pageLinks($total, $page, $limit, 'index.php?option=post-category'); ?></div>
                 </div>
             </div>
         </div>
