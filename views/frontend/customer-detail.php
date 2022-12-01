@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Order;
+
 $orders = Order::where('User_id', '=', $_SESSION['user_id'])->with('products')->get();
 
 $id = $_REQUEST["id"];

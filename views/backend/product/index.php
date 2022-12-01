@@ -49,7 +49,6 @@ $list = Product::where('Status', '!=', '0')->with('images')->orderBy('CreatedAt'
                                 <input type="checkbox" name="checkAll">
                             </th>
                             <th class="text-center">Hình</th>
-                            <th class="text-center">Hình chi tiết</th>
                             <th class="text-center">Tên sản phẩm</th>
                             <th class="text-center">Slug</th>
                             <th class="text-center">Ngày tạo</th>
@@ -66,7 +65,7 @@ $list = Product::where('Status', '!=', '0')->with('images')->orderBy('CreatedAt'
                                 <td class="text-center">
                                     <img style="width:200px" src="../public/images/product/<?php echo $row['Img']; ?>" alt="<?php echo $row['Img']; ?>">
                                 </td>
-                                <td class="text-center">
+                                <!-- <td class="text-center">
                                     <?php foreach ($row->images as $pro) : ?>
                                         <div class="slider">
                                             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -90,7 +89,7 @@ $list = Product::where('Status', '!=', '0')->with('images')->orderBy('CreatedAt'
                                             </div>
                                         </div>
                                     <?php endforeach; ?>
-                                </td>
+                                </td> -->
                                 <td class="text-center"><?php echo $row['Name']; ?></td>
                                 <td class="text-center"><?php echo $row['Slug']; ?></td>
                                 <td class="text-center"><?php echo $row['CreatedAt']; ?></td>

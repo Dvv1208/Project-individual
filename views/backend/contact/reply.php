@@ -1,14 +1,17 @@
 <?php
+
 use App\Models\Contact;
+use App\Libraries\MyClass;
+
 $contact = new Contact();
 $id = $_REQUEST['id'];
 $row = Contact::find($id);
-$tt="Giải đáp thắc mắc";
-if($row == null){
-    MyClass::set_flash("message", ['type'=> 'danger','msg'=> 'Mẫu tin không tồn tại !']);
+$tt = "Giải đáp thắc mắc";
+if ($row == null) {
+    MyClass::set_flash("message", ['type' => 'danger', 'msg' => 'Mẫu tin không tồn tại !']);
     header("location:index.php?option=contact");
 }
- ?>
+?>
 <?php require_once('../views/backend/header.php'); ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -42,41 +45,34 @@ if($row == null){
                         <div class="col-md-9">
                             <div class="mb-3">
                                 <label for="title">Tiêu đề liên hệ</label>
-                                <input name="data[Title]" value="<?php echo $row['Title']; ?>" id="title" type="text"
-                                    class="form-control" name value=<?php echo $row['Title'];?> readonly />
+                                <input name="data[Title]" value="<?php echo $row['Title']; ?>" id="title" type="text" class="form-control" name value=<?php echo $row['Title']; ?> readonly />
                             </div>
                             <div class="mb-3">
                                 <label for="detail">Câu hỏi liên hệ</label>
-                                <textarea name="data[Detail]" value="<?php echo $row['Detail']; ?>" id="detail" type="text"
-                                    class="form-control" readonly ><?php echo $row['Detail'];?>
+                                <textarea name="data[Detail]" value="<?php echo $row['Detail']; ?>" id="detail" type="text" class="form-control" readonly><?php echo $row['Detail']; ?>
                                 </textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="replydetaol">Nội dung trả lời</label>
-                                <input type="text" name="data[ReplyDetail]" value="<?php echo $row['ReplyDetail']; ?>" id="detail" type="text"
-                                    class="form-control" >
+                                <input type="text" name="data[ReplyDetail]" value="<?php echo $row['ReplyDetail']; ?>" id="detail" type="text" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
-                        <div class="mb-3">
+                            <div class="mb-3">
                                 <label for="fullname">Họ và tên</label>
-                                <input name="data[FullName]" value="<?php echo $row['FullName']; ?>" id="fullname" type="text"
-                                    class="form-control" name value=<?php echo $row['FullName'];?> readonly />
+                                <input name="data[FullName]" value="<?php echo $row['FullName']; ?>" id="fullname" type="text" class="form-control" name value=<?php echo $row['FullName']; ?> readonly />
                             </div>
                             <div class="mb-3">
                                 <label for="phone">Số điện thoại</label>
-                                <input name="data[Phone]" value="<?php echo $row['Phone']; ?>" id="phone" type="text"
-                                    class="form-control" name value=<?php echo $row['Phone'];?> readonly />
+                                <input name="data[Phone]" value="<?php echo $row['Phone']; ?>" id="phone" type="text" class="form-control" name value=<?php echo $row['Phone']; ?> readonly />
                             </div>
                             <div class="mb-3">
                                 <label for="email">Email</label>
-                                <input name="data[Email]" value="<?php echo $row['Email']; ?>" id="email" type="text"
-                                    class="form-control" name value=<?php echo $row['Email'];?> readonly />
+                                <input name="data[Email]" value="<?php echo $row['Email']; ?>" id="email" type="text" class="form-control" name value=<?php echo $row['Email']; ?> readonly />
                             </div>
                             <div class="mb-3">
                                 <label for="status">Trạng thái</label>
-                                <input name="data[Status]" value="<?php echo "Đã trả lời"; ?>" id="status" type="text"
-                                    class="form-control" value="2" <?php echo ($row['Status']==2)?'selected':''; ?> readonly />
+                                <input name="data[Status]" value="<?php echo "Đã trả lời"; ?>" id="status" type="text" class="form-control" value="2" <?php echo ($row['Status'] == 2) ? 'selected' : ''; ?> readonly />
                             </div>
                         </div>
                     </div>

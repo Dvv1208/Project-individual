@@ -37,24 +37,23 @@ $order = Order::where('Code', '=', $_SESSION['order_id'])->with('products')->fir
                     <h2>Đặt hàng thành công</h2>
                     <p class="lead">Cảm ơn bạn đã mua sắm tại cửa hàng !.</p>
                 </div>
-                <div class="col-md-8 order-md-1">
-
+                <div class="col-md-8">
                     <h4 class="mb-3">Thông tin khách hàng</h4>
                     <table class="table table-bordered" id="myTable">
                         <thead>
                             <tr>
-                                <th>Họ tên khách hàng</th>
-                                <th>Địa chỉ khách hàng</th>
-                                <th>Điện thoại khách hàng</th>
-                                <th>Email khách hàng</th>
+                                <th class="text-center">Họ tên khách hàng</th>
+                                <th class="text-center">Địa chỉ khách hàng</th>
+                                <th class="text-center">Sđt khách hàng</th>
+                                <th class="text-center">Email khách hàng</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><?php echo $order->Name; ?></td>
-                                <td><?php echo $order->Diachi; ?></td>
-                                <td><?php echo $order->Phone; ?></td>
-                                <td><?php echo $order->Email; ?></td>
+                                <td class="text-center"><?php echo $order->Name; ?></td>
+                                <td class="text-center"><?php echo $order->Diachi; ?></td>
+                                <td class="text-center"><?php echo $order->Phone; ?></td>
+                                <td class="text-center"><?php echo $order->Email; ?></td>
                             </tr>
                         <tbody>
                     </table>

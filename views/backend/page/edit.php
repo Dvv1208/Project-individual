@@ -1,20 +1,21 @@
 <?php
+
 use App\Models\Page;
+use App\Libraries\MyClass;
 
 $Page = new Page();
 $id = $_REQUEST['id'];
 $list = Page::where('Status', '!=', '0')->get();
 $row = Page::find($id);
-if($row == null){
-    MyClass::set_flash("message", ['type'=> 'danger','msg'=> 'Mẫu tin không tồn tại !']);
+if ($row == null) {
+    MyClass::set_flash("message", ['type' => 'danger', 'msg' => 'Mẫu tin không tồn tại !']);
     header("location:index.php?option=page");
 }
-$strcatid='';
-foreach($list as $item)
-{
-    $strcatid .= "<option value = '" .$item['Id'] ."'>" .$item['Name'] . "</option>";
+$strcatid = '';
+foreach ($list as $item) {
+    $strcatid .= "<option value = '" . $item['Id'] . "'>" . $item['Name'] . "</option>";
 }
- ?>
+?>
 <?php require_once('../views/backend/header.php'); ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -46,10 +47,9 @@ foreach($list as $item)
                     <div class="row">
                         <input name="id" value="<?php echo $row['Id']; ?>" type="hidden" />
                         <div class="col-md-9">
-                        <div class="mb-3">
+                            <div class="mb-3">
                                 <label for="title">Tiêu đề</label>
-                                <input name="data[Title]" id="title" type="text" class="form-control" required
-                                    placeholder="Nhập tiêu đề bài viết" />
+                                <input name="data[Title]" id="title" type="text" class="form-control" required placeholder="Nhập tiêu đề bài viết" />
                             </div>
                             <div class="mb-3">
                                 <label for="detail">Chi Tiết</label>
@@ -57,13 +57,11 @@ foreach($list as $item)
                             </div>
                             <div class="mb-3">
                                 <label for="metakey">Từ khóa</label>
-                                <textarea name="data[Metakey]" id="metakey" class="form-control" required
-                                    rows="4"></textarea>
+                                <textarea name="data[Metakey]" id="metakey" class="form-control" required rows="4"></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="metadesc">Mô tả</label>
-                                <textarea name="data[Metadesc]" id="metadesc" class="form-control" required
-                                    rows="4"></textarea>
+                                <textarea name="data[Metadesc]" id="metadesc" class="form-control" required rows="4"></textarea>
                             </div>
                         </div>
                         <div class="col-md-3">

@@ -13,6 +13,15 @@ $list_product = Product::where('Status', '=', '1')
     ->get();
 
 $total = Product::where('Status', '=', '1')->count();
+// $start = 8;
+// $end = 550;
+// $step = 100;
+// for ($i = $start; $i <= ceil($end / $step) * $step; $i++) {
+//     if ($i % $step == 0) {
+//         echo $start, " - ", $i, PHP_EOL;
+//         $start = $i + 1;
+//     }
+// }
 
 ?>
 
@@ -28,6 +37,7 @@ $total = Product::where('Status', '=', '1')->count();
             </nav>
         </div>
     </div>
+
 </section>
 <section class="maincontent">
     <div class="container">

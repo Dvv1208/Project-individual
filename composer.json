@@ -10,8 +10,6 @@
     "require": {
         "shuchkin/simplexlsx": "^1.0",
         "illuminate/database": "^8.83",
-        "illuminate/events": "^8.83",
-        "gloudemans/shoppingcart": "^2.6"
+        "illuminate/events": "^8.83"
     }
-    
 }

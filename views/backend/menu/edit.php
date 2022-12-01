@@ -1,22 +1,25 @@
 <?php
+
 use App\Models\Menu;
+use App\Libraries\MyClass;
+
 
 $menu = new Menu();
 $id = $_REQUEST['id'];
 $list = Menu::where('Status', '!=', '0')->get();
 $row = Menu::find($id);
-if($row == null){
-    MyClass::set_flash("message", ['type'=> 'danger','msg'=> 'Mẫu tin không tồn tại !']);
+if ($row == null) {
+    MyClass::set_flash("message", ['type' => 'danger', 'msg' => 'Mẫu tin không tồn tại !']);
     header("location:index.php?option=product");
 }
 $strparentid = "";
 $strorders = "";
-foreach($list as $item){
-  $strparentid .= "<option value = '" .$item['Id'] ."'>" .$item['Name'] . "</option>";
-  $strorders .="<option value='".$item['Orders']."'> Sau: ".$item['Name']."</option>";
+foreach ($list as $item) {
+    $strparentid .= "<option value = '" . $item['Id'] . "'>" . $item['Name'] . "</option>";
+    $strorders .= "<option value='" . $item['Orders'] . "'> Sau: " . $item['Name'] . "</option>";
 }
 
- ?>
+?>
 <?php require_once('../views/backend/header.php'); ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -50,8 +53,7 @@ foreach($list as $item){
                             <input name="id" value="<?php echo $row['Id']; ?>" type="hidden" />
                             <div class="mb-3">
                                 <label for="name">Tên Menu</label>
-                                <input name="data[Name]" value="<?php echo $row['Name']; ?>" id="name" type="text"
-                                    class="form-control" required placeholder="Nhập tên menu" />
+                                <input name="data[Name]" value="<?php echo $row['Name']; ?>" id="name" type="text" class="form-control" required placeholder="Nhập tên menu" />
                             </div>
                             <div class="mb-3">
                                 <label for="link">Liên kết</label>
@@ -59,8 +61,7 @@ foreach($list as $item){
                             </div>
                             <div class="mb-3">
                                 <label for="type">Loại menu</label>
-                                <input name="data[Type]" value="<?php echo $row['Type']; ?>" id="type" type="text" class="form-control"
-                                    placeholder="Nhập loại menu" />
+                                <input name="data[Type]" value="<?php echo $row['Type']; ?>" id="type" type="text" class="form-control" placeholder="Nhập loại menu" />
                             </div>
                         </div>
                         <div class="col-md-3">

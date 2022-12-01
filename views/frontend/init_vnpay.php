@@ -42,7 +42,7 @@ $inputData = array(
     "vnp_ReturnUrl" => $vnp_Returnurl,
     "vnp_TxnRef" => $vnp_TxnRef
 );
-var_dump($vnp_TxnRef);
+// var_dump($vnp_TxnRef);
 
 if (isset($vnp_BankCode) && $vnp_BankCode != "") {
     $inputData['vnp_BankCode'] = $vnp_BankCode;

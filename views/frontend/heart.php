@@ -41,20 +41,20 @@ if (isset($_REQUEST['delheart'])) {
 
 if (isset($_REQUEST['addToCart'])) {
     $list_content = Heart::contentHeart();
-    foreach ($list_content as $rheart) {
-        $qty = $rheart['qty'];
-    }
     $id = $_REQUEST['addToCart'];
     $row_product = Product::where([['Id', '=', $id], ['Status', '=', '1']])->first();
+    foreach ($list_content as $rheart) {
+        $qty = $rheart['qty'];
+        $array = array(
+            'Id' => $id,
+            'Img' => $row_product['Img'],
+            'Name' => $row_product['Name'],
+            'Price' => $row_product['Pricesale'],
+            'qty' => $qty,
+            'amount' => $row_product['Pricesale'] * $qty,
+        );
+    }
 
-    $row_heart = array(
-        'Id' => $id,
-        'Img' => $row_product['Img'],
-        'Name' => $row_product['Name'],
-        'Price' => $row_product['Pricesale'],
-        'qty' => $qty,
-        'amount' => $row_product['Pricesale'] * $qty,
-    );
     if ($id == 'all') {
         foreach ($list_content as $rheart) {
             $array = array(
@@ -63,14 +63,15 @@ if (isset($_REQUEST['addToCart'])) {
                 'Name' => $rheart['Name'],
                 'Price' => $rheart['Price'],
                 'qty' => $rheart['qty'],
-                'amount' => $rheart['amount'] * $rheart['qty']++,
+                'amount' => $rheart['amount'] * $rheart['qty'],
             );
-            Cart::addToCart($array[$count]);
+            Cart::addToCart($array);
             unset($_SESSION['heart']);
         }
+    } else {
+        Cart::addToCart($array);
+        Heart::removeHeart($id);
     }
-    Cart::addToCart($row_heart);
-    Heart::removeHeart($id);
     header("location:index.php?option=heart");
     exit;
 }

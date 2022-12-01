@@ -95,8 +95,6 @@ class Cart
                 $key = self::cart_exist($cart, $row['Id']);
                 if ($key != -1) {
                     $cart[$key]['qty']++;
-                    $cart[$key]['Pricesale']++;
-                    $cart[$key]['amount']++;
                 } else {
                     $cart[] = $row;
                 }

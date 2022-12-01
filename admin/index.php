@@ -1,8 +1,7 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['useradmin']))
-{
+if (!isset($_SESSION['useradmin'])) {
     header('location: login.php');
 }
 
