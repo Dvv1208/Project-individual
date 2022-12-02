@@ -17,18 +17,25 @@ if ($row == null) {
 <!-- Content Wrapper. Contains page content -->
 <form name="forml" action="index.php?option=contact&cat=process" method="post">
     <div class="content-wrapper py-2">
-        <!-- Content Header (Page header) -->
-
-        <!-- Main content -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-left">
+                            <li class="breadcrumb-item"><a href="index.php">Trang quản trị</a></li>
+                            <li class="breadcrumb-item active"><a href="index.php?option=contact">Liên hệ</a></li>
+                            <li class="breadcrumb-item active">Trả lời liên hệ</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
         <section class="content">
 
             <!-- Default box -->
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-6">
-                            <strong class="text-danger">Trả lời bài viết</strong>
-                        </div>
                         <div class="col-md-6 text-right">
                             <a href="index.php?option=contact" class="btn btn-sm btn-info">
                                 <i class="fas fa-undo"></i> Quay về danh sách

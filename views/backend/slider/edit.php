@@ -32,12 +32,10 @@ foreach ($list as $item) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Cập nhật slider</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Bảng điều khiển</a></li>
-              <li class="breadcrumb-item active">Cập nhật Slider</li>
+            <ol class="breadcrumb float-sm-left">
+              <li class="breadcrumb-item"><a href="index.php">Trang quản trị</a></li>
+              <li class="breadcrumb-item active"><a href="index.php?option=slider">Slider</a></li>
+              <li class="breadcrumb-item active">Cập nhật slider</li>
             </ol>
           </div>
         </div>

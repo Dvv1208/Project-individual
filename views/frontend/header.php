@@ -4,6 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 use App\Models\User;
+use App\Libraries\MyClass;
 
 $user = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
 
@@ -20,13 +21,23 @@ $user = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
     <meta name="keywords" content="<?php echo (isset($metadesc)) ? $metadesc : "Mô tả SEO"; ?>">
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/css/all.min.css">
+    <link rel="stylesheet" href="public/css/toastr.min.css">
     <link rel="stylesheet" href="public/css/layoutsite.css">
     <script src="public/js/bootstrap.bundle.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+    <script src="public/js/toastr.min.js"></script>
+    <script>
+        window.toastr.options = {
+            "progressBar": true,
+            heading: 'Positioning',
+            position: 'top-right',
+            stack: false
+        };
+    </script>
 
 </head>
+<?php include_once('views/frontend/message_alert.php'); ?>
 
 <body class="o_connected_user">
     <header class="header">

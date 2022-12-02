@@ -1,5 +1,6 @@
 <?php
 
+use App\Libraries\MyClass;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slider;
@@ -84,7 +85,7 @@ $list_slider = Slider::where([['Position', '=', 'slideshow'], ['Status', '=', '1
                                                 </div>
                                                 <div class="product-btns" role="group" aria-label="Basic example">
                                                     <a href="index.php?option=heart&addheart=<?php echo $row_product['Id']; ?>" class="btn btn-outline-danger"><i class="fas fa-heart"></i> </a>
-                                                    <a href="index.php?option=cart&addcart=<?php echo $row_product['Id']; ?>" class="btn btn-outline-info"><i class="fas fa-shopping-cart"></i> </a>
+                                                    <a onclick="myFunction()" href="index.php?option=cart&addcart=<?php echo $row_product['Id']; ?>" class="btn btn-outline-info"><i class="fas fa-shopping-cart"></i> </a>
                                                     <a href="index.php?option=product&id=<?php echo $row_product['Slug']; ?>" class="btn btn-outline-success"><i class="far fa-eye"></i> </a>
                                                 </div>
                                             </div>

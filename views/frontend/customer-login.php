@@ -1,4 +1,7 @@
 <?php
+
+use App\Libraries\MyClass;
+
 require_once("vendor/autoload.php");
 require_once("config/database.php");
 
@@ -21,7 +24,7 @@ use App\Models\User;
     <link rel="stylesheet" href="public/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="public/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="public/dist/css/adminlte.min.css">
-    <script>
+    <!-- <script>
         $.toast({
             heading: 'Positioning',
             text: 'Use the predefined ones, or specify a custom position object.',
@@ -33,7 +36,7 @@ use App\Models\User;
                 $.toast.show('thành công');
             });
         });
-    </script>
+    </script> -->
     <style>
         .btn-facebook {
             color: #fff;
@@ -78,7 +81,7 @@ use App\Models\User;
                 $_SESSION['logincustomer'] = $username;
                 $_SESSION['user_id'] = $user->Id;
 
-                $message_alert = "Đăng nhập thành công";
+                MyClass::set_flash("message", ['msg' => 'Đăng nhập thành công !']);
                 header("location:index.php");
             } else {
                 $message_alert = '<div class="text-danger text-center">Mật khẩu không chính xác !</div>';

@@ -1,13 +1,19 @@
+<?php require_once('views/frontend/header.php'); ?>
 <?php
 
 use App\Libraries\Cart;
-use App\Libraries\Heart;
+use App\Libraries\MyClass;
 
 $title = "Giỏ hàng";
-
 ?>
-
-<?php require_once('views/frontend/header.php'); ?>
+<script>
+    <?php if (MyClass::exists_flash('message')) : ?>
+        <?php $arr_message = MyClass::get_flash('message'); ?>
+        window.addEventListener('load', function() {
+            toastr.success('<?php echo $arr_message['msg']; ?>');
+        });
+    <?php endif; ?>
+</script>
 <form action="index.php?option=cart" method="post">
     <section class="breadcrumb p-0 m-0">
         <div class="container">
@@ -52,7 +58,7 @@ $title = "Giỏ hàng";
                                     </td>
                                     <td class="text-center"><?php echo number_format($rcart['amount'] * $rcart['qty'], 0, ',', '.') ?><sup>đ</sup></td>
                                     <td class="text-center">
-                                        <a href="index.php?option=cart&delcart=<?php echo $rcart['Id'] ?>">
+                                        <a onclick="deleteCart(<?= $rcart['Id']; ?>);" type="button">
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
@@ -62,7 +68,8 @@ $title = "Giỏ hàng";
 
                             <tr>
                                 <td colspan="4">
-                                    <a class="btn btn-outline-danger" href="index.php?option=cart&delcart=all">Xóa tất cả</a>
+                                    <a class="btn btn-outline-danger" onclick="deleteCartAll();" type="button">Xóa tất cả</a>
+
                                     <!-- <button type="submit" name="updateCart" class="btn btn-success">Cập nhật</button> -->
                                 </td>
                                 <td colspan="2" class="text-end">
@@ -80,7 +87,6 @@ $title = "Giỏ hàng";
 
                             </tr>
                         </table>
-
                     <?php else : ?>
                         GIỎ HÀNG CỦA BẠN CHƯA CÓ SẢN PHẨM NÀO
                     <?php endif; ?>
@@ -91,3 +97,17 @@ $title = "Giỏ hàng";
 </form>
 <!--section content-->
 <?php require_once('views/frontend/footer.php'); ?>
+<script>
+    function deleteCart(id) {
+        if (confirm("Bạn có muốn xóa sản phẩm này khỏi giỏ hàng?")) {
+            location.href = 'index.php?option=cart&delcart=' + id;
+        }
+    }
+</script>
+<script>
+    function deleteCartAll() {
+        if (confirm("Bạn có muốn xóa tất cả sản phẩm khỏi giỏ hàng?")) {
+            location.href = 'index.php?option=cart&delcart=all';
+        }
+    }
+</script>

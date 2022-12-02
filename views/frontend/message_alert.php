@@ -2,13 +2,11 @@
 
 use App\Libraries\MyClass;
 ?>
-
-<?php if (MyClass::exists_flash('message')) : ?>
-  <script>
-    $.toast({
-      text: <?php echo $arr_message['msg']; ?>,
-      position: 'top-right',
-      stack: false
-    })
-  </script>
-<?php endif; ?>
+<script>
+  <?php if (MyClass::exists_flash('message')) : ?>
+    <?php $arr_message = MyClass::get_flash('message'); ?>
+    window.addEventListener('load', function() {
+      toastr.success('<?php echo $arr_message['msg']; ?>');
+    });
+  <?php endif; ?>
+</script>

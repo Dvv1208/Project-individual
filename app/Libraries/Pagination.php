@@ -1,18 +1,19 @@
 <?php
+
 namespace App\Libraries;
 
 class Pagination
 {
     public static function pageCurrent()
     {
-        $page =(isset($_REQUEST['page']))?$_REQUEST['page']:1;
-        $page =(is_numeric($page))?$page:1;
-        $page =($page<=0)?1:$page;
+        $page = (isset($_REQUEST['page'])) ? $_REQUEST['page'] : 1;
+        $page = (is_numeric($page)) ? $page : 1;
+        $page = ($page <= 0) ? 1 : $page;
         return $page;
     }
-    public static function pageOffset($page,$limit)
+    public static function pageOffset($page, $limit)
     {
-        return ($page-1)*$limit;
+        return ($page - 1) * $limit;
     }
     public static function pageLinks($total, $current, $limit, $url = '')
     {

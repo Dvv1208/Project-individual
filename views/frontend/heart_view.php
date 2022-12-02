@@ -7,6 +7,7 @@ $title = "Sảm phẩm yêu thích";
 ?>
 
 <?php require_once('views/frontend/header.php'); ?>
+<?php require_once('views/frontend/message_alert.php'); ?>
 <form action="index.php?option=heart" method="post">
     <section class="breadcrumb p-0 m-0">
         <div class="container">
@@ -52,12 +53,12 @@ $title = "Sảm phẩm yêu thích";
                                     </td>
                                     <td class="text-center"><?php echo number_format($rheart['amount'] * $rheart['qty'], 0, ',', '.') ?><sup>đ</sup></td>
                                     <td class="text-center">
-                                        <a href="index.php?option=heart&addToCart=<?php echo $rheart['Id'] ?>">
+                                        <a onclick="addHeartToCart(<?php echo $rheart['Id']; ?>);" type="button">
                                             <i class="fas fa-shopping-cart"></i>
                                         </a>
                                     </td>
                                     <td class="text-center">
-                                        <a href="index.php?option=heart&delheart=<?php echo $rheart['Id'] ?>">
+                                        <a onclick="deleteHeart(<?php echo $rheart['Id']; ?>);" type="button">
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
@@ -65,7 +66,7 @@ $title = "Sảm phẩm yêu thích";
                             <?php endforeach; ?>
                             <tr>
                                 <td colspan="6">
-                                    <a class="btn btn-outline-danger" href="index.php?option=heart&delheart=all">Xóa tất cả</a>
+                                    <a class="btn btn-outline-danger" onclick="deleteHeartAll();" type="button">Xóa tất cả</a>
                                 </td>
                                 <td colspan="2" class="text-end">
                                 </td>
@@ -76,7 +77,7 @@ $title = "Sảm phẩm yêu thích";
                                 </td>
                                 <div class="form-group">
                                     <td colspan="6" class="text-end">
-                                        <a class="btn btn-outline-success" href="index.php?option=heart&addToCart=all">Thêm tất cả vào giỏ hàng</a>
+                                        <a class="btn btn-outline-success" onclick="addAllCart();" type="button">Thêm tất cả vào giỏ hàng</a>
                                     </td>
                                 </div>
                             </tr>
@@ -92,3 +93,31 @@ $title = "Sảm phẩm yêu thích";
 </form>
 <!--section content-->
 <?php require_once('views/frontend/footer.php'); ?>
+<script>
+    function deleteHeart(id) {
+        if (confirm("Bạn có muốn xóa sản phẩm này khỏi danh sách yêu thích?")) {
+            location.href = 'index.php?option=heart&delheart=' + id;
+        }
+    }
+</script>
+<script>
+    function deleteHeartAll() {
+        if (confirm("Bạn có muốn xóa tất cả sản phẩm khỏi danh sách yêu thích?")) {
+            location.href = 'index.php?option=heart&delheart=all';
+        }
+    }
+</script>
+<script>
+    function addHeartToCart(id) {
+        if (confirm("Bạn có muốn thêm sản phẩm này qua giỏ hàng không?")) {
+            location.href = 'index.php?option=heart&addToCart=' + id;
+        }
+    }
+</script>
+<script>
+    function addAllCart() {
+        if (confirm("Bạn có muốn thêm tất cả sản phẩm qua giỏ hàng không?")) {
+            location.href = 'index.php?option=heart&addToCart=all';
+        }
+    }
+</script>

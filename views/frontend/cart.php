@@ -2,9 +2,8 @@
 
 use App\Models\Product;
 use App\Libraries\Cart;
-use App\Models\Order;
-use App\Models\User;
-use App\Models\Orderdetail;
+use App\Libraries\MyClass;
+use Illuminate\Support\Arr;
 
 $product = Product::where([['Status', '=', '1']])->orderBy('CreatedAt', 'desc')->get();
 
@@ -25,6 +24,7 @@ if (isset($_REQUEST['addcart'])) {
         'amount' => $row_product['Pricesale'] * $qty,
     );
     Cart::addCart($row_cart);
+    MyClass::set_flash("message", ['msg' => 'Thêm vào giỏ hàng thành công !']);
     header("location:index.php");
     exit;
 }
@@ -35,7 +35,9 @@ if (isset($_REQUEST['delcart'])) {
         unset($_SESSION['cart']);
     } else {
         Cart::removeCart($id);
+        MyClass::set_flash("message", ['msg' => 'Xóa sản phẩm khỏi giỏ hàng thành công!']);
     }
+    MyClass::set_flash("message", ['msg' => 'Xóa sản phẩm khỏi giỏ hàng thành công!']);
     header("location:index.php?option=cart");
     exit;
 }

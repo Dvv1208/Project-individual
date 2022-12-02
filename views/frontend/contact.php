@@ -6,8 +6,8 @@ use App\Libraries\Pagination;
 $title = 'Liên hệ';
 
 ?>
-
 <?php require_once('views/frontend/header.php'); ?>
+<?php include_once('views/frontend/message_alert.php'); ?>
 <section class="maincontent">
     <?php require_once('views/frontend/mod_slider.php'); ?>
     <form name="forml" action="index.php?option=contact-process" method="post">

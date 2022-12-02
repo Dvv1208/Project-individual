@@ -3,6 +3,7 @@
 use App\Libraries\Cart;
 use App\Models\Product;
 use App\Libraries\Heart;
+use App\Libraries\MyClass;
 
 $product = Product::where([['Status', '=', '1']])->orderBy('CreatedAt', 'desc')->get();
 
@@ -23,6 +24,7 @@ if (isset($_REQUEST['addheart'])) {
         'amount' => $row_product['Pricesale'] * $qty,
     );
     Heart::addHeart($row_heart);
+    MyClass::set_flash("message", ['msg' => 'Thêm vào danh sách yêu thích thành công !']);
     header("location:index.php");
     exit;
 }
@@ -34,8 +36,10 @@ if (isset($_REQUEST['delheart'])) {
         unset($_SESSION['heart']);
     } else {
         Heart::removeHeart($id);
+        MyClass::set_flash("message", ['msg' => 'Xóa khỏi danh sách yêu thích thành công !']);
     }
     header("location:index.php?option=heart");
+    MyClass::set_flash("message", ['msg' => 'Xóa khỏi danh sách yêu thích thành công !']);
     exit;
 }
 
@@ -67,10 +71,12 @@ if (isset($_REQUEST['addToCart'])) {
             );
             Cart::addToCart($array);
             unset($_SESSION['heart']);
+            MyClass::set_flash("message", ['msg' => 'Thêm tất cả từ danh sách yêu thích qua giỏ hàng thành công !']);
         }
     } else {
         Cart::addToCart($array);
         Heart::removeHeart($id);
+        MyClass::set_flash("message", ['msg' => 'Thêm từ danh sách yêu thích qua giỏ hàng thành công !']);
     }
     header("location:index.php?option=heart");
     exit;

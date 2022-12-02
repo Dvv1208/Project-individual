@@ -18,7 +18,7 @@
                     </div>
                   </div>
                   <div class="col-4 text-end">
-                    
+
                   </div>
                 </div>
               </div>
@@ -38,7 +38,7 @@
                     </div>
                   </div>
                   <div class="col-4 text-end">
-                    
+
                   </div>
                 </div>
               </div>
@@ -58,7 +58,7 @@
                     </div>
                   </div>
                   <div class="col-4 text-end">
-                    
+
                   </div>
                 </div>
               </div>
@@ -78,7 +78,7 @@
                     </div>
                   </div>
                   <div class="col-4 text-end">
-                    
+
                   </div>
                 </div>
               </div>

@@ -21,18 +21,25 @@ foreach ($list as $item) {
 <!-- Content Wrapper. Contains page content -->
 <form name="form1" action="index.php?option=post&cat=process" method="post" enctype="multipart/form-data">
     <div class="content-wrapper py-2">
-        <!-- Content Header (Page header) -->
-
-        <!-- Main content -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-left">
+                            <li class="breadcrumb-item"><a href="index.php">Trang quản trị</a></li>
+                            <li class="breadcrumb-item active"><a href="index.php?option=post">Bài viết</a></li>
+                            <li class="breadcrumb-item active">Cập nhật bài viết</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
         <section class="content">
 
             <!-- Default box -->
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-6">
-                            <strong class="text-danger">Cập nhật danh mục</strong>
-                        </div>
                         <div class="col-md-6 text-right">
                             <a href="index.php?option=post" class="btn btn-sm btn-info">
                                 <i class="fas fa-undo"></i> Quay về danh sách

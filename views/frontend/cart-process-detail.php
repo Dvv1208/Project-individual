@@ -14,6 +14,7 @@ $order = Order::where('Code', '=', $_SESSION['order_id'])->with('products')->fir
 ?>
 
 <?php require_once('views/frontend/header.php'); ?>
+<?php include_once('views/frontend/message_alert.php'); ?>
 <section class="breadcrumb p-0 m-0">
     <div class="container">
         <div class="row">

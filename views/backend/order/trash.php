@@ -14,12 +14,10 @@ $list = Order::where('OrderStatus', '=', '0')->orderBy('CreatedAt', 'desc')->wit
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Đơn hàng đã hủy</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Bảng điều khiển</a></li>
-                        <li class="breadcrumb-item active">Thùng rác danh mục</li>
+                    <ol class="breadcrumb float-sm-left">
+                        <li class="breadcrumb-item"><a href="index.php">Trang quản trị</a></li>
+                        <li class="breadcrumb-item active"><a href="index.php?option=order">Đơn hàng</a></li>
+                        <li class="breadcrumb-item active">Đơn hàng bị hủy</li>
                     </ol>
                 </div>
             </div>
@@ -48,9 +46,6 @@ $list = Order::where('OrderStatus', '=', '0')->orderBy('CreatedAt', 'desc')->wit
                 <table class="table table-bordered" id="myTable">
                     <thead>
                         <tr>
-                            <th style="width:5px" class="text-center">
-                                <input type="checkbox" name="checkAll">
-                            </th>
                             <th class="text-center">Tên</th>
                             <th class="text-center">Địa chỉ</th>
                             <th class="text-center">Sđt</th>
@@ -73,9 +68,6 @@ $list = Order::where('OrderStatus', '=', '0')->orderBy('CreatedAt', 'desc')->wit
                             }
                             ?>
                             <tr>
-                                <td style="width:5px" class="text-center">
-                                    <input type="checkbox" name="checkId[]">
-                                </td>
                                 <td class="text-center"><?php echo $row['Name']; ?></td>
                                 <td class="text-center"><?php echo $row['Diachi']; ?></td>
                                 <td class="text-center"><?php echo $row['Phone']; ?></td>
@@ -100,11 +92,11 @@ $list = Order::where('OrderStatus', '=', '0')->orderBy('CreatedAt', 'desc')->wit
         </div>
         <!-- /.card -->
 </div>
+<?php require_once('../views/backend/footer.php'); ?>
 </section>
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<?php require_once('../views/backend/footer.php'); ?>
 <script>
     $(document).ready(function() {
         $('#myTable').DataTable();

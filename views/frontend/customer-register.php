@@ -1,5 +1,6 @@
 <?php
 
+use App\Libraries\MyClass;
 use App\Models\Huyen;
 use App\Models\Tinh;
 use App\Models\User;
@@ -53,7 +54,8 @@ use App\Models\Xa;
         $user->CreatedAt = date('Y-m-d H:i:s');
         $user->Status = 1;
         $user->save();
-        header("location:index.php?option=customer&login");
+        MyClass::set_flash("message", ['msg' => 'Đăng ký thành công! Mời bạn đăng nhập']);
+        header("location:index.php");
     }
     ?>
     <div class="card-header text-center my-3">

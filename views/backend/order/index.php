@@ -9,33 +9,26 @@ $list = Order::where('OrderStatus', '!=', 0)->orderBy('CreatedAt', 'desc')->get(
 
 <?php require_once('../views/backend/header.php'); ?>
 
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Tất cả đơn hàng</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Bảng điều khiển</a></li>
-            <li class="breadcrumb-item active">Tất cả</li>
+          <ol class="breadcrumb float-sm-left">
+            <li class="breadcrumb-item"><a href="index.php">Trang quản trị</a></li>
+            <li class="breadcrumb-item active"><a href="index.php?option=order">Đơn hàng</a></li>
+            <li class="breadcrumb-item active">Tất cả đơn hàng</li>
           </ol>
         </div>
       </div>
-    </div><!-- /.container-fluid -->
+    </div>
   </section>
-
-  <!-- Main content -->
   <section class="content">
-
-    <!-- Default box -->
     <div class="card">
+
       <div class="row">
-        <div class="col-12 text-right">
-          <a href="index.php?option=order&cat=trash" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Đơn hàng bị hủy
+        <div class="col-12 text-right my-3">
+          <a href="index.php?option=order&cat=trash" class="btn btn-sm btn-danger"></i> Đơn hàng bị hủy
           </a>
         </div>
       </div>
@@ -86,7 +79,7 @@ $list = Order::where('OrderStatus', '!=', 0)->orderBy('CreatedAt', 'desc')->get(
                     <a href="index.php?option=order&cat=detail&code=<?php echo $row['Code']; ?>" title="Chi tiết" class="btn btn-sm btn-primary">
                       <i class="fas fa-eye"></i>
                     </a>
-                    <a href="index.php?option=order&cat=edit&id=<?php echo $row['Id']; ?>" title="Cập nhật" class="btn btn-sm btn-info">
+                    <a href="index.php?option=order&cat=edit&code=<?php echo $row['Code']; ?>" title="Cập nhật" class="btn btn-sm btn-info">
                       <i class="fas fa-edit"></i>
                     </a>
                   <?php endif; ?>
