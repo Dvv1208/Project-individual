@@ -35,6 +35,17 @@ $list_product = Product::where('Status', '=', '1')
     ->with('images')
     ->get();
 $list_img = ProductsImages::where('proId', '=', $row_pro['Id'])->get();
+$imgpro = Product::where('Id', '=', $row_pro['Id'])->with('images')->get();
+
+
+
+// foreach ($imgpro as $i) {
+//     echo '<pre>';
+//     print_r($i->Img);
+//     echo '</pre>';
+// }
+
+
 ?>
 
 <section class="maincontent">
@@ -44,20 +55,38 @@ $list_img = ProductsImages::where('proId', '=', $row_pro['Id'])->get();
                 <div class="row">
                     <div class="col-md-2 col-md-pull-5">
                         <div id="product-imgs">
-                            <?php foreach ($list_img as $key) : ?>
-                                <div class="product-preview">
-                                    <img src="public/images/product/<?php echo $key->ImgId; ?>" class="img-fluid w-100" alt="<?php echo $key->ImgId; ?>">
-                                </div>
-                            <?php endforeach; ?>
+                            <?php
+                            foreach ($imgpro as $i) {
+                                echo ("<div class='product-preview'>"
+                                    . "<img src='public/images/product/$i->Img' class='img-fluid w-100' alt='$i->Img'>"
+                                    . "</div>");
+                                if ($i->Id != null) {
+                                    foreach ($list_img as $key) {
+                                        echo ("<div class='product-preview'>"
+                                            . "<img src='public/images/product/images/$key->ImgId' class='img-fluid w-100' alt='$key->ImgId'> "
+                                            . "</div>");
+                                    }
+                                }
+                            }
+                            ?>
                         </div>
                     </div>
                     <div class="col-md-5 col-md-push-2">
                         <div id="product-main-img" style="width: 498px;">
-                            <?php foreach ($list_img as $key) : ?>
-                                <div class="product-preview">
-                                    <img src="public/images/product/<?php echo $key->ImgId; ?>" class="img-fluid w-100" alt="<?php echo $key->ImgId; ?>">
-                                </div>
-                            <?php endforeach; ?>
+                            <?php
+                            foreach ($imgpro as $i) {
+                                echo ("<div class='product-preview'>"
+                                    . "<img src='public/images/product/$i->Img' class='img-fluid w-100' alt='$i->Img'>"
+                                    . "</div>");
+                                if ($i->Id != null) {
+                                    foreach ($list_img as $key) {
+                                        echo ("<div class='product-preview'>"
+                                            . "<img src='public/images/product/images/$key->ImgId' class='img-fluid w-100' alt='$key->ImgId'> "
+                                            . "</div>");
+                                    }
+                                }
+                            }
+                            ?>
                         </div>
                     </div>
 
@@ -121,6 +150,7 @@ $list_img = ProductsImages::where('proId', '=', $row_pro['Id'])->get();
                         </div>
                     </div>
                     <!--end row-->
+                    <br>
                     <div class="div my-3">
                         <h3>SẢN PHẨM CÙNG LOẠI</h3>
                         <div class="products-tabs">

@@ -12,7 +12,7 @@
                         </form>
                         <ul class="newsletter-follow">
                             <li>
-                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="facebook.com/dvv1208"><i class="fab fa-facebook-f"></i></a>
                             </li>
                             <li>
                                 <a href="#"><i class="fab fa-twitter"></i></a>
@@ -70,8 +70,8 @@
                     <span style="font-size: 13px; font-weight: bold; text-transform: uppercase;">Hổ trợ tư vấn</span>
                     <p style="font-size: 13px;">Hotline: 0985781353</p>
                     <p style="font-size: 13px;">
-                        <a href="https://www.facebook.com/dvv1208/">
-                            <i class="fab fa-facebook"></i>Facebook</a>
+                        <a style="text-decoration: none" href="https://www.facebook.com/dvv1208/">
+                            <i class="fab fa-facebook"></i> Facebook</a>
                     </p>
                 </div>
             </div>

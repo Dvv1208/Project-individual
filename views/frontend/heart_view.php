@@ -84,7 +84,7 @@ $title = "Sảm phẩm yêu thích";
                         </table>
 
                     <?php else : ?>
-                        BẠN CHƯA CÓ SẢN PHẨM YÊU THÍCH nào
+                        BẠN CHƯA CÓ SẢN PHẨM YÊU THÍCH NÀO
                     <?php endif; ?>
                 </div>
             </div>

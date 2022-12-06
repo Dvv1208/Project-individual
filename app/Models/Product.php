@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    use HasFactory;
-
     protected $table = 'product';
     protected $primaryKey = 'Id';
     const CREATED_AT = 'CreatedAt';

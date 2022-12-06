@@ -2,7 +2,7 @@
 
 use App\Models\Category;
 
-$list = Category::where('Status', '!=', '0')->get();
+$list = Category::where('Parentid', '=', '0')->get();
 $strcatid = "";
 foreach ($list as $item) {
     $strcatid .= "<option value = '" . $item['Id'] . "'>" . $item['Name'] . "</option>";
@@ -88,6 +88,10 @@ foreach ($list as $item) {
                             </div>
                             <div class="mb-3">
                                 <label for="img">Hình</label>
+                                <input type="file" name="avt" id="avt">
+                            </div>
+                            <div class="mb-3">
+                                <label for="img">Hình chi tiết</label>
                                 <input type="file" name="img[]" multiple>
                             </div>
                             <div class="mb-3">

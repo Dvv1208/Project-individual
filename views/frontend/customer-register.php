@@ -1,13 +1,3 @@
-<?php
-
-use App\Libraries\MyClass;
-use App\Models\Huyen;
-use App\Models\Tinh;
-use App\Models\User;
-use App\Models\Xa;
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,68 +14,36 @@ use App\Models\Xa;
 </head>
 
 <body class="hold-transition login-page">
-    <?php
-    if (isset($_POST['DANGKY'])) {
-        $user = new User();
-        $tinh = Tinh::where('matp', '=', $_POST['tinh'])->get();
-        $huyen = Huyen::where('maqh', '=', $_POST['huyen'])->get();
-        $xa = Xa::where('xaid', '=', $_POST['xa'])->get();
-        $user->Fullname = $_POST['Fullname'];
-        $user->Username = $_POST['Username'];
-        $user->Email = $_POST['Email'];
-        $user->Password = sha1($_POST['Password']);
-        $user->Gender = $_POST['Gender'];
-        $user->Phone = $_POST['Phone'];
-        $user->Roles = $_POST['Roles'];
-        foreach ($tinh as $t) {
-            $tinhname = $t->name;
-        }
-        foreach ($huyen as $h) {
-            $huyenname = $h->name;
-        }
-        foreach ($xa as $x) {
-            $xaname = $x->name;
-        }
-        $h = $_POST['huyen'];
-        $x = $_POST['xa'];
-        $diachi = $_POST['diachi'];
-        $row_address = $diachi . ", " . $xaname . ", " . $huyenname . ", " . $tinhname;
-        $user->Address = $row_address;
-        $user->CreatedAt = date('Y-m-d H:i:s');
-        $user->Status = 1;
-        $user->save();
-        MyClass::set_flash("message", ['msg' => 'Đăng ký thành công! Mời bạn đăng nhập']);
-        header("location:index.php");
-    }
-    ?>
+
     <div class="card-header text-center my-3">
         <a class="h1"><b>Đăng Ký</b></a>
     </div>
-    <form class="col-6 m-auto border border-primary p-2 row" action="" method="post">
-        <div class="col-12 mb-3">
+    <form class="col-6 m-auto border border-primary p-2 row" action="index.php?option=customer-register-process" method="post" enctype="multipart/form-data">
+        <div class="col-6 mb-3">
             <label for="name">Họ và tên</label>
             <div class="input-group">
                 <input name="Fullname" id=fullname type="text" required class="form-control" placeholder="Nhập họ và tên của bạn">
             </div>
         </div>
-        <div class="col-12 mb-3">
+        <div class="col-6 mb-3">
             <label for="name">Tên đăng nhập</label>
             <div class="input-group">
                 <input name="Username" id=username type="text" required class="form-control" placeholder="Tên đăng nhập">
             </div>
         </div>
-        <div class="col-12 mb-3">
+        <div class="col-6 mb-3">
             <label for="name">Email</label>
             <div class="input-group">
                 <input name="Email" id=email type="email" required class="form-control" placeholder="Email">
             </div>
         </div>
-        <div class="col-12 mb-3">
+        <div class="col-6 mb-3">
             <label for="name">Mật khẩu</label>
             <div class="input-group">
                 <input name="Password" type="password" id=password required class="form-control" placeholder="Mật Khẩu">
             </div>
         </div>
+
         <div class="col-12 mb-3">
             <label for="name">Giới tính</label>&nbsp &nbsp
             <div class="input-group text-center ">
@@ -93,12 +51,21 @@ use App\Models\Xa;
                 <input name="Gender" class="form-check form-check-inline" type="radio" value="0" />Nữ
             </div>
         </div>
-        <div class="col-12 mb-3">
+        <div class="col-6 mb-3">
             <label for="name">Số điện thoại</label>
             <div class="input-group">
                 <input name="Phone" id=phone required class="form-control" placeholder="Số điện thoại">
             </div>
         </div>
+
+        <div class="col-6 mb-3">
+            <label for="img">Hình đại diện</label>
+            <div class="input-group">
+                <img class="center" style="width: 150px; height: 150px; border-radius: 50%;" src="public/images/user/default.jpg" onClick="triggerClick()" id="profileDisplay">
+                <input type="file" name="profileImage" onChange="displayImage(this)" id="profileImage" class="form-control" style="display: none;">
+            </div>
+        </div>
+
         <input name="Roles" value="0" type="hidden" />
         <table name="address">
             <div class="col-6 mb-3">
@@ -201,6 +168,29 @@ use App\Models\Xa;
     <script src="public/plugins/jquery/jquery.min.js"></script>
     <script src="public/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="public/dist/js/adminlte.min.js"></script>
+    <style>
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+    </style>
+    <script>
+        function triggerClick(e) {
+            document.querySelector('#profileImage').click();
+        }
+
+        function displayImage(e) {
+            if (e.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.querySelector('#profileDisplay').setAttribute('src', e.target.result);
+                }
+                reader.readAsDataURL(e.files[0]);
+            }
+        }
+    </script>
 </body>
 
 </html>
