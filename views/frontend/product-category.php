@@ -98,14 +98,18 @@ $total = Product::where('Status', '=', '1')->whereIn('Catid', $listcatid)->count
                                         </div>
                                     <?php endforeach; ?>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="container text-center">
+                            <div class="row">
                                 <div id="slick-nav-1" class="products-slick-nav"></div>
                             </div>
                         </div>
                     </div>
-                    <div><?= Pagination::pageLinks($total, $page, $limit, 'index.php?option=product&cat=' . $slug); ?></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 <?php require_once('views/frontend/footer.php'); ?>

@@ -138,58 +138,259 @@ $imgpro = Product::where('Id', '=', $row_pro['Id'])->with('images')->get();
                         <h5>Chi tiết sản phẩm</h5>
                         <p><?php echo $row_pro['Detail']; ?></p>
                         <!-- <p>
-                <div class="fb-like" data-href="index.php?option=product&id=<?php echo $slug; ?>" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true">
-                </div>
-                </p> -->
+                        <div class="fb-like" data-href="index.php?option=product&id=<?php echo $slug; ?>" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true">
+                        </div>
+                        </p> -->
                     </div>
 
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-12">
                             <div class="fb-comments" data-href="index.php?option=product&id=<?php echo $slug; ?>" data-width="100%" data-numposts="5">
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!--end row-->
-                    <br>
-                    <div class="div my-3">
-                        <h3>SẢN PHẨM CÙNG LOẠI</h3>
-                        <div class="products-tabs">
-                            <div id="tab1" class="tab-pane active">
-                                <div class="products-slick" data-nav="#slick-nav-1">
-                                    <?php foreach ($list_product as $row_product) : ?>
-                                        <div class="product">
-                                            <div class="product-img">
-                                                <a href="index.php?option=product&id=<?php echo $row_product['Slug']; ?>">
-                                                    <img src="public/images/product/<?php echo $row_product['Img']; ?>" class="card-img-top" alt="<?php echo $row_product['Img']; ?>">
-                                                </a>
-                                            </div>
-                                            <div class="product-body">
-                                                <h3 class="product-name">
-                                                    <h5>
-                                                        <a style="text-decoration: none" href="index.php?option=product&id=<?php echo $row_product['Slug']; ?>">
-                                                            <?php echo $row_product['Name']; ?>
-                                                        </a>
-                                                    </h5>
-                                                </h3>
-                                                <h5 class="product-price"><?php echo number_format($row_product['Pricesale'], 0, ',', '.') . "<sup>đ</sup>"; ?>
-                                                    <del class="product-old-price"><?php echo number_format($row_product['Price'], 0, ',', '.') . "<sup>đ</sup>"; ?></del>
-                                                </h5>
-                                                <div class="product-rating">
+
+                    <div class="col-md-12">
+                        <div id="product-tab">
+                            <ul class="tab-nav">
+                                <li class="active"><a style="text-decoration: none" data-toggle="tab" class="tablinks" onclick="openTab(event, 'tabDetail')" type="button">Chi tiết sản phẩm</a></li>
+                                <li><a style="text-decoration: none" data-toggle="tab" class="tablinks" onclick="openTab(event, 'tabMetadesc')" type="button">Mô tả sản phẩm</a></li>
+                                <li><a style="text-decoration: none" data-toggle="tab" class="tablinks" onclick="openTab(event, 'tabVote')" type="button">Đánh giá sản phẩm</a></li>
+                            </ul>
+                            <div id="tabDetail" class="tabcontent" style="display:block">
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <p><?php echo $row_pro['Detail']; ?></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="tabMetadesc" class="tabcontent">
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <p><?php echo $row_pro['Metadesc']; ?></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="tabVote" class="tabcontent">
+                                <div class="row mb-3">
+                                    <!-- Rating -->
+                                    <div class="col-md-3 ">
+                                        <div id="rating">
+                                            <div class="rating-avg">
+                                                <span>4.5</span>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
                                                 </div>
-                                                <div class="product-btns" role="group" aria-label="Basic example">
-                                                    <a href="index.php?option=heart&addheart=<?php echo $row_product['Id']; ?>" class="btn btn-outline-danger"><i class="fas fa-heart"></i> </a>
-                                                    <a href="index.php?option=cart&addcart=<?php echo $row_product['Id']; ?>" class="btn btn-outline-info"><i class="fas fa-shopping-cart"></i> </a>
-                                                    <a href="index.php?option=product&id=<?php echo $row_product['Slug']; ?>" class="btn btn-outline-success"><i class="far fa-eye"></i> </a>
-                                                </div>
                                             </div>
+                                            <ul class="rating">
+                                                <li>
+                                                    <div class="rating-stars">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                    <div class="rating-progress">
+                                                        <div style="width: 80%;"></div>
+                                                    </div>
+                                                    <span class="sum">3</span>
+                                                </li>
+                                                <li>
+                                                    <div class="rating-stars">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                    </div>
+                                                    <div class="rating-progress">
+                                                        <div style="width: 60%;"></div>
+                                                    </div>
+                                                    <span class="sum">2</span>
+                                                </li>
+                                                <li>
+                                                    <div class="rating-stars">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                    </div>
+                                                    <div class="rating-progress">
+                                                        <div></div>
+                                                    </div>
+                                                    <span class="sum">0</span>
+                                                </li>
+                                                <li>
+                                                    <div class="rating-stars">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                    </div>
+                                                    <div class="rating-progress">
+                                                        <div></div>
+                                                    </div>
+                                                    <span class="sum">0</span>
+                                                </li>
+                                                <li>
+                                                    <div class="rating-stars">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                    </div>
+                                                    <div class="rating-progress">
+                                                        <div></div>
+                                                    </div>
+                                                    <span class="sum">0</span>
+                                                </li>
+                                            </ul>
                                         </div>
-                                    <?php endforeach; ?>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div id="reviews">
+                                            <ul class="reviews">
+                                                <li>
+                                                    <div class="review-heading">
+                                                        <h5 class="name">John</h5>
+                                                        <p class="date">27 DEC 2018, 8:0 PM</p>
+                                                        <div class="review-rating">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-o empty"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="review-body">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="review-heading">
+                                                        <h5 class="name">John</h5>
+                                                        <p class="date">27 DEC 2018, 8:0 PM</p>
+                                                        <div class="review-rating">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-o empty"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="review-body">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="review-heading">
+                                                        <h5 class="name">John</h5>
+                                                        <p class="date">27 DEC 2018, 8:0 PM</p>
+                                                        <div class="review-rating">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-o empty"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="review-body">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div id="review-form">
+                                            <form class="review-form">
+                                                <input class="input" type="text" placeholder="Your Name">
+                                                <input class="input" type="email" placeholder="Your Email">
+                                                <textarea class="input" placeholder="Your Review"></textarea>
+                                                <div class="input-rating">
+                                                    <span>Your Rating: </span>
+                                                    <div class="stars">
+                                                        <input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
+                                                        <input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
+                                                        <input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
+                                                        <input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
+                                                        <input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
+                                                    </div>
+                                                </div>
+                                                <button class="primary-btn">Submit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="container my-3">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="newsletter">
+                                    <h3>SẢN PHẨM CÙNG LOẠI</h3>
+                                    <div class="products-tabs">
+                                        <div class="products-slick" data-nav="#slick-nav-1">
+                                            <?php foreach ($list_product as $row_product) : ?>
+                                                <div class="product">
+                                                    <div class="product-img">
+                                                        <a href="index.php?option=product&id=<?php echo $row_product['Slug']; ?>">
+                                                            <img src="public/images/product/<?php echo $row_product['Img']; ?>" class="card-img-top" alt="<?php echo $row_product['Img']; ?>">
+                                                        </a>
+                                                    </div>
+                                                    <div class="product-body">
+                                                        <h3 class="product-name">
+                                                            <h5>
+                                                                <a style="text-decoration: none" href="index.php?option=product&id=<?php echo $row_product['Slug']; ?>">
+                                                                    <?php echo $row_product['Name']; ?>
+                                                                </a>
+                                                            </h5>
+                                                        </h3>
+                                                        <h5 class="product-price"><?php echo number_format($row_product['Pricesale'], 0, ',', '.') . "<sup>đ</sup>"; ?>
+                                                            <del class="product-old-price"><?php echo number_format($row_product['Price'], 0, ',', '.') . "<sup>đ</sup>"; ?></del>
+                                                        </h5>
+                                                        <div class="product-rating">
+                                                        </div>
+                                                        <div class="product-btns" role="group" aria-label="Basic example">
+                                                            <a href="index.php?option=heart&addheart=<?php echo $row_product['Id']; ?>" class="btn btn-outline-danger"><i class="fas fa-heart"></i> </a>
+                                                            <a href="index.php?option=cart&addcart=<?php echo $row_product['Id']; ?>" class="btn btn-outline-info"><i class="fas fa-shopping-cart"></i> </a>
+                                                            <a href="index.php?option=product&id=<?php echo $row_product['Slug']; ?>" class="btn btn-outline-success"><i class="far fa-eye"></i> </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
+                                    <div class="container text-center">
+                                        <div class="row">
+                                            <div id="slick-nav-1" class="products-slick-nav"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 </section>
+
 <?php require_once('views/frontend/footer.php'); ?>
 <link type="text/css" rel="stylesheet" href="public/home/css/slick.css" />
 <link type="text/css" rel="stylesheet" href="public/home/css/slick-theme.css" />
@@ -200,3 +401,25 @@ $imgpro = Product::where('Id', '=', $row_pro['Id'])->with('images')->get();
 <script src="public/home/js/nouislider.min.js"></script>
 <script src="public/home/js/jquery.zoom.min.js"></script>
 <script src="public/home/js/main.js"></script>
+<script src="public/home/js/bootstrap.min.js"></script>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace("active", "");
+        }
+        document.getElementById(tabName).style.display = " block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+<style>
+    .tabcontent {
+        display: none;
+    }
+</style>

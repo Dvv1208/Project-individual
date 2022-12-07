@@ -11,7 +11,6 @@ $username = User::find($_SESSION['user_id']);
 $orders = Order::where('User_id', '=', $_SESSION['user_id'])->with('products')->get();
 $user_id = $username->Id;
 $userimg = UserImage::where('User_id', '=', $user_id)->get();
-
 ?>
 
 <?php require_once('views/frontend/header.php'); ?>
@@ -97,61 +96,61 @@ $userimg = UserImage::where('User_id', '=', $user_id)->get();
         <div class="col-md-9">
             <div class="col-md-9">
                 <h3>Lịch sử đơn hàng</h3>
-                <?php if ($orders != null) : ?>
-                    <table class="table table-borderd">
-                        <tr>
-                            <th class="text-center">Mã đơn hàng</th>
-                            <th class="text-center">Thành tiền</th>
-                            <th class="text-center">Phương thức thanh toán</th>
-                            <th class="text-center">Trạng thái đơn hàng</th>
-                            <th class="text-center"></th>
-                        </tr>
+            </div>
+            <?php if (count($orders) != null) : ?>
+                <table class="table table-borderd">
+                    <tr>
+                        <th class="text-center">Mã đơn hàng</th>
+                        <th class="text-center">Thành tiền</th>
+                        <th class="text-center">Phương thức thanh toán</th>
+                        <th class="text-center">Trạng thái đơn hàng</th>
+                        <th class="text-center"></th>
+                    </tr>
 
-                        <?php foreach ($orders as $order) : ?>
-                            <?php
-                            $totalMoney = 0;
-                            foreach ($order->products as $product) {
-                                $totalMoney += $product->pivot->Amount;
-                            }
-                            ?>
-                            <tr>
-                                <td class="text-center"><?php echo $order->Code; ?></td>
-                                <td class="text-center">
-                                    <?php echo number_format($totalMoney, 0, ',', '.') . "<sup>đ</sup>"; ?>
-                                </td>
-                                <td class="text-center"><?php echo $order->Pttt; ?></td>
-                                <td class="text-center">
-                                    <?php
-                                    if (($order->OrderStatus) == "1") {
-                                        echo ("Chờ xác nhận");
-                                    } elseif (($order->OrderStatus) == "0") {
-                                        echo ("Đã hủy");
-                                    } else {
-                                        echo ("Đang giao hàng");
-                                    }
-                                    ?>
-                                </td>
-                                <td class="text-center">
-                                    <!-- <?php if (($order->OrderStatus) == "0") : ?>
+                    <?php foreach ($orders as $order) : ?>
+                        <?php
+                        $totalMoney = 0;
+                        foreach ($order->products as $product) {
+                            $totalMoney += $product->pivot->Amount;
+                        }
+                        ?>
+                        <tr>
+                            <td class="text-center"><?php echo $order->Code; ?></td>
+                            <td class="text-center">
+                                <?php echo number_format($totalMoney, 0, ',', '.') . "<sup>đ</sup>"; ?>
+                            </td>
+                            <td class="text-center"><?php echo $order->Pttt; ?></td>
+                            <td class="text-center">
+                                <?php
+                                if (($order->OrderStatus) == "1") {
+                                    echo ("Chờ xác nhận");
+                                } elseif (($order->OrderStatus) == "0") {
+                                    echo ("Đã hủy");
+                                } else {
+                                    echo ("Đang giao hàng");
+                                }
+                                ?>
+                            </td>
+                            <td class="text-center">
+                                <!-- <?php if (($order->OrderStatus) == "0") : ?>
                                         <input type="hidden" name="action" value="huydonhang">
                                         <a href="index.php?option=customer&profile=status&id=<?php echo $order->Id; ?>" title="Trạng thái đơn hàng" class="btn btn-sm btn-danger">Khôi phục đơn hàng</a>
                                         </input>
                                     <?php endif; ?> -->
-                                    <?php if (($order->OrderStatus) == "1") : ?>
-                                        <input type="hidden" name="action" value="huydonhang">
-                                        <a href="index.php?option=customer&profile=status&id=<?php echo $order->Id; ?>" title="Trạng thái đơn hàng" class="btn btn-sm btn-danger">Hủy đơn hàng</a>
-                                        </input>
-                                        <?php if (($order->OrderStatus) == "2") : ?>
-                                        <?php endif; ?>
+                                <?php if (($order->OrderStatus) == "1") : ?>
+                                    <input type="hidden" name="action" value="huydonhang">
+                                    <a href="index.php?option=customer&profile=status&id=<?php echo $order->Id; ?>" title="Trạng thái đơn hàng" class="btn btn-sm btn-danger">Hủy đơn hàng</a>
+                                    </input>
+                                    <?php if (($order->OrderStatus) == "2") : ?>
                                     <?php endif; ?>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </table>
-                <?php else : ?>
-                    Bạn chưa có đơn hàng nào
-                <?php endif; ?>
-            </div>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            <?php else : ?>
+                <strong>Bạn chưa có đơn hàng nào</strong>
+            <?php endif; ?>
         </div>
 
         <hr class="mb-4">

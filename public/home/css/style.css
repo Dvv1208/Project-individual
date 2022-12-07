@@ -1599,14 +1599,14 @@ textarea.input {
 \*----------------------------*/
 
 #product-tab {
-  margin-top: 60px;
+  margin-top: 40px;
 }
 
 #product-tab .tab-nav {
   position: relative;
   text-align: center;
   padding: 15px 0px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 #product-tab .tab-nav:after {

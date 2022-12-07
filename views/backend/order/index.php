@@ -3,7 +3,7 @@
 use App\Models\Order;
 use App\Libraries\MyClass;
 
-$list = Order::where('OrderStatus', '!=', 0)->orderBy('CreatedAt', 'desc')->get();
+$list = Order::where('OrderStatus', '!=', 0)->orderBy('CreatedAt', 'DESC')->get();
 
 ?>
 

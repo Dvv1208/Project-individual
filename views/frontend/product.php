@@ -86,7 +86,7 @@ $total = Product::where('Status', '=', '1')->count();
                                     </div>
                                 <?php endforeach; ?>
                             </div>
-                            <div id="slick-nav-1" class="products-slick-nav"></div>
+
                         </div>
                     </div>
                 </div>
@@ -94,4 +94,9 @@ $total = Product::where('Status', '=', '1')->count();
         </div>
     </div>
 </section>
+<div class="container text-center">
+    <div class="row">
+        <div id="slick-nav-1" class="products-slick-nav"></div>
+    </div>
+</div>
 <?php require_once('views/frontend/footer.php'); ?>
