@@ -33,110 +33,66 @@ $userimg = UserImage::where('User_id', '=', $user_id)->get();
             <div class="card-header">
                 <h2>Thông tin của bạn</h2>
             </div>
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="text-center">
-                        <?php foreach ($userimg as $img) {
-                        } ?>
-                        <img style="border-radius: 50%;" src="public/images/user/<?php echo $img->Avatar; ?>" onClick="triggerClick()" id="profileDisplay" class="avatar img-circle img-thumbnail" alt="avatar">
+            <form action="index.php?option=customer-profile-saveImage" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="text-center">
+                            <?php foreach ($userimg as $img) {
+                            } ?>
+                            <img style="border-radius: 50%; width: auto; height: 300px;" src="public/images/user/<?php echo $img->Avatar; ?>" onClick="triggerClick()" id="profileDisplay" title="Ấn vào để thay đổi hình đại diện" class="avatar img-circle img-thumbnail" alt="<?php echo $img->Avatar; ?>">
+                        </div>
+                        <input type="file" name="profileImage" onChange="displayImage(this)" id="profileImage" class="form-control" style="display: none;">
                     </div>
-                </div>
-                <div class="col-sm-9">
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="home">
-                            <form class="form" action="##" method="post" id="registrationForm">
+                    <div class="col-sm-9">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="home">
                                 <div class="form-group">
-
                                     <div class="col-xs-6">
-                                        <label><b>Họ tên</b></label><br> 
-                                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="<?php echo $username->Fullname; ?>" title="enter your first name if any.">
+                                        <label for="name">
+                                            <label><b>Họ tên</b></label><br>
+                                        </label>
+                                        <input type="text" class="form-control" name="name" id="name" value="<?php echo $username->Fullname; ?>" title="Nhập họ tên của bạn" required>
                                     </div>
                                 </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label><b>Địa chỉ</b></label><br> 
-                                        <input type="text" class="form-control" name="last_name" id="last_name" placeholder="<?php echo $username->Address; ?>" title="enter your last name if any.">
+                                <div class="form-group my-3">
+                                    <div class="col-xs-6 ">
+                                        <label for="address">
+                                            <label><b>Địa chỉ</b></label><br>
+                                        </label>
+                                        <input type="text" class="form-control" name="address" id="address" value="<?php echo $username->Address; ?>" title="Nhập địa chỉ của bạn" required>
                                     </div>
                                 </div>
-
-                                <div class="form-group">
-
+                                <div class="form-group my-3">
                                     <div class="col-xs-6">
                                         <label for="phone">
-                                            <label><b>Số điện thoại</b></label><br> 
+                                            <label><b>Số điện thoại</b></label><br>
                                         </label>
-                                        <input type="text" class="form-control" name="phone" id="phone" placeholder="<?php echo  $username->Phone; ?>" title="enter your phone number if any.">
+                                        <input type="text" class="form-control" name="phone" id="phone" value="<?php echo  $username->Phone; ?>" title="Nhập số điện thoại của bạn" required>
                                     </div>
                                 </div>
-
-                                <div class="form-group">
+                                <div class="form-group my-3">
                                     <div class="col-xs-6">
-                                        <label for="mobile">
-                                            <label><b>Email</b></label><br> 
+                                        <label for="email">
+                                            <label><b>Email</b></label><br>
                                         </label>
-                                        <input type="text" class="form-control" name="mobile" id="mobile" placeholder="<?php echo  $username->Email; ?>" title="enter your mobile number if any.">
+                                        <input type="text" class="form-control" name="email" id="email" value="<?php echo  $username->Email; ?>" title="Nhập email của bạn" required>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group my-3 text-end">
                                     <div class="col-xs-12">
                                         <br>
-                                        <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                                        <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                                        <button type="button" value="edit_profile" id="edit_profile" class="btn btn-outline-info btn-block">Sửa</button>
+                                        <button type="submit" name="save_profile" value="save_profile" id="save_profile" class="btn btn-outline-success btn-block">Lưu</button>
+                                        <button type="button" value="cancel_profile" id="cancel_profile" class="btn btn-outline-info btn-block">Hủy</button>
                                     </div>
                                 </div>
-                            </form>
-                            <hr>
+                                <hr>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
-        <div class="row">
-            <div class="col-6">
-                <div class="card-header">
-                    <h2>Thông tin của bạn</h2>
-                </div>
-                <div class="container border py-3 my-3">
-                    <div class="col-md-auto">
-                        <label><b>Họ tên</b></label><br> <?php echo $username->Fullname; ?>
-                    </div>
-                    <div class="col-md-auto">
-                        <label><b>Địa chỉ</b></label><br> <?php echo $username->Address; ?>
-                    </div>
-                    <div class="col-md-auto">
-                        <label><b>Số điện thoại</b></label><br> <?php echo  $username->Phone; ?>
-                    </div>
-                    <div class="col-md-auto">
-                        <label><b>Email</b></label><br> <?php echo  $username->Email; ?>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-            </div>
-            <div class="col-3">
-                <div class="text-center">
-                    <h2>Ảnh đại diện</h2>
-                </div>
-                <div class="container py-3 my-3">
-                    <form action="index.php?option=customer-profile-saveImage" method="post" enctype="multipart/form-data">
-                        <div class="form-group text-center" style="position: relative;">
-                            <span class="img-div">
-                                <?php foreach ($userimg as $img) {
-                                } ?>
-                                <img class="col-9" style="border-radius: 50%;" src="public/images/user/<?php echo $img->Avatar; ?>" onClick="triggerClick()" id="profileDisplay">
-                            </span>
-                            <input type="file" name="profileImage" onChange="displayImage(this)" id="profileImage" class="form-control" style="display: none;">
-                        </div>
-                        <br>
-                        <div class="form-group text-center">
-                            <button type="submit" name="save_profile" class="btn btn-outline-success btn-block">Lưu</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
 
         <div class="col-md-9">
             <div class="col-md-9">
@@ -205,6 +161,7 @@ $userimg = UserImage::where('User_id', '=', $user_id)->get();
     </div>
 </section>
 <?php require_once('views/frontend/footer.php'); ?>
+
 <script>
     function triggerClick(e) {
         document.querySelector('#profileImage').click();
@@ -219,4 +176,21 @@ $userimg = UserImage::where('User_id', '=', $user_id)->get();
             reader.readAsDataURL(e.files[0]);
         }
     }
+</script>
+<script>
+    $("#save_profile, #cancel_profile").hide();
+    $('input').attr('disabled', true);
+    $('#edit_profile').on('click', function(e) {
+        $("#save_profile, #cancel_profile").show();
+        $("#edit_profile").hide();
+        e.preventDefault();
+        if ($('input').attr('disabled')) {
+            $('input').removeAttr('disabled');
+        }
+    })
+    $('#cancel_profile').on('click', function(e) {
+        $("#save_profile, #cancel_profile").hide();
+        $("#edit_profile").show();
+        $('input').attr('disabled', true);
+    })
 </script>

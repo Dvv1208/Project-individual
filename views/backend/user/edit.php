@@ -52,19 +52,19 @@ $args = array(
               <input name="id" type="hidden" value="<?= $row['Id']; ?>" id="id" class="form-control">
               <div class="mb-3">
                 <label for="fullname">Họ tên thành viên</label>
-                <input name="data[FullName]" type="text" value="<?= $row['FullName']; ?>" id="fullname" placeholder="nhập tên thành viên" class="form-control">
+                <input name="data[FullName]" type="text" value="<?= $row['Fullname']; ?>" id="fullname" placeholder="nhập tên thành viên" class="form-control">
               </div>
               <div class="mb-3">
                 <label for="email">Email</label>
-                <input name="data[Email]" id="email" rows="5" class="form-control">Email hiện tại: <?= $row['Email']; ?>
+                <input name="data[Email]" id="email" rows="5" value="<?= $row['Email']; ?>" class="form-control">
               </div>
               <div class="mb-3">
                 <label for="phone">Điện thoại</label>
-                <input name="data[Phone]" id="phone" rows="5" class="form-control">Số điện thoại hiện tại: <?= $row['Phone']; ?>
+                <input name="data[Phone]" id="phone" rows="5" value="<?= $row['Phone']; ?>" class="form-control">
               </div>
               <div class="mb-3">
-                <label for="password">Mật khẩu mới</label>
-                <input name="data[Password]" id="password" rows="5" class="form-control">Password hiện tại: <?= $row['Password']; ?>
+                <label for="password">Mật khẩu</label>
+                <input name="data[Password]" id="password" rows="5" value="<?= $row['Password']; ?>" class="form-control">
               </div>
             </div>
 
@@ -89,26 +89,14 @@ $args = array(
               <div class="mb-3">
                 <label for="status">Trạng thái</label>
                 <select id="status" name="status" class="form-control">
-                  <option value="1" <?= ($row['Status'] == 1) ? 'selected' : ''; ?>>Xuất bản</option>
-                  <option value="2" <?= ($row['Status'] == 2) ? 'selected' : ''; ?>>Không xuất bản</option>
+                  <option value="1" <?= ($row['Status'] == 1) ? 'selected' : ''; ?>>Hoạt động</option>
+                  <option value="2" <?= ($row['Status'] == 2) ? 'selected' : ''; ?>>Không hoạt động</option>
                 </select>
               </div>
             </div>
           </div>
 
         </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-          <div class="row">
-            <div class="col-12 text-right">
-              <button type="submit" name="CAPNHAT" class="btn btn-sm btn-success">
-                <i class="fas fa-save"></i>Lưu[chỉnh sửa]</a>
-              </button>
-              <a href="index.php?option=user" class="btn btn-sm btn-info"><i class="fas fa-undo"></i>Quay về danh sách</a>
-            </div>
-          </div>
-        </div>
-        <!-- /.card -->
 
     </section>
     <!-- /.content -->
