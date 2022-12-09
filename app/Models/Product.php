@@ -17,6 +17,7 @@ class Product extends Model
     {
         return $this->hasMany(ProductsImages::class, 'proId', 'Id');
     }
+    
     public $sortable = [
         'id',
         'name',
