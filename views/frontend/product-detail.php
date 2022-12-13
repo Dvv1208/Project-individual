@@ -1,9 +1,11 @@
 <?php require_once('views/frontend/header.php'); ?>
 <?php
 
-use App\Models\Product;
-use App\Models\Category;
 use App\Libraries\Pagination;
+use App\Models\Product;
+use App\Models\User;
+use App\Models\Category;
+use App\Models\Reviews;
 use App\Models\ProductsImages;
 
 $slug = $_REQUEST['id'];
@@ -37,13 +39,7 @@ $list_product = Product::where('Status', '=', '1')
     ->get();
 $list_img = ProductsImages::where('proId', '=', $row_pro['Id'])->get();
 $imgpro = Product::where('Id', '=', $row_pro['Id'])->with('images')->get();
-
-
-// foreach ($imgpro as $i) {
-//     echo '<pre>';
-//     print_r($i->Img);
-//     echo '</pre>';
-// }
+$reviews = Reviews::where('pro_id', '=', $row_pro['Id'])->get();
 
 
 ?>
@@ -89,19 +85,13 @@ $imgpro = Product::where('Id', '=', $row_pro['Id'])->with('images')->get();
                             ?>
                         </div>
                     </div>
-
                     <div class="col-md-5">
                         <div class="product-details">
-                            <h2 class="product-name"><?php echo $row_pro['Name']; ?></h2>
                             <div>
-                                <div class="product-rating">
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                </div>
-                                <a style="text-decoration: none" class="review-link" href="#">10 lượt đánh giá | Thêm đánh giá của bạn</a>
+                                <?php $totalReview = 0 ?>
+                                <?php $totalReview = count($reviews) ?>
+                                <h4 class="position-relative"><?php echo $row_pro['Name']; ?></h4>
+                                <a>(<?php echo $totalReview . ' lượt đánh giá' ?>)</a>
                             </div>
                             <div>
                                 <h5 class="product-price"><?php echo number_format($row_pro['Pricesale'], 0, ',', '.') . "<sup>đ</sup>"; ?>
@@ -182,11 +172,11 @@ $imgpro = Product::where('Id', '=', $row_pro['Id'])->with('images')->get();
                                             <div class="rating-avg">
                                                 <span id="average_rating">0.0</span> / 5
                                                 <div class="rating-stars">
-                                                    <i class="fas fa-star text-warning star-light mr-1 main_star"></i>
-                                                    <i class="fas fa-star text-warning star-light mr-1 main_star"></i>
-                                                    <i class="fas fa-star text-warning star-light mr-1 main_star"></i>
-                                                    <i class="fas fa-star text-warning star-light mr-1 main_star"></i>
-                                                    <i class="fas fa-star text-warning star-light mr-1 main_star"></i>
+                                                    <i class="fas fa-star star-light mr-1 main_star"></i>
+                                                    <i class="fas fa-star star-light mr-1 main_star"></i>
+                                                    <i class="fas fa-star star-light mr-1 main_star"></i>
+                                                    <i class="fas fa-star star-light mr-1 main_star"></i>
+                                                    <i class="fas fa-star star-light mr-1 main_star"></i>
                                                 </div>
                                             </div>
                                             <ul class="rating">
@@ -204,7 +194,7 @@ $imgpro = Product::where('Id', '=', $row_pro['Id'])->with('images')->get();
                                                         <div class="progress-label-left"><b>4</b> <i class="fas fa-star text-warning"></i></div>
                                                     </div>
                                                     <div class="rating-progress">
-                                                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="five_star_progress"></div>
+                                                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="four_star_progress"></div>
                                                     </div>
                                                     (<span id="total_four_star_review">0</span>)
                                                 </li>
@@ -213,7 +203,7 @@ $imgpro = Product::where('Id', '=', $row_pro['Id'])->with('images')->get();
                                                         <div class="progress-label-left"><b>3</b> <i class="fas fa-star text-warning"></i></div>
                                                     </div>
                                                     <div class="rating-progress">
-                                                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="five_star_progress"></div>
+                                                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="three_star_progress"></div>
                                                     </div>
                                                     (<span id="total_three_star_review">0</span>)
                                                 </li>
@@ -222,7 +212,7 @@ $imgpro = Product::where('Id', '=', $row_pro['Id'])->with('images')->get();
                                                         <div class="progress-label-left"><b>2</b> <i class="fas fa-star text-warning"></i></div>
                                                     </div>
                                                     <div class="rating-progress">
-                                                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="five_star_progress"></div>
+                                                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="two_star_progress"></div>
                                                     </div>
                                                     (<span id="total_two_star_review">0</span>)
                                                 </li>
@@ -231,7 +221,7 @@ $imgpro = Product::where('Id', '=', $row_pro['Id'])->with('images')->get();
                                                         <div class="progress-label-left"><b>1</b> <i class="fas fa-star text-warning"></i></div>
                                                     </div>
                                                     <div class="rating-progress">
-                                                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="five_star_progress"></div>
+                                                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="one_star_progress"></div>
                                                     </div>
                                                     (<span id="total_one_star_review">0</span>)
                                                 </li>
@@ -239,7 +229,6 @@ $imgpro = Product::where('Id', '=', $row_pro['Id'])->with('images')->get();
                                             <span id="total_review">0</span> Đánh giá
                                         </div>
                                     </div>
-
                                     <div class="col-md-6">
                                         <div id="reviews">
                                             <ul class="reviews">
@@ -261,6 +250,13 @@ $imgpro = Product::where('Id', '=', $row_pro['Id'])->with('images')->get();
                                                 </li>
                                             </ul>
                                         </div>
+                                        <ul class="reviews-pagination">
+                                            <li class="active">1</li>
+                                            <li><a style="text-decoration: none" href="#">2</a></li>
+                                            <li><a style="text-decoration: none" href="#">3</a></li>
+                                            <li><a style="text-decoration: none" href="#">4</a></li>
+                                            <li><a style="text-decoration: none" href="#"><i class="fa fa-angle-right"></i></a></li>
+                                        </ul>
                                     </div>
 
                                     <div class="col-md-3 text-center">
@@ -342,7 +338,8 @@ $imgpro = Product::where('Id', '=', $row_pro['Id'])->with('images')->get();
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="user_name" id="user_name" class="form-control" placeholder="Nhập tên của bạn" />
+                            <?php $user = User::find($_SESSION['user_id']); ?>
+                            <input type="text" name="user_name" id="user_name" class="form-control" placeholder="<?php echo $user->Fullname;?>" />
                         </div>
                         <div class="form-group">
                             <input type="hidden" name="pro_id" id="pro_id" class="form-control" value="<?php echo $row_pro['Id']; ?>" />
@@ -373,195 +370,9 @@ $imgpro = Product::where('Id', '=', $row_pro['Id'])->with('images')->get();
 <script src="public/home/js/jquery.zoom.min.js"></script>
 <script src="public/home/js/main.js"></script>
 <script src="public/home/js/bootstrap.min.js"></script>
-
-<script>
-    function openTab(evt, tabName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace("active", "");
-        }
-        document.getElementById(tabName).style.display = " block";
-        evt.currentTarget.className += " active";
-    }
-</script>
+<script src="public/js/reviews.js"></script>
 <style>
     .tabcontent {
         display: none;
     }
 </style>
-<script>
-    var rating_data = 0;
-
-    $('#add_review').click(function() {
-
-        $('#review_modal').modal('show');
-
-    });
-
-    $(document).on('mouseenter', '.submit_star', function() {
-
-        var rating = $(this).data('rating');
-
-        reset_background();
-
-        for (var count = 1; count <= rating; count++) {
-
-            $('#submit_star_' + count).addClass('text-warning');
-
-        }
-
-    });
-
-    function reset_background() {
-        for (var count = 1; count <= 5; count++) {
-
-            $('#submit_star_' + count).addClass('star-light');
-
-            $('#submit_star_' + count).removeClass('text-warning');
-
-        }
-    }
-
-    $(document).on('mouseleave', '.submit_star', function() {
-
-        reset_background();
-
-        for (var count = 1; count <= rating_data; count++) {
-
-            $('#submit_star_' + count).removeClass('star-light');
-
-            $('#submit_star_' + count).addClass('text-warning');
-        }
-
-    });
-
-    $(document).on('click', '.submit_star', function() {
-
-        rating_data = $(this).data('rating');
-
-    });
-
-    $('#save_review').click(function() {
-
-        var user_name = $('#user_name').val();
-
-        var pro_id = $('#pro_id').val();
-
-        var user_review = $('#user_review').val();
-
-        if (user_name == '' || user_review == '') {
-            alert("Please Fill Both Field");
-            return false;
-        } else {
-            $.ajax({
-                url: "index.php?option=product-reviews",
-                method: "POST",
-                data: {
-                    rating_data: rating_data,
-                    pro_id: pro_id,
-                    user_name: user_name,
-                    user_review: user_review
-                },
-                success: function(data) {
-                    $('#review_modal').modal('hide');
-
-                    load_rating_data();
-
-                    alert(data);
-                }
-            })
-        }
-
-    });
-    load_rating_data();
-
-    function load_rating_data() {
-        $.ajax({
-            url: "index.php?option=product-reviews",
-            method: "POST",
-            data: {
-                action: 'load_data'
-            },
-            dataType: "JSON",
-            success: function(data) {
-                $('#average_rating').text(data.average_rating);
-                $('#total_review').text(data.total_review);
-
-                var count_star = 0;
-
-                $('.main_star').each(function() {
-                    count_star++;
-                    if (Math.ceil(data.average_rating) >= count_star) {
-                        $(this).addClass('text-warning');
-                        $(this).addClass('star-light');
-                    }
-                });
-
-                $('#total_five_star_review').text(data.five_star_review);
-
-                $('#total_four_star_review').text(data.four_star_review);
-
-                $('#total_three_star_review').text(data.three_star_review);
-
-                $('#total_two_star_review').text(data.two_star_review);
-
-                $('#total_one_star_review').text(data.one_star_review);
-
-                $('#five_star_progress').css('width', (data.five_star_review / data.total_review) * 100 + '%');
-
-                $('#four_star_progress').css('width', (data.four_star_review / data.total_review) * 100 + '%');
-
-                $('#three_star_progress').css('width', (data.three_star_review / data.total_review) * 100 + '%');
-
-                $('#two_star_progress').css('width', (data.two_star_review / data.total_review) * 100 + '%');
-
-                $('#one_star_progress').css('width', (data.one_star_review / data.total_review) * 100 + '%');
-
-                if (data.review_data.length > 0) {
-                    var html = '';
-
-                    for (var count = 0; count < data.review_data.length; count++) {
-                        html += '<div class="row mb-3">';
-                        html += '<div class="col-md-12">';
-                        html += '<div id="reviews">';
-                        html += '<ul class="reviews">';
-                        html += '<li>';
-                        html += '<div class="review-heading">';
-                        html += '<h5 class="name"> ' + data.review_data[count].user_name + '</h5>';
-                        html += '<p class="date"> ' + data.review_data[count].datetime + ' </p>';
-                        html += '<div class="review-rating">';
-                        for (var star = 1; star <= 5; star++) {
-                            var class_name = '';
-
-                            if (data.review_data[count].rating >= star) {
-                                class_name = 'text-warning';
-                            } else {
-                                class_name = 'star-light';
-                            }
-                            html += '<i class="fas fa-star ' + class_name + ' mr-1"></i>';
-                        }
-                        html += '</div>';
-                        html += '</div>';
-                        html += '<div class="review-body">';
-                        html += '<p>' + data.review_data[count].user_review + '</p>';
-                        html += '</div>';
-                        html += '</li>';
-                        html += '</ul>';
-                        html += '</div>';
-                        html += '</div>';
-                        html += '</div>';
-                        html += '</div>';
-                    }
-
-                    $('#reviews').html(html);
-                }
-            }
-        })
-    }
-</script>

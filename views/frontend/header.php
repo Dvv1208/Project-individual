@@ -26,6 +26,7 @@ $user = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
     <script src="public/js/bootstrap.bundle.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="#">
     <script src="public/js/toastr.min.js"></script>
     <script>
         window.toastr.options = {
@@ -46,7 +47,9 @@ $user = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
                 <nav data-name="Navbar" class="navbar navbar-expand-lg navbar-light o_colored_level o_cc shadow-sm">
                     <div id="top_menu_container" class="container justify-content-start justify-content-lg-between">
                         <a href="/" class="navbar-brand logo mr-4">
-                            <span data-oe-model="website" data-oe-id="1" data-oe-field="logo" data-oe-type="image" data-oe-expression="website.logo" role="img" aria-label="Logo of My Website" title="My Website"><img src="/web/image/website/1/logo/My%20Website?unique=3e7f044" class="img img-fluid" alt="My Website" loading="lazy"></span>
+                            <span data-oe-model="website" data-oe-id="1" data-oe-field="logo" data-oe-type="image" data-oe-expression="website.logo" role="img" aria-label="Logo of My Website" title="My Website">
+                                <img src="" class="img img-fluid" alt="My Website" loading="lazy">
+                            </span>
                         </a>
                         <button type="button" data-toggle="collapse" data-target="#top_menu_collapse" data-oe-model="ir.ui.view" data-oe-id="4965" data-oe-field="arch" data-oe-xpath="/t[1]/button[1]" class="navbar-toggler ml-auto">
                             <span class="navbar-toggler-icon o_not_editable"></span>

@@ -58,9 +58,9 @@ $total = Product::where('Status', '=', '1')->whereIn('Catid', $listcatid)->count
             </div>
             <div class="col-md-12">
                 <div class="product_category my-3">
-                    <h3 class="my-3 text-center">
+                    <h2 class="my-3 text-center position-relative">
                         <?php echo $title; ?>
-                    </h3>
+                    </h2>
                     <div class="row">
                         <div class="products-tabs">
                             <div id="tab1" class="tab-pane active">

@@ -4,10 +4,10 @@
             <footer class="row row-cols-5 py-3 my-3 border-top">
                 <div class="col-md-12">
                     <div class="newsletter">
-                        <form>
+                        <form action="index.php?option=contact" method="post">
                             <table>
-                                <input class="input" type="email" placeholder="Enter Your Email">
-                                <button class="newsletter-btn"><i class="fa fa-envelope"></i> Đăng ký</button>
+                                <input class="input" type="email" placeholder="Nhập email của bạn">
+                                <button class="newsletter-btn" type="submit"><i class="fa fa-envelope"></i> Đăng ký</button>
                             </table>
                         </form>
                         <ul class="newsletter-follow">

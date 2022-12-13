@@ -1,6 +1,7 @@
 <?php
 
 use App\Libraries\Cart;
+use App\Libraries\MyClass;
 use App\Models\Order;
 
 $list_content = Cart::contentCart();
@@ -8,7 +9,8 @@ $totalMoney = 0;
 $orders = Order::where('User_id', '=', $_SESSION['user_id'])->with('products')->get();
 
 header('Content-type: text/html; charset=utf-8');
-
+// header("content-type: application/json; charset=UTF-8");
+http_response_code(200);
 function execPostRequest($url, $data)
 {
     $ch = curl_init($url);
@@ -43,10 +45,9 @@ foreach ($orders as $order) {
     }
 }
 $amount = $totalMoney;
-var_dump($amount);
 $orderId = time() . "";
-$redirectUrl = "http://localhost/JavaScript/php/index.php?option=cart-pay_view";
-$ipnUrl = "http://localhost/JavaScript/php/index.php?option=cart-process-detail";
+$redirectUrl = "http://localhost/JavaScript/php/index.php?option=cart-pay-camon";
+$ipnUrl = "http://localhost/JavaScript/php/index.php?option=cart-pay_view";
 $extraData = "";
 
 $requestId = time() . "";
@@ -72,7 +73,3 @@ $data = array(
 $result = execPostRequest($endpoint, json_encode($data));
 $jsonResult = json_decode($result, true);
 header('Location: ' . $jsonResult['payUrl']);
-// if($redirectUrl == false)
-// {
-//     unset($_SESSION['cart']);
-// }

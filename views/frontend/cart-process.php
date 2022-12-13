@@ -92,9 +92,9 @@ switch ($_POST['action']) {
                     . "<br>Tell: 0985781353" . "<br>Email: vovanduong175@gmail.com";
 
                 if (mail($to, $subject, $message, $headers)) {
-                    echo 'Your mail has been sent successfully.';
+                    echo 'Email của bạn đã được gữi đi thành công.';
                 } else {
-                    echo 'Unable to send email. Please try again.';
+                    echo 'Không thể gữi mail. Vui lòng kiểm tra lại';
                 }
                 MyClass::set_flash("message", ['msg' => 'Đặt hàng thành công !']);
                 header("location:index.php?option=cart-process-detail");

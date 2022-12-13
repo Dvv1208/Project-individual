@@ -91,7 +91,7 @@ use App\Models\User;
             <div class="sidebar">
                 <div class="form-inline">
                     <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control form-control-sidebar" type="search" placeholder="Tìm kiếm" aria-label="Search">
                         <div class="input-group-append">
                             <button class="btn btn-sidebar">
                                 <i class="fas fa-search fa-fw"></i>
@@ -104,7 +104,7 @@ use App\Models\User;
                     <ul class="nav nav-pills-danger nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fa fa-product-hunt"></i>
                                 <p>
                                     Sản phẩm
                                     <i class="right fas fa-angle-left"></i>
@@ -114,7 +114,7 @@ use App\Models\User;
                                 <li class="nav-item">
                                     <a href="index.php?option=product" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Tất cả sản phẩm</p>
+                                        <p class="active">Tất cả sản phẩm</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -133,7 +133,7 @@ use App\Models\User;
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fa fa-newspaper-o"></i>
                                 <p>
                                     Bài viết
                                     <i class="right fas fa-angle-left"></i>
@@ -168,7 +168,7 @@ use App\Models\User;
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fa fa-shopping-basket"></i>
                                 <p>
                                     Đơn hàng
                                     <i class="right fas fa-angle-left"></i>
@@ -182,16 +182,16 @@ use App\Models\User;
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="index.php?option=product&cat=create" class="nav-link">
+                                    <a href="index.php?option=order&cat=order-cart" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Thêm đơn hàng</p>
+                                        <p>Tình trạng đơn hàng</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fa fa-user-o"></i>
                                 <p>
                                     Khách hàng
                                     <i class="right fas fa-angle-left"></i>
@@ -214,7 +214,7 @@ use App\Models\User;
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fa fa-id-badge"></i>
                                 <p>
                                     Liên hệ
                                     <i class="right fas fa-angle-left"></i>
@@ -237,7 +237,7 @@ use App\Models\User;
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fa fa-tachometer"></i>
                                 <p>
                                     Giao diện
                                     <i class="right fas fa-angle-left"></i>
@@ -262,7 +262,7 @@ use App\Models\User;
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fa fa-users"></i>
                                 <p>
                                     Thành viên
                                     <i class="right fas fa-angle-left"></i>

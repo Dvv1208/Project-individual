@@ -1,12 +1,11 @@
+<?php require_once('../views/backend/header.php'); ?>
 <?php
 
 use App\Models\Topic;
 
 $list = Topic::where('Status', '!=', '0')->orderBy('CreatedAt', 'desc')->get();
 ?>
-<?php require_once('../views/backend/header.php'); ?>
 
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper py-2">
   <section class="content-header">
     <div class="container-fluid">
@@ -20,8 +19,6 @@ $list = Topic::where('Status', '!=', '0')->orderBy('CreatedAt', 'desc')->get();
     </div><!-- /.container-fluid -->
   </section>
   <section class="content">
-
-    <!-- Default box -->
     <div class="card">
       <div class="card-header">
         <div class="row">
@@ -32,7 +29,6 @@ $list = Topic::where('Status', '!=', '0')->orderBy('CreatedAt', 'desc')->get();
             <a href="index.php?option=topic&cat=trash" class="btn btn-sm btn-danger">
               <i class="fas fa-trash"></i>Thùng rác
             </a>
-
           </div>
         </div>
       </div>
@@ -44,7 +40,7 @@ $list = Topic::where('Status', '!=', '0')->orderBy('CreatedAt', 'desc')->get();
               <th>Tên danh mục</th>
               <th>Slug</th>
               <th class="text-center">Chức năng</th>
-              <th  class="text-center">ID</th>
+              <th class="text-center">ID</th>
             </tr>
           </thead>
           <tbody>

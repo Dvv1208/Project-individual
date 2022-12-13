@@ -5,8 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Đăng ký thành viên</title>
-    <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
-    <script src="js/jtoast.js"></script>
+    <script src="public/plugins/jquery/jquery.min.js"></script>
+    <link rel="icon" type="image/svg+xml" href="#">
+    <!-- <script src="js/jtoast.js"></script> -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="public/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="public/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
@@ -119,6 +120,7 @@
                     });
                 }
             });
+            $("#tinh").select2();
         })
     </script>
     <!-- script lấy huyện trong tỉnh -->
@@ -142,6 +144,7 @@
                     });
                 }
             });
+            $("#huyen").select2();
         }
     </script>
     <!-- script lấy xã trong huyện -->
@@ -162,12 +165,13 @@
                     }
                 }
             });
+            $("#xa").select2();
         }
     </script>
     </div>
-    <script src="public/plugins/jquery/jquery.min.js"></script>
-    <script src="public/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="public/dist/js/adminlte.min.js"></script>
+    <!-- <link href="public/select2/css/select2.min.css" rel="stylesheet" />
+    <script src="public/select2/js/select2.min.js"></script> -->
     <style>
         .center {
             display: block;

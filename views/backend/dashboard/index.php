@@ -10,7 +10,7 @@
                 <div class="row">
                   <div class="col-8">
                     <div class="numbers">
-                      <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Money</p>
+                      <p class="text-sm mb-0 text-capitalize font-weight-bold">Tiền hôm nay</p>
                       <h5 class="font-weight-bolder mb-0">
                         $53,000
                         <span class="text-success text-sm font-weight-bolder">+55%</span>
@@ -30,7 +30,7 @@
                 <div class="row">
                   <div class="col-8">
                     <div class="numbers">
-                      <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Users</p>
+                      <p class="text-sm mb-0 text-capitalize font-weight-bold">Người dùng hôm nay</p>
                       <h5 class="font-weight-bolder mb-0">
                         2,300
                         <span class="text-success text-sm font-weight-bolder">+3%</span>
@@ -50,7 +50,7 @@
                 <div class="row">
                   <div class="col-8">
                     <div class="numbers">
-                      <p class="text-sm mb-0 text-capitalize font-weight-bold">New Clients</p>
+                      <p class="text-sm mb-0 text-capitalize font-weight-bold">Khách hàng mới</p>
                       <h5 class="font-weight-bolder mb-0">
                         +3,462
                         <span class="text-danger text-sm font-weight-bolder">-2%</span>
@@ -70,7 +70,7 @@
                 <div class="row">
                   <div class="col-8">
                     <div class="numbers">
-                      <p class="text-sm mb-0 text-capitalize font-weight-bold">Sales</p>
+                      <p class="text-sm mb-0 text-capitalize font-weight-bold">Doanh thu</p>
                       <h5 class="font-weight-bolder mb-0">
                         $103,430
                         <span class="text-success text-sm font-weight-bolder">+5%</span>
@@ -92,11 +92,11 @@
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="d-flex flex-column h-100">
-                      <p class="mb-1 pt-2 text-bold">Built by developers</p>
-                      <h5 class="font-weight-bolder">Soft UI Dashboard</h5>
-                      <p class="mb-5">From colors, cards, typography to complex elements, you will find the full documentation.</p>
+                      <p class="mb-1 pt-2 text-bold">Thiết kế bởi</p>
+                      <h5 class="font-weight-bolder">Trang quản trị</h5>
+                      <p class="mb-5">Từ màu sắc, thẻ, kiểu chữ đến các yếu tố phức tạp, bạn sẽ tìm thấy tài liệu đầy đủ.</p>
                       <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
-                        Read More
+                        Đọc thêm
                         <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
                       </a>
                     </div>
@@ -118,10 +118,10 @@
               <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('../public/assets/img/ivancik.jpg');">
                 <span class="mask bg-gradient-dark"></span>
                 <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
-                  <h5 class="text-white font-weight-bolder mb-4 pt-2">Work with the rockets</h5>
-                  <p class="text-white">Wealth creation is an evolutionarily recent positive-sum game. It is all about who take the opportunity first.</p>
+                  <h5 class="text-white font-weight-bolder mb-4 pt-2">Làm việc với tên lửa</h5>
+                  <p class="text-white">Tạo ra của cải là một trò chơi có tổng dương gần đây. Đó là tất cả về những người nắm bắt cơ hội đầu tiên.</p>
                   <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
-                    Read More
+                    Đọc thêm
                     <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
                   </a>
                 </div>
@@ -138,15 +138,15 @@
                     <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
                   </div>
                 </div>
-                <h6 class="ms-2 mt-4 mb-0"> Active Users </h6>
-                <p class="text-sm ms-2"> (<span class="font-weight-bolder">+23%</span>) than last week </p>
+                <h6 class="ms-2 mt-4 mb-0"> Người dùng hoạt động </h6>
+                <p class="text-sm ms-2"> (<span class="font-weight-bolder">+23%</span>) so với tuần trước </p>
                 <div class="container border-radius-lg">
                   <div class="row">
                     <div class="col-3 py-3 ps-0">
                       <div class="d-flex mb-2">
                         <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-primary text-center me-2 d-flex align-items-center justify-content-center">
                           <svg width="10px" height="10px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <title>document</title>
+                            <title>Tài liệu</title>
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                               <g transform="translate(-1870.000000, -591.000000)" fill="#FFFFFF" fill-rule="nonzero">
                                 <g transform="translate(1716.000000, 291.000000)">
@@ -159,7 +159,7 @@
                             </g>
                           </svg>
                         </div>
-                        <p class="text-xs mt-1 mb-0 font-weight-bold">Users</p>
+                        <p class="text-xs mt-1 mb-0 font-weight-bold">Người dùng</p>
                       </div>
                       <h4 class="font-weight-bolder">36K</h4>
                       <div class="progress w-75">
@@ -170,7 +170,7 @@
                       <div class="d-flex mb-2">
                         <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-info text-center me-2 d-flex align-items-center justify-content-center">
                           <svg width="10px" height="10px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <title>spaceship</title>
+                            <title>Tàu không gian</title>
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                               <g transform="translate(-1720.000000, -592.000000)" fill="#FFFFFF" fill-rule="nonzero">
                                 <g transform="translate(1716.000000, 291.000000)">
@@ -185,7 +185,7 @@
                             </g>
                           </svg>
                         </div>
-                        <p class="text-xs mt-1 mb-0 font-weight-bold">Clicks</p>
+                        <p class="text-xs mt-1 mb-0 font-weight-bold">Nhấp chuột</p>
                       </div>
                       <h4 class="font-weight-bolder">2m</h4>
                       <div class="progress w-75">
@@ -196,7 +196,7 @@
                       <div class="d-flex mb-2">
                         <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-warning text-center me-2 d-flex align-items-center justify-content-center">
                           <svg width="10px" height="10px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <title>credit-card</title>
+                            <title>Thẻ tín dụng</title>
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                               <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
                                 <g transform="translate(1716.000000, 291.000000)">
@@ -209,7 +209,7 @@
                             </g>
                           </svg>
                         </div>
-                        <p class="text-xs mt-1 mb-0 font-weight-bold">Sales</p>
+                        <p class="text-xs mt-1 mb-0 font-weight-bold">Doanh thu</p>
                       </div>
                       <h4 class="font-weight-bolder">435$</h4>
                       <div class="progress w-75">
@@ -220,7 +220,7 @@
                       <div class="d-flex mb-2">
                         <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-danger text-center me-2 d-flex align-items-center justify-content-center">
                           <svg width="10px" height="10px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <title>settings</title>
+                            <title>Cài đặt</title>
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                               <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
                                 <g transform="translate(1716.000000, 291.000000)">
@@ -234,7 +234,7 @@
                             </g>
                           </svg>
                         </div>
-                        <p class="text-xs mt-1 mb-0 font-weight-bold">Items</p>
+                        <p class="text-xs mt-1 mb-0 font-weight-bold">Mặt hàng</p>
                       </div>
                       <h4 class="font-weight-bolder">43</h4>
                       <div class="progress w-75">
@@ -249,7 +249,7 @@
           <div class="col-lg-7">
             <div class="card z-index-2">
               <div class="card-header pb-0">
-                <h6>Sales overview</h6>
+                <h6>Doanh thu tổng quát</h6>
                 <p class="text-sm">
                   <i class="fa fa-arrow-up text-success"></i>
                   <span class="font-weight-bold">4% more</span> in 2021

@@ -111,12 +111,8 @@ $list = Contact::where('Status', '!=', '0')->orderBy('CreatedAt', 'desc')->get()
 
             <!-- /.card-footer-->
         </div>
-        <!-- /.card -->
+    </section>
 </div>
-</section>
-<!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
 <?php require_once('../views/backend/footer.php'); ?>
 <script>
     $(document).ready(function() {
