@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 13, 2022 at 10:58 AM
+-- Generation Time: Dec 16, 2022 at 10:56 AM
 -- Server version: 8.0.30
--- PHP Version: 8.1.10
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -11676,9 +11676,32 @@ CREATE TABLE `tttn_order` (
 --
 
 INSERT INTO `tttn_order` (`Id`, `Code`, `User_id`, `CreatedAt`, `Diachi`, `Name`, `Phone`, `Email`, `Pttt`, `OrderStatus`, `UpdatedAt`) VALUES
-(1, '1670919953', 21, '2022-12-13 01:25:53', '97 đường số 11, Phường Trường Thọ, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', 'Võ Văn Dương', '0985781353', 'vovanduong175@gmail.com', 'Khi nhận hàng', '2', '2022-12-13 09:36:12'),
+(1, '1670919953', 21, '2022-12-13 01:25:53', '97 đường số 11, Phường Trường Thọ, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', 'Võ Văn Dương', '0985781353', 'vovanduong175@gmail.com', 'Khi nhận hàng', '0', '2022-12-16 10:01:02'),
 (2, '1670919979', 21, '2022-12-13 01:26:19', '97 đường số 11, Phường Trường Thọ, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', 'Võ Văn Dương', '0985781353', 'vovanduong175@gmail.com', 'Thanh toán bằng VnPay', '2', '2022-12-13 09:45:02'),
-(3, '1670920035', 21, '2022-12-13 01:27:15', '97 đường số 11, Phường Trường Thọ, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', 'Võ Văn Dương', '0985781353', 'vovanduong175@gmail.com', 'Thanh toán bằng Momo', '2', '2022-12-13 09:45:25');
+(3, '1670920035', 21, '2022-12-13 01:27:15', '97 đường số 11, Phường Trường Thọ, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', 'Võ Văn Dương', '0985781353', 'vovanduong175@gmail.com', 'Thanh toán bằng Momo', '2', '2022-12-16 03:55:36'),
+(4, '1671186527', 21, '2022-12-16 10:28:47', '97 đường số 11, Phường Trường Thọ, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', 'Võ Văn Dương', '0985781353', 'vovanduong258@gmail.com', 'Khi nhận hàng', '0', '2022-12-16 10:30:56');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tttn_ordercancel`
+--
+
+CREATE TABLE `tttn_ordercancel` (
+  `Id` int NOT NULL,
+  `Order_id` varchar(20) NOT NULL COMMENT 'Mã đơn hàng',
+  `Reason` varchar(255) NOT NULL COMMENT 'Lý do hủy đơn hàng',
+  `CreatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UpdatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tttn_ordercancel`
+--
+
+INSERT INTO `tttn_ordercancel` (`Id`, `Order_id`, `Reason`, `CreatedAt`, `UpdatedAt`) VALUES
+(1, '1670919953', 'không muốn mua nữa', '2022-12-16 10:01:02', '2022-12-16 10:01:02'),
+(2, '1671186527', 'Muốn đổi sang màu khác', '2022-12-16 10:30:56', '2022-12-16 10:30:56');
 
 -- --------------------------------------------------------
 
@@ -11702,7 +11725,8 @@ CREATE TABLE `tttn_orderdetail` (
 INSERT INTO `tttn_orderdetail` (`Id`, `Orderid`, `Productid`, `Price`, `Quantity`, `Amount`) VALUES
 (1, 1670919953, 1670222935, 100000.00, 1, 100000.00),
 (2, 1670919979, 1669113634, 100000.00, 1, 100000.00),
-(3, 1670920035, 9, 4000000.00, 1, 4000000.00);
+(3, 1670920035, 9, 4000000.00, 1, 4000000.00),
+(4, 1671186527, 9, 4000000.00, 1, 4000000.00);
 
 -- --------------------------------------------------------
 
@@ -11922,9 +11946,22 @@ INSERT INTO `tttn_review` (`review_id`, `pro_id`, `user_name`, `user_rating`, `u
 (3, 2, 'Dung', 5, 'Sản phẩm tốt, chất lượng cao', 1670486532),
 (4, 3, 'Nhật', 5, 'Quá xịn sò', 1670486759),
 (5, 4, 'Dũng', 5, 'Quá xịn sò', 1670489089),
-(10, 9, 'Trang Huyền', 5, 'Sản phẩm tốt, chất lượng tuyệt vời, giá cả phải chăng, good', 1670493534),
-(21, 9, 'Trang', 4, 'Sản phẩm tốt, chất lượng cao', 1670813114),
-(22, 9, 'Trang Trang', 3, 'Sản phẩm tốt, chất lượng cao', 1670813148);
+(6, 9, 'Trang Huyền', 5, 'Sản phẩm tốt, chất lượng tuyệt vời, giá cả phải chăng, good', 1670493534),
+(7, 9, 'Trang', 4, 'Sản phẩm tốt, chất lượng cao', 1670813114),
+(8, 9, 'Trang Trang', 3, 'Sản phẩm tốt, chất lượng cao', 1670813148),
+(9, 9, 'Dương', 5, 'Sản phẩm tốt, chất lượng cao, giá cả hợp lý', 1671070828),
+(10, 9, 'Võ Văn Dương', 4, 'Quá tuyệt vời cho một cuộc tình vừa qua, là như làn gió phôi phai', 1671077638),
+(11, 7, 'Võ Văn Dương', 5, 'Giờ thì anh đã can đảm để rời xa em rồi, đừng khóc nhé em người ơi', 1671077840),
+(12, 7, 'Trang', 5, 'Sản phẩm tốt, chất lượng cao, giá cả hợp lý', 1671173996),
+(13, 7, 'Nhung', 5, 'Tuyệt vời ông mặt trời', 1671174126),
+(14, 7, 'Huyền', 5, 'Sản phẩm tốt, chất lượng cao, giá cả tuyệt vời ', 1671174324),
+(15, 6, 'Võ Văn Dương', 5, 'Sản phẩm tốt, giá cả hợp lý', 1671174585),
+(16, 6, 'Huyền', 5, 'Sản phẩm tốt, giá cả hợp lý', 1671174594),
+(17, 6, 'Trang', 5, 'Sản phẩm tốt, giá cả hợp lý', 1671174609),
+(18, 1669113634, 'Võ Văn Dương', 5, 'Tuyệt vời !!', 1671176450),
+(19, 1669113634, 'Trang', 5, 'Tuyệt vời !!', 1671176460),
+(20, 1669113634, 'Huyền', 5, 'Good !!!', 1671176703),
+(29, 5, 'Võ Văn Dương', 5, 'Sản phẩm tốt, chất lượng cao, giá cả hợp lý', 1671183237);
 
 -- --------------------------------------------------------
 
@@ -12066,8 +12103,9 @@ CREATE TABLE `tttn_user` (
 --
 
 INSERT INTO `tttn_user` (`Id`, `Fullname`, `Username`, `Password`, `Email`, `Gender`, `Phone`, `Roles`, `Address`, `CreatedAt`, `CreatedBy`, `UpdatedAt`, `UpdatedBy`, `Status`) VALUES
-(1, 'Admin', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin@gmail.com', 0, '0987654367', '0', '97 đường số 11, Phường Trường Thọ, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', '2020-07-01 00:16:03', 1, '2022-12-06 21:53:06', 1, 1),
-(21, 'Võ Văn Dương', 'dvv1208', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'vovanduong175@gmail.com', 1, '0985781353', '0', '97 đường số 11, Phường Trường Thọ, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', '2022-11-30 21:53:51', 1, '2022-11-30 21:53:51', 1, 1);
+(1, 'Admin', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'vovanduong175@gmail.com', 0, '0987654367', '1', '97 đường số 11, Phường Trường Thọ, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', '2020-07-01 00:16:03', 1, '2022-12-06 21:53:06', 1, 1),
+(21, 'Võ Văn Dương', 'dvv1208', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'vovanduong258@gmail.com', 1, '0985781353', '0', '97 đường số 11, Phường Trường Thọ, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', '2022-11-30 21:53:51', 1, '2022-11-30 21:53:51', 1, 1),
+(44, 'Ngô Phi Thuận', 'npt1109', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'thuanngo1109@gmail.com', 1, '03335444712', '0', '97 đường số 11, Phường Phước Long B, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', '2022-12-16 01:30:53', 1, '2022-12-16 01:31:51', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -12089,7 +12127,8 @@ CREATE TABLE `tttn_userimage` (
 
 INSERT INTO `tttn_userimage` (`Id`, `User_id`, `Avatar`, `CreatedAt`, `UpdatedAt`) VALUES
 (1, 21, '21_dvv1208.jpg', '2022-12-05 04:51:13', '2022-12-05 04:51:13'),
-(2, 1, '21_dvv1208.jpg', '2022-12-06 10:35:32', '2022-12-06 10:35:32');
+(2, 1, '21_dvv1208.jpg', '2022-12-06 10:35:32', '2022-12-06 10:35:32'),
+(17, 44, '167115429244_npt1109.jpg', '2022-12-16 01:31:32', '2022-12-16 01:31:32');
 
 --
 -- Indexes for dumped tables
@@ -12147,6 +12186,12 @@ ALTER TABLE `tttn_menu`
 -- Indexes for table `tttn_order`
 --
 ALTER TABLE `tttn_order`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `tttn_ordercancel`
+--
+ALTER TABLE `tttn_ordercancel`
   ADD PRIMARY KEY (`Id`);
 
 --
@@ -12247,13 +12292,19 @@ ALTER TABLE `tttn_menu`
 -- AUTO_INCREMENT for table `tttn_order`
 --
 ALTER TABLE `tttn_order`
-  MODIFY `Id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Id đơn hàng', AUTO_INCREMENT=4;
+  MODIFY `Id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Id đơn hàng', AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tttn_ordercancel`
+--
+ALTER TABLE `tttn_ordercancel`
+  MODIFY `Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tttn_orderdetail`
 --
 ALTER TABLE `tttn_orderdetail`
-  MODIFY `Id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Mã CT Đơn hàng', AUTO_INCREMENT=4;
+  MODIFY `Id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Mã CT Đơn hàng', AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tttn_product`
@@ -12271,7 +12322,7 @@ ALTER TABLE `tttn_proimages`
 -- AUTO_INCREMENT for table `tttn_review`
 --
 ALTER TABLE `tttn_review`
-  MODIFY `review_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `review_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `tttn_slider`
@@ -12301,13 +12352,13 @@ ALTER TABLE `tttn_ttvnpay`
 -- AUTO_INCREMENT for table `tttn_user`
 --
 ALTER TABLE `tttn_user`
-  MODIFY `Id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Mã tài khoản', AUTO_INCREMENT=44;
+  MODIFY `Id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Mã tài khoản', AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `tttn_userimage`
 --
 ALTER TABLE `tttn_userimage`
-  MODIFY `Id` int NOT NULL AUTO_INCREMENT COMMENT 'Id hình', AUTO_INCREMENT=17;
+  MODIFY `Id` int NOT NULL AUTO_INCREMENT COMMENT 'Id hình', AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
