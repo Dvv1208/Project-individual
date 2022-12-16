@@ -4,8 +4,10 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 use App\Models\User;
+use App\Libraries\MyClass;
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,18 +17,15 @@ use App\Models\User;
     <title>Trang quản trị</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <!-- Nucleo Icons -->
     <link href="../public/assets/css/nucleo-icons.css" rel="stylesheet" />
     <link href="../public/assets/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="../public/css/toastr.min.css">
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="../public/assets/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- CSS Files -->
-    <!-- <link id="pagestyle" href="../public/assets/css/soft-ui-dashboard.css?v=1.0.6" rel="stylesheet" /> -->
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="../public/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../public/dist/css/adminlte.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
 </head>
 
 <body class="hold-transition sidebar-mini">

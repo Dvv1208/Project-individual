@@ -63,7 +63,7 @@ use App\Models\User;
         if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
             $args = [
                 ['Email', '=', $username],
-                
+
                 ['Password', '=', $password],
                 ['Status', '=', '1'],
             ];
@@ -82,7 +82,6 @@ use App\Models\User;
             if ($user != null) {
                 $_SESSION['logincustomer'] = $username;
                 $_SESSION['user_id'] = $user->Id;
-
                 MyClass::set_flash("message", ['msg' => 'Đăng nhập thành công !']);
                 header("location:index.php");
             } else {

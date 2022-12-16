@@ -87,11 +87,11 @@ $reviews = Reviews::where('pro_id', '=', $row_pro['Id'])->get();
                     </div>
                     <div class="col-md-5">
                         <div class="product-details">
-                            <div>
+                            <div id="name_count_reviews">
                                 <?php $totalReview = 0 ?>
                                 <?php $totalReview = count($reviews) ?>
                                 <h4 class="position-relative"><?php echo $row_pro['Name']; ?></h4>
-                                <a>(<?php echo $totalReview . ' lượt đánh giá' ?>)</a>
+                                (<?php echo $totalReview . ' lượt đánh giá' ?>)
                             </div>
                             <div>
                                 <h5 class="product-price"><?php echo number_format($row_pro['Pricesale'], 0, ',', '.') . "<sup>đ</sup>"; ?>
@@ -250,12 +250,7 @@ $reviews = Reviews::where('pro_id', '=', $row_pro['Id'])->get();
                                                 </li>
                                             </ul>
                                         </div>
-                                        <ul class="reviews-pagination">
-                                            <li class="active">1</li>
-                                            <li><a style="text-decoration: none" href="#">2</a></li>
-                                            <li><a style="text-decoration: none" href="#">3</a></li>
-                                            <li><a style="text-decoration: none" href="#">4</a></li>
-                                            <li><a style="text-decoration: none" href="#"><i class="fa fa-angle-right"></i></a></li>
+                                        <ul class="reviews-pagination pager" id="myPager">
                                         </ul>
                                     </div>
 
@@ -339,7 +334,7 @@ $reviews = Reviews::where('pro_id', '=', $row_pro['Id'])->get();
                         </div>
                         <div class="form-group">
                             <?php $user = User::find($_SESSION['user_id']); ?>
-                            <input type="text" name="user_name" id="user_name" class="form-control" placeholder="<?php echo $user->Fullname;?>" />
+                            <input type="text" name="user_name" id="user_name" class="form-control" placeholder="<?php echo $user->Fullname; ?> (hoặc nhập tên khác)" />
                         </div>
                         <div class="form-group">
                             <input type="hidden" name="pro_id" id="pro_id" class="form-control" value="<?php echo $row_pro['Id']; ?>" />

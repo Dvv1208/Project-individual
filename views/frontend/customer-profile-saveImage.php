@@ -4,6 +4,8 @@ use App\Libraries\MyClass;
 use App\Models\User;
 use App\Models\UserImage;
 
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+
 if (isset($_POST['save_profile'])) {
     $userimg = new UserImage();
     $user = User::find($_SESSION['user_id']);

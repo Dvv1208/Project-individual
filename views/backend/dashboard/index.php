@@ -1,4 +1,6 @@
-<?php require_once('../views/backend/header.php'); ?>
+<?php require_once('../views/backend/header.php');
+
+?>
 <div class="content-wrapper">
   <section class="content-header">
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">

@@ -2,6 +2,7 @@
 
 use App\Models\Order;
 use App\Libraries\MyClass;
+use App\Models\CancelOrder;
 
 $list = Order::where('OrderStatus', '=', '0')->orderBy('CreatedAt', 'desc')->with('products')->get();
 ?>
@@ -47,11 +48,12 @@ $list = Order::where('OrderStatus', '=', '0')->orderBy('CreatedAt', 'desc')->wit
                     <thead>
                         <tr>
                             <th class="text-center">Tên</th>
-                            <th class="text-center">Địa chỉ</th>
+                            <th class="text-center" style="width: 250px;">Địa chỉ</th>
                             <th class="text-center">Sđt</th>
                             <th class="text-center">Email</th>
                             <th class="text-center">Mã đơn hàng</th>
-                            <th class="text-center">Số lượng sản phẩm</th>
+                            <th class="text-center">Lý do hủy</th>
+                            <th class="text-center">Số lượng</th>
                             <th class="text-center">Thành tiền</th>
                             <th class="text-center">Ngày tạo</th>
                             <th class="text-center">Chức năng</th>
@@ -60,6 +62,10 @@ $list = Order::where('OrderStatus', '=', '0')->orderBy('CreatedAt', 'desc')->wit
                     <tbody>
                         <?php foreach ($list as $row) : ?>
                             <?php
+                            $cancel = CancelOrder::where('Order_id', '=', $row->Code)->get();
+                            foreach ($cancel as $c) {
+                                $reason = $c->Reason;
+                            }
                             $totalMoney = 0;
                             $qty = 0;
                             foreach ($row->products as $product) {
@@ -73,6 +79,7 @@ $list = Order::where('OrderStatus', '=', '0')->orderBy('CreatedAt', 'desc')->wit
                                 <td class="text-center"><?php echo $row['Phone']; ?></td>
                                 <td class="text-center"><?php echo $row['Email']; ?></td>
                                 <td class="text-center"><?php echo $row['Code']; ?></td>
+                                <td class="text-center"><?php echo $reason; ?></td>
                                 <td class="text-center"><?php echo $qty; ?></td>
                                 <td class="text-center"><?php echo number_format($totalMoney, 0, ',', '.') . "<sup>đ</sup>"; ?></td>
                                 <td class="text-center"><?php echo $row['CreatedAt']; ?></td>

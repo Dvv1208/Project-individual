@@ -1,4 +1,7 @@
 <?php
+
+use App\Libraries\MyClass;
+
 session_start();
 require_once("../vendor/autoload.php");
 require_once("../config/database.php");
@@ -52,6 +55,7 @@ use App\Models\User;
             if ($password == $user['Password']) {
                 $_SESSION['useradmin'] = $username;
                 $_SESSION['userid'] = $user['Id'];
+                MyClass::set_flash("message", ['msg' => 'Đăng nhập thành công !']);
                 header("location:index.php");
             } else {
                 $error = '<div class="text-danger">Mật khẩu không chính xác !</div>';

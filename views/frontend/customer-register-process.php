@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\UserImage;
 use App\Models\Xa;
 
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 ?>
 <?php
 if (isset($_POST['DANGKY'])) {

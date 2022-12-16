@@ -5,6 +5,11 @@ use App\Models\Momo;
 use App\Models\Order;
 use App\Models\Orderdetail;
 use App\Models\VnPay;
+use PHPMailer\PHPMailer\PHPMailer;
+
+require 'vendor/PHPMailer/phpmailer/src/Exception.php';
+require 'vendor/PHPMailer/phpmailer/src/PHPMailer.php';
+require 'vendor/PHPMailer/phpmailer/src/SMTP.php';
 
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 
@@ -19,66 +24,77 @@ if (isset($_GET['partnerCode'])) {
     $momo->payType = $_GET['payType'];
     if ($momo->save() == true) {
         MyClass::set_flash("message", ['msg' => 'Thanh toán bằng Momo thành công !']);
-        $orders = Order::where('User_id', '=', $_SESSION['user_id'])->with('products')->get();
+        $orders = Order::where([['User_id', '=', $_SESSION['user_id']], ['Code', '=', $momo->orderId]])->with('products')->get();
         foreach ($orders as $order) {
-            $to = $order->Email;
-            $name = $order->Name;
-            $address = $order->Diachi;
-            $phone = $order->Phone;
-            $pay = $order->Pttt;
-            $subject = 'Shop đã tiếp nhận đơn hàng' . "\r" . $order->Code;
-            $from = 'Admin';
-            $headers = 'MIME-Version: 1.0' . "\r\n";
-            $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
-
-            $headers .= 'From: ' . $from . "\r\n" .
-                'X-Mailer: PHP/' . phpversion();
-            $message = '<html><body>';
-            $message .= "Dear " . $name . "," . "\n"
-                . "<br><br> Cảm ơn bạn đã mua sắm tại cửa hàng." . "\n\n"
-                . "<br><br> Địa chỉ: " . $address . "\n\n"
-                . "<br> Số điện thoại: " . $phone . "\n\n"
-                . "<br> Hình thức thanh toán: " . $pay . "\n\n"
-                . "<br><br> Thông tin sản phẩm: " . "\n\n";
-            foreach ($order->products as $key => $pro) {
-                $totalMoney = 0;
-                $totalMoney += $pro->pivot->Amount;
-                $qty = $pro->pivot->Quantity;
-                $path = "C:/JavaScript/php/public/images/product/$pro->Img";
-                $type = pathinfo($path, PATHINFO_EXTENSION);
-                $data = file_get_contents($path);
-                $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-                // $message .= "<br>" . "Base" . $base64;
-                $message .= "<br>
-                    <html>
-                        <body>
-                            <table>" .
-                    "<tr class='text-center'>" .
-                    "<th rowspan='4' style='width:100px'>" . "<img src='$base64' style='width:100px' alt='$pro->Img'>" . "</th>" .
-                    "<td class='text-center'>$pro->Name</td>" .
-                    "</tr>";
-                $message .=
-                    "<tr>" .
-                    "<td class='text-center'>" . "Mã đơn hàng: " . "$order->Code</td>" .
-                    "</tr>" .
-                    "<tr>" .
-                    "<td class='text-center'>" . "Số lượng: " . "$qty</td>" .
-                    "</tr>" .
-                    "<tr>" .
-                    "<td class='text-center'>" . "Thành tiền: " . "$totalMoney<sup>đ</sup>" . "</td>" .
-                    "</tr>" .
-                    "</table>
-                        </body>
-                    </html>";
+            if (($order->Pttt) == "Thanh toán bằng Momo") {
+                $statuspay = "Đã thanh toán";
             }
-            $message .= "<br> Chúng tôi sẽ gửi thông báo sau cho bạn. " . "\n\n"
-                . "<br><br>Cảm ơn &Trân trọng," . "\n" . "<br><br>Admin"
-                . "<br>Tell: 0985781353" . "<br>Email: vovanduong175@gmail.com";
+            $mail = new PHPMailer;
+            $mail->setLanguage("vi");
+            try {
+                $mail->SMTPSecure = 0;
+                $mail->isSMTP();
+                $mail->Encoding = 'base64';
+                $mail->CharSet  = "utf-8";
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username   = 'vovanduong258@gmail.com';
+                $mail->Password   = 'kqmcjauglcwyoauj';
+                $mail->SMTPSecure = 'ssl';
+                $mail->Port       = 465;
+                $mail->setFrom('vovanduong258@gmail.com', 'Võ Văn Dương');
+                $mail->addAddress($order->Email, $order->Name);
+                $mail->isHTML(true);
+                $mail->Subject = "Shop đã tiếp nhận đơn hàng $order->Code của bạn";
+                $mail->Body .= "Dear " . $order->Name . "," . "\n"
+                    . "<br><br> Cảm ơn bạn đã mua sắm tại cửa hàng." . "\n\n"
+                    . "<br><br> Địa chỉ: " . $order->Diachi . "\n\n"
+                    . "<br> Số điện thoại: " . $order->Phone . "\n\n"
+                    . "<br> Hình thức thanh toán: " . $order->Pttt . "\n\n"
+                    . "<br> Trạng thái thanh toán: " . $statuspay . "\n\n"
+                    . "<br><br> Thông tin sản phẩm: " . "\n\n";
+                foreach ($order->products as $key => $pro) {
+                    $qty += $pro->pivot->Quantity;
+                    $totalMoney += $pro->pivot->Amount;
+                    $mail->addEmbeddedImage("public/images/product/$pro->Img", 'images_base64');
+                    $mail->Body .= "<br>
+                        <html>
+                            <body>
+                                <table>" .
+                        "<tr class='text-center'>" .
+                        "<th rowspan='4' style='width:100px'>" . "<img src='cid:images_base64' style='width:100px' alt='$pro->Img'>" . "</th>" .
+                        "<td class='text-center'>$pro->Name</td>" .
+                        "</tr>";
 
-            if (mail($to, $subject, $message, $headers)) {
-                echo 'Email của bạn đã được gữi đi thành công.';
-            } else {
-                echo 'Không thể gữi mail. Vui lòng kiểm tra lại';
+                    $mail->Body .=
+                        "<tr>" .
+                        "<td class='text-center'>" . "Mã đơn hàng: " . "$order->Code</td>" .
+                        "</tr>" .
+                        "<tr>" .
+                        "<td class='text-center'>" . "Số lượng: " . "$qty</td>" .
+                        "</tr>" .
+                        "<tr>" .
+                        "<td class='text-center'>" . "Thành tiền: " . number_format($totalMoney, 0, ',', '.') . "<sup>đ</sup>" . "</td>" .
+                        "</tr>" .
+                        "</table>
+                            </body>
+                        </html>";
+                }
+                $mail->Body .= "<br> Chúng tôi sẽ gửi thông báo sau cho bạn. " . "\n\n"
+                    . "<br><br>Cảm ơn &Trân trọng," . "\n" . "<br><br>Admin"
+                    . "<br>Tell: 0985781353" . "<br>Email: vovanduong258@gmail.com";
+
+                $mail->smtpConnect(array(
+                    "ssl" => array(
+                        "verify_peer" => false,
+                        "verify_peer_name" => false,
+                        "allow_self_signed" => true
+                    )
+                ));
+                $mail->send();
+                echo 'Đã gửi mail thành công';
+            } catch (Exception $e) {
+                echo 'Mail không gửi được. Lỗi: ', $mail->ErrorInfo;
             }
         }
         header('Location:index.php?option=cart-process-detail');
@@ -102,66 +118,77 @@ if (isset($_GET['vnp_Amount'])) {
     $vnpay->vnp_TxnRef = $_GET['vnp_TxnRef'];
     if ($vnpay->save() == true) {
         MyClass::set_flash("message", ['msg' => 'Thanh toán bằng VnPay thành công !']);
-        $orders = Order::where('User_id', '=', $_SESSION['user_id'])->with('products')->get();
+        $orders = Order::where([['User_id', '=', $_SESSION['user_id']], ['Code', '=', $vnpay->vnp_TxnRef]])->with('products')->get();
         foreach ($orders as $order) {
-            $to = $order->Email;
-            $name = $order->Name;
-            $address = $order->Diachi;
-            $phone = $order->Phone;
-            $pay = $order->Pttt;
-            $subject = 'Shop đã tiếp nhận đơn hàng' . "\r" . $order->Code;
-            $from = 'Admin';
-            $headers = 'MIME-Version: 1.0' . "\r\n";
-            $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
-
-            $headers .= 'From: ' . $from . "\r\n" .
-                'X-Mailer: PHP/' . phpversion();
-            $message = '<html><body>';
-            $message .= "Dear " . $name . "," . "\n"
-                . "<br><br> Cảm ơn bạn đã mua sắm tại cửa hàng." . "\n\n"
-                . "<br><br> Địa chỉ: " . $address . "\n\n"
-                . "<br> Số điện thoại: " . $phone . "\n\n"
-                . "<br> Hình thức thanh toán: " . $pay . "\n\n"
-                . "<br><br> Thông tin sản phẩm: " . "\n\n";
-            foreach ($order->products as $key => $pro) {
-                $totalMoney = 0;
-                $totalMoney += $pro->pivot->Amount;
-                $qty = $pro->pivot->Quantity;
-                $path = "C:/JavaScript/php/public/images/product/$pro->Img";
-                $type = pathinfo($path, PATHINFO_EXTENSION);
-                $data = file_get_contents($path);
-                $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-                // $message .= "<br>" . "Base" . $base64;
-                $message .= "<br>
-                    <html>
-                        <body>
-                            <table>" .
-                    "<tr class='text-center'>" .
-                    "<th rowspan='4' style='width:100px'>" . "<img src='$base64' style='width:100px' alt='$pro->Img'>" . "</th>" .
-                    "<td class='text-center'>$pro->Name</td>" .
-                    "</tr>";
-                $message .=
-                    "<tr>" .
-                    "<td class='text-center'>" . "Mã đơn hàng: " . "$order->Code</td>" .
-                    "</tr>" .
-                    "<tr>" .
-                    "<td class='text-center'>" . "Số lượng: " . "$qty</td>" .
-                    "</tr>" .
-                    "<tr>" .
-                    "<td class='text-center'>" . "Thành tiền: " . "$totalMoney<sup>đ</sup>" . "</td>" .
-                    "</tr>" .
-                    "</table>
-                        </body>
-                    </html>";
+            if (($order->Pttt) == "Thanh toán bằng VnPay") {
+                $statuspay = "Đã thanh toán";
             }
-            $message .= "<br> Chúng tôi sẽ gửi thông báo sau cho bạn. " . "\n\n"
-                . "<br><br>Cảm ơn &Trân trọng," . "\n" . "<br><br>Admin"
-                . "<br>Tell: 0985781353" . "<br>Email: vovanduong175@gmail.com";
+            $mail = new PHPMailer;
+            $mail->setLanguage("vi");
+            try {
+                $mail->SMTPSecure = 0;
+                $mail->isSMTP();
+                $mail->Encoding = 'base64';
+                $mail->CharSet  = "utf-8";
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username   = 'vovanduong258@gmail.com';
+                $mail->Password   = 'kqmcjauglcwyoauj';
+                $mail->SMTPSecure = 'ssl';
+                $mail->Port       = 465;
+                $mail->setFrom('vovanduong258@gmail.com', 'Võ Văn Dương');
+                $mail->addAddress($order->Email, $order->Name);
+                $mail->isHTML(true);
+                $mail->Subject = "Shop đã tiếp nhận đơn hàng $order->Code của bạn";
+                $mail->Body .= "Dear " . $order->Name . "," . "\n"
+                    . "<br><br> Cảm ơn bạn đã mua sắm tại cửa hàng." . "\n\n"
+                    . "<br><br> Địa chỉ: " . $order->Diachi . "\n\n"
+                    . "<br> Số điện thoại: " . $order->Phone . "\n\n"
+                    . "<br> Hình thức thanh toán: " . $order->Pttt . "\n\n"
+                    . "<br> Trạng thái thanh toán: " . $statuspay . "\n\n"
+                    . "<br><br> Thông tin sản phẩm: " . "\n\n";
+                foreach ($order->products as $key => $pro) {
+                    $qty += $pro->pivot->Quantity;
+                    $totalMoney += $pro->pivot->Amount;
+                    $mail->addEmbeddedImage("public/images/product/$pro->Img", 'images_base64');
+                    $mail->Body .= "<br>
+                        <html>
+                            <body>
+                                <table>" .
+                        "<tr class='text-center'>" .
+                        "<th rowspan='4' style='width:100px'>" . "<img src='cid:images_base64' style='width:100px' alt='$pro->Img'>" . "</th>" .
+                        "<td class='text-center'>$pro->Name</td>" .
+                        "</tr>";
 
-            if (mail($to, $subject, $message, $headers)) {
-                echo 'Email của bạn đã được gữi đi thành công.';
-            } else {
-                echo 'Không thể gữi mail. Vui lòng kiểm tra lại';
+                    $mail->Body .=
+                        "<tr>" .
+                        "<td class='text-center'>" . "Mã đơn hàng: " . "$order->Code</td>" .
+                        "</tr>" .
+                        "<tr>" .
+                        "<td class='text-center'>" . "Số lượng: " . "$qty</td>" .
+                        "</tr>" .
+                        "<tr>" .
+                        "<td class='text-center'>" . "Thành tiền: " . number_format($totalMoney, 0, ',', '.') . "<sup>đ</sup>" . "</td>" .
+                        "</tr>" .
+                        "</table>
+                            </body>
+                        </html>";
+                }
+                $mail->Body .= "<br> Chúng tôi sẽ gửi thông báo sau cho bạn. " . "\n\n"
+                    . "<br><br>Cảm ơn &Trân trọng," . "\n" . "<br><br>Admin"
+                    . "<br>Tell: 0985781353" . "<br>Email: vovanduong258@gmail.com";
+
+                $mail->smtpConnect(array(
+                    "ssl" => array(
+                        "verify_peer" => false,
+                        "verify_peer_name" => false,
+                        "allow_self_signed" => true
+                    )
+                ));
+                $mail->send();
+                echo 'Đã gửi mail thành công';
+            } catch (Exception $e) {
+                echo 'Mail không gửi được. Lỗi: ', $mail->ErrorInfo;
             }
         }
         header('Location:index.php?option=cart-process-detail');

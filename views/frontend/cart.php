@@ -6,7 +6,7 @@ use App\Libraries\MyClass;
 use Illuminate\Support\Arr;
 
 $product = Product::where([['Status', '=', '1']])->orderBy('CreatedAt', 'desc')->get();
-
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 $cart = new Cart();
 $page = "view";
 

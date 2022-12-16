@@ -67,6 +67,7 @@ class ComposerStaticIniteefe62fb9b124370fc206937201c5db1
             'Psr\\Container\\' => 14,
             'PragmaRX\\Google2FA\\' => 19,
             'ParagonIE\\ConstantTime\\' => 23,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'L' => 
         array (
@@ -253,6 +254,10 @@ class ComposerStaticIniteefe62fb9b124370fc206937201c5db1
         'ParagonIE\\ConstantTime\\' => 
         array (
             0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'League\\OAuth1\\Client\\' => 
         array (

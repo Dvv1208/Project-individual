@@ -8,9 +8,10 @@ use App\Models\UserImage;
 $title = 'Thông tin của tôi';
 
 $username = User::find($_SESSION['user_id']);
-$orders = Order::where('User_id', '=', $_SESSION['user_id'])->with('products')->get();
+$orders = Order::where('User_id', '=', $_SESSION['user_id'])->with('products')->orderBy('CreatedAt', 'desc')->get();
 $user_id = $username->Id;
 $userimg = UserImage::where('User_id', '=', $user_id)->get();
+
 ?>
 
 <?php require_once('views/frontend/header.php'); ?>
@@ -32,7 +33,7 @@ $userimg = UserImage::where('User_id', '=', $user_id)->get();
             <div class="card-header">
                 <h2>Thông tin của bạn</h2>
             </div>
-            <form action="index.php?option=customer-profile-saveImage" method="post" enctype="multipart/form-data">
+            <form action="index.php?option=customer-profile-saveImage" method="post" enctype="multipart/form-data" id="form_profile">
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="text-center">
@@ -139,23 +140,47 @@ $userimg = UserImage::where('User_id', '=', $user_id)->get();
                                     <?php endif; ?> -->
                                 <?php if (($order->OrderStatus) == "1") : ?>
                                     <input type="hidden" name="action" value="huydonhang">
-                                    <a href="index.php?option=customer&profile=status&id=<?php echo $order->Id; ?>" title="Trạng thái đơn hàng" class="btn btn-sm btn-danger">Hủy đơn hàng</a>
+                                    <button id="cancel_order" name="cancel_order" title="Trạng thái đơn hàng" class="btn btn-sm btn-danger">Hủy đơn hàng</button>
                                     </input>
                                     <?php if (($order->OrderStatus) == "2") : ?>
                                     <?php endif; ?>
                                 <?php endif; ?>
                             </td>
                         </tr>
+                        <div id="reason_order" class="modal" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Lý do hủy đơn hàng</h5>
+                                    </div>
+                                    <div id="review-form">
+                                        <form class="review-form">
+                                            <div class="modal-body">
+                                                <br>
+                                                <div class="form-group">
+                                                    <input type="hidden" name="order_id" id="order_id" class="form-control" value="<?php echo $order->Id; ?>" />
+                                                    <input type="hidden" name="order_code" id="order_code" class="form-control" value="<?php echo $order->Code; ?>" />
+                                                    <textarea name="user_reason" id="user_reason" class="form-control" placeholder="Nhập lý do hủy đơn của bạn"></textarea>
+                                                </div>
+                                                <br>
+                                                <div class="form-group text-center">
+                                                    <a type="button" id="save_order" name="save_order" class="btn btn-outline-danger" style="text-decoration: none">Gửi</a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <?php endforeach; ?>
                 </table>
             <?php else : ?>
                 <strong>Bạn chưa có đơn hàng nào</strong>
             <?php endif; ?>
         </div>
-
         <hr class="mb-4">
         <div class="col-md-4 order-md-2 mb-4">
-            <a class="btn btn-info" href="index.php">Quay về trang chủ</a>
+            <a class="btn btn-outline-info" href="index.php">Quay về trang chủ</a>
         </div>
     </div>
 </section>
@@ -177,19 +202,49 @@ $userimg = UserImage::where('User_id', '=', $user_id)->get();
     }
 </script>
 <script>
+    $('#cancel_order').click(function() {
+        $('#reason_order').modal('show');
+    });
+
+    $('#save_order').click(function() {
+        var order_id = $('#order_id').val();
+        var order_code = $('#order_code').val();
+        var user_reason = $('#user_reason').val();
+        if (user_reason == '') {
+            alert("Bạn phải điền lý do hủy đơn hàng");
+            return false;
+        } else {
+            $.ajax({
+                url: "index.php?option=customer-detail",
+                method: "POST",
+                data: {
+                    order_id: order_id,
+                    order_code: order_code,
+                    user_reason: user_reason
+                },
+                success: function(data) {
+                    $('#reason_order').modal('hide');
+                    alert("Đơn hàng của bạn đã được hủy");
+                    window.location.reload();
+                }
+            });
+        }
+    });
+</script>
+<script>
     $("#save_profile, #cancel_profile").hide();
-    $('input').attr('disabled', true);
+    $('#form_profile input').attr('disabled', true);
     $('#edit_profile').on('click', function(e) {
         $("#save_profile, #cancel_profile").show();
         $("#edit_profile").hide();
         e.preventDefault();
-        if ($('input').attr('disabled')) {
-            $('input').removeAttr('disabled');
+        if ($('#form_profile input').attr('disabled')) {
+            $('#form_profile input').removeAttr('disabled');
         }
     })
     $('#cancel_profile').on('click', function(e) {
         $("#save_profile, #cancel_profile").hide();
         $("#edit_profile").show();
-        $('input').attr('disabled', true);
+        $('#form_profile input').attr('disabled', true);
     })
 </script>

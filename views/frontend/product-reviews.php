@@ -1,8 +1,11 @@
 <?php
 
+use App\Libraries\Pagination;
 use App\Models\Product;
 use App\Models\Reviews;
 use App\Models\User;
+
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 $reviews = new Reviews();
 
@@ -17,6 +20,7 @@ if (isset($_POST["rating_data"])) {
     );
     $reviews->insert($data);
     echo "Đánh giá & Xếp hạng của bạn đã gửi thành công";
+    die;
     // header('location:index.php?option=');
 }
 
@@ -31,7 +35,7 @@ if (isset($_POST["action"])) {
     $one_star_review = 0;
     $total_user_rating = 0;
     $review_content = array();
-
+    
     $result = Reviews::where('pro_id', '=', $_POST["pro_id"])->orderBy('datetime', 'desc')->get();
 
     foreach ($result as $row) {
@@ -39,7 +43,7 @@ if (isset($_POST["action"])) {
             'user_name' => $row["user_name"],
             'user_review' => $row["user_review"],
             'rating' => $row["user_rating"],
-            'datetime' => date('l jS, F Y h:i:s A', $row["datetime"])
+            'datetime' => date('y-m-d H:i:s', $row["datetime"])
         );
 
         if ($row["user_rating"] == '5') {

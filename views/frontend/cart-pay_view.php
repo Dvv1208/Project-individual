@@ -68,7 +68,7 @@ if (!isset($_SESSION['logincustomer'])) {
                             <tr>
                                 <td>
                                     <input type="hidden" name="action" value="dathang">
-                                    <button class="btn btn-outline-success" name="dathang" type="submit">Đặt hàng</button>
+                                    <button class="btn btn-outline-success" name="dathang" onclick="confirmOrder();" type="submit">Đặt hàng</button>
                                     </input>
                                 </td>
                             </tr>
