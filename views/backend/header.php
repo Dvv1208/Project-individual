@@ -26,6 +26,9 @@ use App\Libraries\MyClass;
     <link rel="stylesheet" href="../public/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../public/dist/css/adminlte.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -75,18 +78,14 @@ use App\Libraries\MyClass;
                 </li>
             </ul>
         </nav>
-        <!-- /.navbar -->
 
-        <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <!-- Brand Logo -->
             <a class="brand-link">
                 <?php $username = User::find($_SESSION['userid']); ?>
                 <img src="../public/dist/img/user2-160x160.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light"><?php echo $username->Fullname ?></span>
             </a>
 
-            <!-- Sidebar -->
             <div class="sidebar">
                 <div class="form-inline">
                     <div class="input-group" data-widget="sidebar-search">
@@ -99,12 +98,12 @@ use App\Libraries\MyClass;
                     </div>
                 </div>
 
-                <nav class="mt-2">
+                <nav class="mt-2" id="fixednav">
                     <ul class="nav nav-pills-danger nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-product-hunt"></i>
-                                <p>
+                                <p id="tabcontent">
                                     Sản phẩm
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
@@ -113,13 +112,14 @@ use App\Libraries\MyClass;
                                 <li class="nav-item">
                                     <a href="index.php?option=product" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p class="active">Tất cả sản phẩm</p>
+                                        <p class="tablinks">Tất cả sản phẩm</p>
                                     </a>
                                 </li>
+
                                 <li class="nav-item">
                                     <a href="index.php?option=product&cat=create" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Thêm sản phẩm</p>
+                                        <p class="tablinks">Thêm sản phẩm</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -258,7 +258,6 @@ use App\Libraries\MyClass;
 
                             </ul>
                         </li>
-
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa fa-users"></i>
@@ -285,7 +284,25 @@ use App\Libraries\MyClass;
                         </li>
                     </ul>
                 </nav>
-                <!-- /.sidebar-menu -->
             </div>
-            <!-- /.sidebar -->
         </aside>
+        <script>
+            $(function() {
+                var url = window.location;
+                $('ul.nav-sidebar a').filter(function() {
+                    return this.href == url;
+                }).addClass('active');
+                $('ul.nav-treeview a').filter(function() {
+                        return this.href == url;
+                    }).parentsUntil(".nav-sidebar > .nav-treeview")
+                    .css({
+                        'display': 'block'
+                    })
+                    .addClass('menu-open').prev('a')
+                    .addClass('active');
+            });
+            // $(".nav .nav-link").on("click", function() {
+            //     $(".nav").find(".active").removeClass("active");
+            //     $(this).addClass("active");
+            // });
+        </script>
