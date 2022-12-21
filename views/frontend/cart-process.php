@@ -6,6 +6,7 @@ use App\Libraries\MyClass;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\Orderdetail;
+use App\Models\Product;
 use PHPMailer\PHPMailer\PHPMailer;
 
 require 'vendor/PHPMailer/phpmailer/src/Exception.php';
@@ -39,13 +40,12 @@ switch ($_POST['action']) {
                 $orderdetail->Productid = $cart['Id'];
                 $orderdetail->Price = $cart['Price'];
                 $orderdetail->Quantity = $cart['qty'];
-                $orderdetail->Amount = $cart['amount'] * $cart['qty'];
+                $orderdetail->Amount = $cart['amount'];
                 $orderdetail->save();
             }
         }
         switch ($_POST['payment']) {
             case 'Khi nhận hàng':
-
                 $mail = new PHPMailer;
                 $mail->setLanguage("vi");
                 try {
@@ -73,30 +73,32 @@ switch ($_POST['action']) {
                         . "<br> Hình thức thanh toán: " . $order->Pttt . "\n\n"
                         . "<br> Trạng thái thanh toán: " . $statuspay . "\n\n"
                         . "<br><br> Thông tin sản phẩm: " . "\n\n";
-                    foreach ($order->products as $key => $pro) {
-                        $mail->addEmbeddedImage("public/images/product/$pro->Img", 'images_base64');
-                        $mail->Body .= "<br>
+                    foreach ($order->products as $pro) {
+                        $orderdetail = Orderdetail::where([['Orderid', '=', $order->Code], ['Productid', '=', $pro->Id]])->get();
+                        foreach ($orderdetail as $oddt) {
+                            $mail->addEmbeddedImage("public/images/product/$pro->Img", 'images_base64');
+                            $mail->Body .= "<br>
                         <html>
                             <body>
                                 <table>" .
-                            "<tr class='text-center'>" .
-                            "<th rowspan='4' style='width:100px'>" . "<img src='cid:images_base64' style='width:100px' alt='$pro->Img'>" . "</th>" .
-                            "<td class='text-center'>$pro->Name</td>" .
-                            "</tr>";
-
-                        $mail->Body .=
-                            "<tr>" .
-                            "<td class='text-center'>" . "Mã đơn hàng: " . "$order->Code</td>" .
-                            "</tr>" .
-                            "<tr>" .
-                            "<td class='text-center'>" . "Số lượng: " . "$orderdetail->Quantity</td>" .
-                            "</tr>" .
-                            "<tr>" .
-                            "<td class='text-center'>" . "Thành tiền: " . number_format($orderdetail->Amount, 0, ',', '.') . "<sup>đ</sup>" . "</td>" .
-                            "</tr>" .
-                            "</table>
+                                "<tr class='text-center'>" .
+                                "<th rowspan='4' style='width:100px'>" . "<img src='cid:images_base64' style='width:100px' alt='$pro->Img'>" . "</th>" .
+                                "<td class='text-center'>$pro->Name</td>" .
+                                "</tr>";
+                            $mail->Body .=
+                                "<tr>" .
+                                "<td class='text-center'>" . "Mã đơn hàng: " . "$order->Code</td>" .
+                                "</tr>" .
+                                "<tr>" .
+                                "<td class='text-center'>" . "Số lượng: " . "$oddt->Quantity</td>" .
+                                "</tr>" .
+                                "<tr>" .
+                                "<td class='text-center'>" . "Thành tiền: " . number_format($oddt->Amount, 0, ',', '.') . "<sup>đ</sup>" . "</td>" .
+                                "</tr>" .
+                                "</table>
                             </body>
                         </html>";
+                        }
                     }
                     $mail->Body .= "<br> Chúng tôi sẽ gửi thông báo sau cho bạn. " . "\n\n"
                         . "<br><br>Cảm ơn &Trân trọng," . "\n" . "<br><br>Admin"

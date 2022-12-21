@@ -4,6 +4,7 @@ use App\Libraries\MyClass;
 use App\Models\Momo;
 use App\Models\Order;
 use App\Models\Orderdetail;
+use App\Models\Product;
 use App\Models\VnPay;
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -54,31 +55,35 @@ if (isset($_GET['partnerCode'])) {
                     . "<br> Trạng thái thanh toán: " . $statuspay . "\n\n"
                     . "<br><br> Thông tin sản phẩm: " . "\n\n";
                 foreach ($order->products as $key => $pro) {
-                    $qty += $pro->pivot->Quantity;
-                    $totalMoney += $pro->pivot->Amount;
-                    $mail->addEmbeddedImage("public/images/product/$pro->Img", 'images_base64');
-                    $mail->Body .= "<br>
-                        <html>
-                            <body>
-                                <table>" .
-                        "<tr class='text-center'>" .
-                        "<th rowspan='4' style='width:100px'>" . "<img src='cid:images_base64' style='width:100px' alt='$pro->Img'>" . "</th>" .
-                        "<td class='text-center'>$pro->Name</td>" .
-                        "</tr>";
+                    $orderdetail = Orderdetail::where([['Orderid', '=', $order->Code], ['Productid', '=', $pro->Id]])->get();
+                    foreach ($orderdetail as $oddt) {
+                        $product = Product::where('Id', '=', $oddt->Productid)->get();
+                        foreach ($product as $proI) {
+                            $mail->addEmbeddedImage("public/images/product/$proI->Img", 'images_base64');
+                            $mail->Body .= "<br>
+                            <html>
+                                <body>
+                                    <table>" .
+                                "<tr class='text-center'>" .
+                                "<th rowspan='4' style='width:100px'>" . "<img src='cid:images_base64' style='width:100px' alt='$proI->Img'>" . "</th>" .
+                                "<td class='text-center'>$pro->Name</td>" .
+                                "</tr>";
 
-                    $mail->Body .=
-                        "<tr>" .
-                        "<td class='text-center'>" . "Mã đơn hàng: " . "$order->Code</td>" .
-                        "</tr>" .
-                        "<tr>" .
-                        "<td class='text-center'>" . "Số lượng: " . "$qty</td>" .
-                        "</tr>" .
-                        "<tr>" .
-                        "<td class='text-center'>" . "Thành tiền: " . number_format($totalMoney, 0, ',', '.') . "<sup>đ</sup>" . "</td>" .
-                        "</tr>" .
-                        "</table>
-                            </body>
-                        </html>";
+                            $mail->Body .=
+                                "<tr>" .
+                                "<td class='text-center'>" . "Mã đơn hàng: " . "$order->Code</td>" .
+                                "</tr>" .
+                                "<tr>" .
+                                "<td class='text-center'>" . "Số lượng: " . "$oddt->Quantity</td>" .
+                                "</tr>" .
+                                "<tr>" .
+                                "<td class='text-center'>" . "Thành tiền: " . number_format($oddt->Amount, 0, ',', '.') . "<sup>đ</sup>" . "</td>" .
+                                "</tr>" .
+                                "</table>
+                                </body>
+                            </html>";
+                        }
+                    }
                 }
                 $mail->Body .= "<br> Chúng tôi sẽ gửi thông báo sau cho bạn. " . "\n\n"
                     . "<br><br>Cảm ơn &Trân trọng," . "\n" . "<br><br>Admin"
@@ -148,31 +153,36 @@ if (isset($_GET['vnp_Amount'])) {
                     . "<br> Trạng thái thanh toán: " . $statuspay . "\n\n"
                     . "<br><br> Thông tin sản phẩm: " . "\n\n";
                 foreach ($order->products as $key => $pro) {
-                    $qty += $pro->pivot->Quantity;
-                    $totalMoney += $pro->pivot->Amount;
-                    $mail->addEmbeddedImage("public/images/product/$pro->Img", 'images_base64');
-                    $mail->Body .= "<br>
+                    $orderdetail = Orderdetail::where([['Orderid', '=', $order->Code], ['Productid', '=', $pro->Id]])->get();
+                    foreach ($orderdetail as $oddt) {
+                        $product = Product::where('Id', '=', $oddt->Productid)->get();
+                        foreach ($product as $proI) {
+                            var_dump($proI->Img);
+                            $mail->addEmbeddedImage("public/images/product/$proI->Img", 'images_base64');
+                            $mail->Body .= "<br>
                         <html>
                             <body>
                                 <table>" .
-                        "<tr class='text-center'>" .
-                        "<th rowspan='4' style='width:100px'>" . "<img src='cid:images_base64' style='width:100px' alt='$pro->Img'>" . "</th>" .
-                        "<td class='text-center'>$pro->Name</td>" .
-                        "</tr>";
+                                "<tr class='text-center'>" .
+                                "<th rowspan='4' style='width:100px'>" . "<img src='cid:images_base64' style='width:100px' alt='$proI->Img'>" . "</th>" .
+                                "<td class='text-center'>$pro->Name</td>" .
+                                "</tr>";
 
-                    $mail->Body .=
-                        "<tr>" .
-                        "<td class='text-center'>" . "Mã đơn hàng: " . "$order->Code</td>" .
-                        "</tr>" .
-                        "<tr>" .
-                        "<td class='text-center'>" . "Số lượng: " . "$qty</td>" .
-                        "</tr>" .
-                        "<tr>" .
-                        "<td class='text-center'>" . "Thành tiền: " . number_format($totalMoney, 0, ',', '.') . "<sup>đ</sup>" . "</td>" .
-                        "</tr>" .
-                        "</table>
+                            $mail->Body .=
+                                "<tr>" .
+                                "<td class='text-center'>" . "Mã đơn hàng: " . "$order->Code</td>" .
+                                "</tr>" .
+                                "<tr>" .
+                                "<td class='text-center'>" . "Số lượng: " . "$oddt->Quantity</td>" .
+                                "</tr>" .
+                                "<tr>" .
+                                "<td class='text-center'>" . "Thành tiền: " . number_format($oddt->Amount, 0, ',', '.') . "<sup>đ</sup>" . "</td>" .
+                                "</tr>" .
+                                "</table>
                             </body>
                         </html>";
+                        }
+                    }
                 }
                 $mail->Body .= "<br> Chúng tôi sẽ gửi thông báo sau cho bạn. " . "\n\n"
                     . "<br><br>Cảm ơn &Trân trọng," . "\n" . "<br><br>Admin"

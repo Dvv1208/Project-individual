@@ -94,27 +94,43 @@ $reviews = Reviews::where('pro_id', '=', $row_pro['Id'])->get();
                                 (<?php echo $totalReview . ' lượt đánh giá' ?>)
                             </div>
                             <div>
-                                <h5 class="product-price"><?php echo number_format($row_pro['Pricesale'], 0, ',', '.') . "<sup>đ</sup>"; ?>
-                                    <del class="product-old-price"><?php echo number_format($row_pro['Price'], 0, ',', '.') . "<sup>đ</sup>"; ?></del>
+                                <h5 class="product-price">
+                                    <?php
+                                    if (($row_pro['Price']) > ($row_pro['Pricesale'])) {
+                                        echo number_format($row_pro['Pricesale'], 0, ',', '.') . "<sup>đ</sup>" . " ";
+                                        echo "<del class='product-old-price' style='font-size: 60%;'>";
+                                        echo number_format($row_pro['Price'], 0, ',', '.') . "<sup>đ</sup>";
+                                        "</del>";
+                                    } elseif (($row_pro['Price']) == ($row_pro['Pricesale'])) {
+                                        echo number_format($row_pro['Pricesale'], 0, ',', '.') . "<sup>đ</sup>";
+                                    } else {
+                                        "<del class='product-old-price'>";
+                                        echo number_format($row_pro['Price'], 0, ',', '.') . "<sup>đ</sup>";
+                                        "</del>";
+                                    }
+                                    ?>
                                 </h5>
                             </div>
                             <div class="add-to-cart">
-                                <div class="qty-label">
-                                    Số lượng
-                                    <div class="input-number">
-                                        <input type="number" value="1" min="1">
-                                        <span class="qty-up">+</span>
-                                        <span class="qty-down">-</span>
-                                    </div>
-                                </div><br><br>
-                                <ul class="product-btns" role="group" aria-label="Basic example">
-                                    <li>
-                                        <a href="index.php?option=heart&addheart=<?php echo $row_pro['Id']; ?>" class="btn btn-outline-danger"><i class="fas fa-heart"></i> Thêm vào yêu thích</a>
-                                    </li>
-                                    <li>
-                                        <a href="index.php?option=cart&addcart=<?php echo $row_pro['Id']; ?>" class="btn btn-outline-info"><i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
-                                    </li>
-                                </ul>
+                                <form id="addcart" action="index.php?option=addcart" method="post">
+                                    <div class="qty-label">
+                                        Số lượng
+                                        <div class="input-number">
+                                            <input type="number" name="qty" id="qty" value="1" min="1" max="10" style="width:80%" aria-describedby="basic-addon2">
+                                            <span class="qty-up">+</span>
+                                            <span class="qty-down">-</span>
+                                        </div>
+                                    </div><br><br>
+                                    <ul class="product-btns" role="group" aria-label="Basic example">
+                                        <li>
+                                            <button type="submit" name="addheartFromdetail" class="btn btn-outline-danger"><i class="fas fa-heart"></i> THÊM VÀO YÊU THÍCH</button>
+                                        </li>
+                                        <li>
+                                            <input type="hidden" value="<?php echo $row_pro['Id']; ?>" name="proid" id="proid" />
+                                            <button type="submit" name="addcartFromdetail" id="addcartFromdetail" class="btn btn-outline-info"><i class="fas fa-shopping-cart"></i> THÊM VÀO GIỎ HÀNG</button>
+                                        </li>
+                                    </ul>
+                                </form>
                             </div>
                             <ul class="product-links">
                                 <li><label>Chia sẻ: </label></li>

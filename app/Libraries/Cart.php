@@ -21,6 +21,7 @@ class Cart
             }
             $_SESSION['cart'] = $cart;
         }
+        var_dump($_SESSION['cart']);
     }
     public static function cart_exist($cart, $id)
     {
@@ -50,16 +51,13 @@ class Cart
         }
     }
 
-    public static function updateCart($row)
+    public static function updateCart($row, $id, $number)
     {
         if (isset($_SESSION['cart'])) {
             $cart = $_SESSION['cart'];
-            $key = self::cart_exist($cart, $row['Id']);
-            if ($key != -1) {
-                $cart[$key]['qty'] = $row;
-                $cart[$key]['Pricesale'] = $row['Pricesale'];
-                $cart[$key]['amount'] = $row['amount'];
-            }
+            $key = self::cart_exist($cart, $id);
+            $cart[$key]['qty'] = $number;
+            $cart[$key]['amount'] = $cart[$key]['Price'] * $cart[$key]['qty'];
             if ($cart[$key]['qty'] == 0) {
                 unset($cart[$key]);
             }

@@ -3,6 +3,7 @@
 use App\Libraries\Cart;
 use App\Libraries\MyClass;
 use App\Models\Order;
+use App\Models\Orderdetail;
 
 $list_content = Cart::contentCart();
 $totalMoney = 0;
@@ -74,4 +75,3 @@ $returnData = array(
     'code' => '00', 'message' => 'success', 'data' => $vnp_Url
 );
 header('Location: ' . $vnp_Url);
-

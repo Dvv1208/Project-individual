@@ -21,7 +21,7 @@ if (isset($_REQUEST['addcart'])) {
         'Name' => $row_product['Name'],
         'Price' => $row_product['Pricesale'],
         'qty' => $qty,
-        'amount' => $row_product['Pricesale'] * $qty,
+        'amount' => $row_product['Price'] * $qty,
     );
     Cart::addCart($row_cart);
     MyClass::set_flash("message", ['msg' => 'Thêm vào giỏ hàng thành công !']);
@@ -41,7 +41,14 @@ if (isset($_REQUEST['delcart'])) {
     header("location:index.php?option=cart");
     exit;
 }
-
+if (isset($_POST['updateCart'])) {
+    $arr_qty = $_POST['qty'];
+    foreach ($arr_qty as $id => $number) {
+        $cart = $_SESSION['cart'];
+        $cart = Cart::updateCart($cart, $id, $number);
+        MyClass::set_flash("message", ['msg' => 'Cập nhật giỏ hàng thành công!']);
+    }
+}
 if ($page == "view") {
     $list_content = Cart::contentCart();
     require_once('views/frontend/cart_view.php');

@@ -1,12 +1,12 @@
 <?php
 
 use App\Libraries\MyClass;
+use App\Models\User;
+use App\Models\UserImage;
 
 require_once("vendor/autoload.php");
 require_once("config/database.php");
-
-use App\Models\User;
-
+require_once("config/google.php");
 
 ?>
 
@@ -55,6 +55,7 @@ use App\Models\User;
 
 <body class="hold-transition login-page">
     <?php
+
     if (isset($_POST['DANGNHAP'])) {
         $username = $_POST['username'];
         $password = sha1($_POST['password']);
@@ -63,7 +64,6 @@ use App\Models\User;
         if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
             $args = [
                 ['Email', '=', $username],
-
                 ['Password', '=', $password],
                 ['Status', '=', '1'],
             ];
@@ -83,7 +83,11 @@ use App\Models\User;
                 $_SESSION['logincustomer'] = $username;
                 $_SESSION['user_id'] = $user->Id;
                 MyClass::set_flash("message", ['msg' => 'Đăng nhập thành công !']);
-                header("location:index.php");
+                if ($_SESSION['checkout'] != null) {
+                    header("location:index.php?option=cart");
+                } else {
+                    header("location:index.php");
+                }
             } else {
                 $message_alert = '<div class="text-danger text-center">Mật khẩu không chính xác !</div>';
             }
@@ -119,11 +123,9 @@ use App\Models\User;
                             <button name="DANGNHAP" id="btnDn" type="submit" class="btn btn-primary btn-block">Đăng Nhập</button>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div id="loginGoogle" class="my-3"></div>
-                        </div>
-                    </div>
+                    <a type="button" onclick="window.location = '<?php echo $login_url ?>'" class="btn btn-google btn-user btn-block my-3">
+                        <i class="fab fa-google fa-fw"></i> Đăng nhập với Google
+                    </a>
                     <a href="index.php?option=facebook" class="btn btn-facebook btn-user btn-facebook btn-block">
                         <i class="fab fa-facebook fa-fw"></i> Đăng nhập với Facebook
                     </a>
@@ -152,9 +154,9 @@ use App\Models\User;
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     if ('success' == this.responseText) {
-                        location.href = 'index.php?option=test';
+                        location.href = 'index.php?option=google';
                     } else {
-                        location.href = 'index.php?option=test';
+                        location.href = 'index.php?option=google';
                     }
                 }
             };
@@ -172,9 +174,9 @@ use App\Models\User;
                     theme: "outline",
                     size: "large",
                     width: "320"
-                } // customization attributes
+                }
             );
-            google.accounts.id.prompt(); // also display the One Tap dialog
+            google.accounts.id.prompt();
         }
     </script>
 

@@ -8,7 +8,10 @@ $title = 'Thanh toán';
 $username = User::find($_SESSION['user_id']);
 
 if (!isset($_SESSION['logincustomer'])) {
+    $_SESSION['checkout'] = true;
     header('location:index.php?option=customer-login');
+} else {
+    unset($_SESSION['checkout']);
 }
 
 ?>
@@ -102,8 +105,8 @@ if (!isset($_SESSION['logincustomer'])) {
                                     <td class="text-center"><?php echo number_format($rcart['Price'], 0, ',', '.'); ?><sup>đ</sup></td>
                                     <td class="text-center"><?php echo $rcart['qty'] ?></td>
                                     <td class="text-center">
-                                        <?php echo number_format($rcart['amount'] * $rcart['qty'], 0, ',', '.') ?><sup>đ</sup></td>
-                                    <?php $totalMoney += $rcart['amount'] * $rcart['qty']; ?>
+                                        <?php echo number_format($rcart['Price'] * $rcart['qty'], 0, ',', '.') ?><sup>đ</sup></td>
+                                    <?php $totalMoney += $rcart['amount'] ?>
                                 </tr>
                             <?php endforeach; ?>
                             <tr>

@@ -17,6 +17,7 @@ if (isset($_POST['DANGKY'])) {
     $xa = Xa::where('xaid', '=', $_POST['xa'])->get();
     $user->Fullname = $_POST['Fullname'];
     $user->Username = $_POST['Username'];
+    $emailErr = "Email không đúng định dạng";
     $user->Email = $_POST['Email'];
     $user->Password = sha1($_POST['Password']);
     $user->Gender = $_POST['Gender'];

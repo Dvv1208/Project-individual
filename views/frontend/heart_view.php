@@ -51,7 +51,7 @@ $title = "Sảm phẩm yêu thích";
                                     <td class="text-center">
                                         <?php echo $rheart['qty'] ?>
                                     </td>
-                                    <td class="text-center"><?php echo number_format($rheart['amount'] * $rheart['qty'], 0, ',', '.') ?><sup>đ</sup></td>
+                                    <td class="text-center"><?php echo number_format($rheart['amount'], 0, ',', '.') ?><sup>đ</sup></td>
                                     <td class="text-center">
                                         <a onclick="addHeartToCart(<?php echo $rheart['Id']; ?>);" type="button">
                                             <i class="fas fa-shopping-cart"></i>
