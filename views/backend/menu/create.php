@@ -1,15 +1,16 @@
 <?php
+
 use App\Models\Menu;
 
 $list = Menu::where('Status', '!=', '0')->get();
 $strparentid = "";
 $strorders = "";
-foreach($list as $item){
-  $strparentid .= "<option value = '" .$item['Id'] ."'>" .$item['Name'] . "</option>";
-  $strorders .="<option value='".$item['Orders']."'> Sau: ".$item['Name']."</option>";
+foreach ($list as $item) {
+    $strparentid .= "<option value = '" . $item['Id'] . "'>" . $item['Name'] . "</option>";
+    $strorders .= "<option value='" . $item['Orders'] . "'> Sau: " . $item['Name'] . "</option>";
 }
 
- ?>
+?>
 <?php require_once('../views/backend/header.php'); ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -20,12 +21,10 @@ foreach($list as $item){
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Thêm danh mục sản phẩm</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Bảng điều khiển</a></li>
-                            <li class="breadcrumb-item active">Thêm Menu</li>
+                        <ol class="breadcrumb float-sm-left">
+                            <li class="breadcrumb-item"><a href="index.php">Trang quản trị</a></li>
+                            <li class="breadcrumb-item active"><a href="index.php?option=menu">Menu</a></li>
+                            <li class="breadcrumb-item active">Thêm mới menu</li>
                         </ol>
                     </div>
                 </div>
@@ -54,18 +53,15 @@ foreach($list as $item){
                         <div class="col-md-9">
                             <div class="mb-3">
                                 <label for="name">Tên Menu</label>
-                                <input name="data[Name]" id="name" type="text" class="form-control" required
-                                    placeholder="Nhập tên menu" />
+                                <input name="data[Name]" id="name" type="text" class="form-control" required placeholder="Nhập tên menu" />
                             </div>
                             <div class="mb-3">
                                 <label for="link">Liên kết</label>
-                                <input name="data[Link]" id="link" type="text" class="form-control"
-                                    placeholder="#" />
+                                <input name="data[Link]" id="link" type="text" class="form-control" placeholder="#" />
                             </div>
                             <div class="mb-3">
                                 <label for="type">Loại menu</label>
-                                <input name="data[Type]" id="type" type="text" class="form-control"
-                                    placeholder="Nhập loại menu" />
+                                <input name="data[Type]" id="type" type="text" class="form-control" placeholder="Nhập loại menu" />
                             </div>
                         </div>
                         <div class="col-md-3">

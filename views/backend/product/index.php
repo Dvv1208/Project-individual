@@ -2,8 +2,9 @@
 
 use App\Models\Product;
 use App\Libraries\MyClass;
+use App\Models\ProductsImages;
 
-$list = Product::where('Status', '!=', '0')->orderBy('CreatedAt', 'desc')->get();
+$list = Product::where('Status', '!=', '0')->with('images')->orderBy('CreatedAt', 'desc')->get();
 
 ?>
 
@@ -15,11 +16,9 @@ $list = Product::where('Status', '!=', '0')->orderBy('CreatedAt', 'desc')->get()
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Danh mục sản phẩm</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Bảng điều khiển</a></li>
+                    <ol class="breadcrumb float-sm-left">
+                        <li class="breadcrumb-item"><a href="index.php">Trang quản trị</a></li>
+                        <li class="breadcrumb-item active"><a href="index.php?option=product">Sản phẩm</a></li>
                         <li class="breadcrumb-item active">Tất cả sản phẩm</li>
                     </ol>
                 </div>
@@ -27,10 +26,7 @@ $list = Product::where('Status', '!=', '0')->orderBy('CreatedAt', 'desc')->get()
         </div><!-- /.container-fluid -->
     </section>
 
-    <!-- Main content -->
     <section class="content">
-
-        <!-- Default box -->
         <div class="card">
             <div class="card-header">
                 <div class="row">
@@ -43,7 +39,7 @@ $list = Product::where('Status', '!=', '0')->orderBy('CreatedAt', 'desc')->get()
                 </div>
             </div>
             <div class="card-body">
-            <?php include_once('../views/backend/message_alert.php');?>
+                <?php include_once('../views/backend/message_alert.php'); ?>
                 <table class="table table-bordered" id="myTable">
                     <thead>
                         <tr>
@@ -67,6 +63,31 @@ $list = Product::where('Status', '!=', '0')->orderBy('CreatedAt', 'desc')->get()
                                 <td class="text-center">
                                     <img style="width:200px" src="../public/images/product/<?php echo $row['Img']; ?>" alt="<?php echo $row['Img']; ?>">
                                 </td>
+                                <!-- <td class="text-center">
+                                    <?php foreach ($row->images as $pro) : ?>
+                                        <div class="slider">
+                                            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                                <div class="carousel-inner">
+                                                    <?php $index = 1; ?>
+                                                    <?php if ($index == 1) : ?>
+                                                        <div class="carousel-item active" style="display:inline-block">
+                                                            <img style="width:200px" src="../public/images/product/<?php echo $pro->ImgId; ?>" alt="<?php echo $pro->ImgId; ?>">
+                                                        </div>
+                                                    <?php endif; ?>
+                                                    <?php $index++; ?>
+                                                </div>
+                                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Previous</span>
+                                                </button>
+                                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Next</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </td> -->
                                 <td class="text-center"><?php echo $row['Name']; ?></td>
                                 <td class="text-center"><?php echo $row['Slug']; ?></td>
                                 <td class="text-center"><?php echo $row['CreatedAt']; ?></td>
@@ -94,20 +115,14 @@ $list = Product::where('Status', '!=', '0')->orderBy('CreatedAt', 'desc')->get()
                                 </td>
                                 <td><?php echo $row['Id']; ?></td>
                             </tr>
+
                         <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
-            <!-- /.card-body -->
-
-            <!-- /.card-footer-->
         </div>
-        <!-- /.card -->
+    </section>
 </div>
-</section>
-<!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
 <?php require_once('../views/backend/footer.php'); ?>
 <script>
     $(document).ready(function() {

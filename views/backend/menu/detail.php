@@ -5,13 +5,13 @@ use App\Models\Menu;
 
 $id = $_REQUEST["id"];
 $row = Menu::find($id);
-if ($row == null){
-  header("location:index.php?option=menu");
+if ($row == null) {
+    header("location:index.php?option=menu");
 }
 
 ?>
 
-<?php require_once('../views/backend/header.php');?>
+<?php require_once('../views/backend/header.php'); ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -19,11 +19,9 @@ if ($row == null){
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Chi tiết menu</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Bảng điều khiển</a></li>
+                    <ol class="breadcrumb float-sm-left">
+                        <li class="breadcrumb-item"><a href="index.php">Trang quản trị</a></li>
+                        <li class="breadcrumb-item active"><a href="index.php?option=menu">Menu</a></li>
                         <li class="breadcrumb-item active">Chi tiết menu</li>
                     </ol>
                 </div>
@@ -41,12 +39,10 @@ if ($row == null){
                     <a href="index.php?option=menu" class="btn btn-sm btn-info"><i class="fas fa-undo"></i> Quay lại
                         danh sách
                     </a>
-                    <a href="index.php?option=menu&cat=edit&id=<?php echo $row['Id'];?>" title="Cập nhật"
-                        class="btn btn-sm btn-info">
+                    <a href="index.php?option=menu&cat=edit&id=<?php echo $row['Id']; ?>" title="Cập nhật" class="btn btn-sm btn-info">
                         <i class="fas fa-edit">Sửa</i>
                     </a>
-                    <a href="index.php?option=menu&cat=deltrash&id=<?php echo $row['Id'];?>"
-                        title="Xóa vào thùng rác" class="btn btn-sm btn-danger">
+                    <a href="index.php?option=menu&cat=deltrash&id=<?php echo $row['Id']; ?>" title="Xóa vào thùng rác" class="btn btn-sm btn-danger">
                         <i class="fas fa-trash">Xóa</i>
                     </a>
                 </div>
@@ -64,12 +60,12 @@ if ($row == null){
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="text-center"><?php echo $row['Name'];?></td>
-                            <td class="text-center"><?php echo $row['Position'];?></td>
-                            <td class="text-center"><?php echo $row['Type'];?></td>
-                            <td class="text-center"><?php echo $row['CreatedAt'];?></td>
-                            <td class="text-center"><?php echo $row['UpdatedAt'];?></td>
-                            <td><?php echo $row['Id'];?></td>
+                            <td class="text-center"><?php echo $row['Name']; ?></td>
+                            <td class="text-center"><?php echo $row['Position']; ?></td>
+                            <td class="text-center"><?php echo $row['Type']; ?></td>
+                            <td class="text-center"><?php echo $row['CreatedAt']; ?></td>
+                            <td class="text-center"><?php echo $row['UpdatedAt']; ?></td>
+                            <td><?php echo $row['Id']; ?></td>
                         </tr>
                 </table>
             </div>
@@ -83,4 +79,4 @@ if ($row == null){
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<?php require_once('../views/backend/footer.php');?>
+<?php require_once('../views/backend/footer.php'); ?>

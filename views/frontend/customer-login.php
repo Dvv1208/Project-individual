@@ -1,9 +1,12 @@
 <?php
+
+use App\Libraries\MyClass;
+use App\Models\User;
+use App\Models\UserImage;
+
 require_once("vendor/autoload.php");
 require_once("config/database.php");
-
-use App\Models\User;
-
+require_once("config/google.php");
 
 ?>
 
@@ -21,7 +24,8 @@ use App\Models\User;
     <link rel="stylesheet" href="public/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="public/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <link rel="stylesheet" href="public/dist/css/adminlte.min.css">
-    <script>
+    <meta name="google-signin-client_id" content="128720067234-kktk2bauu38r83evmac9dl6b3u3dsgte.apps.googleusercontent.com">
+    <!-- <script>
         $.toast({
             heading: 'Positioning',
             text: 'Use the predefined ones, or specify a custom position object.',
@@ -33,7 +37,7 @@ use App\Models\User;
                 $.toast.show('thành công');
             });
         });
-    </script>
+    </script> -->
     <style>
         .btn-facebook {
             color: #fff;
@@ -51,6 +55,7 @@ use App\Models\User;
 
 <body class="hold-transition login-page">
     <?php
+
     if (isset($_POST['DANGNHAP'])) {
         $username = $_POST['username'];
         $password = sha1($_POST['password']);
@@ -77,9 +82,12 @@ use App\Models\User;
             if ($user != null) {
                 $_SESSION['logincustomer'] = $username;
                 $_SESSION['user_id'] = $user->Id;
-
-                $message_alert = "Đăng nhập thành công";
-                header("location:index.php");
+                MyClass::set_flash("message", ['msg' => 'Đăng nhập thành công !']);
+                if ($_SESSION['checkout'] != null) {
+                    header("location:index.php?option=cart");
+                } else {
+                    header("location:index.php");
+                }
             } else {
                 $message_alert = '<div class="text-danger text-center">Mật khẩu không chính xác !</div>';
             }
@@ -115,10 +123,10 @@ use App\Models\User;
                             <button name="DANGNHAP" id="btnDn" type="submit" class="btn btn-primary btn-block">Đăng Nhập</button>
                         </div>
                     </div>
-                    <a href="index.php?option=google" class="btn btn-google btn-user btn-block my-3">
+                    <a type="button" onclick="window.location = '<?php echo $login_url ?>'" class="btn btn-google btn-user btn-block my-3">
                         <i class="fab fa-google fa-fw"></i> Đăng nhập với Google
                     </a>
-                    <a href="index.php?option=facebook" class="btn btn-facebook btn-user btn-facebook btn-block my-3">
+                    <a href="index.php?option=facebook" class="btn btn-facebook btn-user btn-facebook btn-block">
                         <i class="fab fa-facebook fa-fw"></i> Đăng nhập với Facebook
                     </a>
                     <div class="container signin my-3 text-center">
@@ -139,6 +147,39 @@ use App\Models\User;
     <script src="public/plugins/jquery/jquery.min.js"></script>
     <script src="public/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="public/dist/js/adminlte.min.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+        function handleCredentialResponse(response) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    if ('success' == this.responseText) {
+                        location.href = 'index.php?option=google';
+                    } else {
+                        location.href = 'index.php?option=google';
+                    }
+                }
+            };
+            xhttp.open("POST", "http://localhost/JavaScript/php/index.php?option=save-users", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("response=" + response.credential);
+        }
+        window.onload = function() {
+            google.accounts.id.initialize({
+                client_id: "128720067234-kktk2bauu38r83evmac9dl6b3u3dsgte.apps.googleusercontent.com",
+                callback: handleCredentialResponse
+            });
+            google.accounts.id.renderButton(
+                document.getElementById("loginGoogle"), {
+                    theme: "outline",
+                    size: "large",
+                    width: "320"
+                }
+            );
+            google.accounts.id.prompt();
+        }
+    </script>
+
 </body>
 
 </html>

@@ -1,7 +1,9 @@
 <?php
 
 use App\Libraries\Cart;
+use App\Libraries\MyClass;
 use App\Models\Order;
+use App\Models\Orderdetail;
 
 $list_content = Cart::contentCart();
 $totalMoney = 0;
@@ -10,7 +12,7 @@ error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-$vnp_Returnurl = "http://localhost/JavaScript/php/index.php?option=cart-process-detail";
+$vnp_Returnurl = "http://localhost/JavaScript/php/index.php?option=cart-pay-camon";
 $vnp_TmnCode = "R522YCH8";
 $vnp_HashSecret = "YBRDOTAQPJFSLZKTGTMCDNHBWHKIXTUB";
 foreach ($orders as $order) {
@@ -42,7 +44,7 @@ $inputData = array(
     "vnp_ReturnUrl" => $vnp_Returnurl,
     "vnp_TxnRef" => $vnp_TxnRef
 );
-var_dump($vnp_TxnRef);
+// var_dump($vnp_TxnRef);
 
 if (isset($vnp_BankCode) && $vnp_BankCode != "") {
     $inputData['vnp_BankCode'] = $vnp_BankCode;
@@ -73,4 +75,3 @@ $returnData = array(
     'code' => '00', 'message' => 'success', 'data' => $vnp_Url
 );
 header('Location: ' . $vnp_Url);
-unset($_SESSION['cart']);

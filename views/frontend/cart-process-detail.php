@@ -14,6 +14,21 @@ $order = Order::where('Code', '=', $_SESSION['order_id'])->with('products')->fir
 ?>
 
 <?php require_once('views/frontend/header.php'); ?>
+<?php include_once('views/frontend/message_alert.php'); ?>
+<section class="breadcrumb p-0 m-0">
+    <div class="container">
+        <div class="row">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb my-3">
+                    <li class="breadcrumb-item"><a style="text-decoration: none" href="index.php">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a style="text-decoration: none" href="index.php?option=cart_view">Giỏ hàng</a></li>
+                    <li class="breadcrumb-item"><a style="text-decoration: none" href="index.php?option=cart-pay_view">Thanh toán</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><?php echo $title; ?></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</section>
 <section class="clearfix main mt-2">
     <form name="forml" action="index.php?option=cart-process" method="get">
         <div class="container">
@@ -23,25 +38,24 @@ $order = Order::where('Code', '=', $_SESSION['order_id'])->with('products')->fir
                     <h2>Đặt hàng thành công</h2>
                     <p class="lead">Cảm ơn bạn đã mua sắm tại cửa hàng !.</p>
                 </div>
-                <div class="col-md-8 order-md-1">
-
+                <div class="col-md-8">
                     <h4 class="mb-3">Thông tin khách hàng</h4>
                     <table class="table table-bordered" id="myTable">
                         <thead>
                             <tr>
-                                <th>Họ tên khách hàng</th>
-                                <th>Địa chỉ khách hàng</th>
-                                <th>Điện thoại khách hàng</th>
-                                <th>Email khách hàng</th>
+                                <th class="text-center">Họ tên khách hàng</th>
+                                <th class="text-center">Địa chỉ khách hàng</th>
+                                <th class="text-center">Sđt khách hàng</th>
+                                <th class="text-center">Email khách hàng</th>
                             </tr>
                         </thead>
                         <tbody>
-                                <tr>
-                                    <td><?php echo $order->Name; ?></td>
-                                    <td><?php echo $order->Diachi; ?></td>
-                                    <td><?php echo $order->Phone; ?></td>
-                                    <td><?php echo $order->Email; ?></td>
-                                </tr>
+                            <tr>
+                                <td class="text-center"><?php echo $order->Name; ?></td>
+                                <td class="text-center"><?php echo $order->Diachi; ?></td>
+                                <td class="text-center"><?php echo $order->Phone; ?></td>
+                                <td class="text-center"><?php echo $order->Email; ?></td>
+                            </tr>
                         <tbody>
                     </table>
                     <h4 class="mb-3">Hình thức thanh toán</h4>
@@ -78,10 +92,10 @@ $order = Order::where('Code', '=', $_SESSION['order_id'])->with('products')->fir
                     </div>
                     <hr class="mb-4">
                     <div class="col-md-4 order-md-2 mb-4">
-                        <a class="btn btn-info" href="index.php">Tiếp tục mua sắm</a>
+                        <a class="btn btn-outline-info" href="index.php">Tiếp tục mua sắm</a>
                     </div>
                 </div>
             </div>
     </form>
-    
+
     <?php require_once('views/frontend/footer.php'); ?>

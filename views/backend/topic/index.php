@@ -1,24 +1,27 @@
+<?php require_once('../views/backend/header.php'); ?>
 <?php
 
 use App\Models\Topic;
 
 $list = Topic::where('Status', '!=', '0')->orderBy('CreatedAt', 'desc')->get();
 ?>
-<?php require_once('../views/backend/header.php'); ?>
 
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper py-2">
-  <!-- Content Header (Page header) -->
-
-
-  <!-- Main content -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <ol class="breadcrumb float-sm-left">
+          <li class="breadcrumb-item"><a href="index.php">Trang quản trị</a></li>
+          <li class="breadcrumb-item active"><a href="index.php?option=topic">Bài viết</a></li>
+          <li class="breadcrumb-item active">Tất cả chủ đề bài viết</li>
+        </ol>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
   <section class="content">
-
-    <!-- Default box -->
     <div class="card">
       <div class="card-header">
         <div class="row">
-          <h3 class="text-danger">CHỦ ĐỀ BÀI VIẾT</h3>
           <div class="col-md-12 text-right">
             <a href="index.php?option=topic&cat=create" class="btn btn-sm btn-success">
               <i class="fas fa-plus"></i>Thêm
@@ -26,7 +29,6 @@ $list = Topic::where('Status', '!=', '0')->orderBy('CreatedAt', 'desc')->get();
             <a href="index.php?option=topic&cat=trash" class="btn btn-sm btn-danger">
               <i class="fas fa-trash"></i>Thùng rác
             </a>
-
           </div>
         </div>
       </div>
@@ -38,7 +40,7 @@ $list = Topic::where('Status', '!=', '0')->orderBy('CreatedAt', 'desc')->get();
               <th>Tên danh mục</th>
               <th>Slug</th>
               <th class="text-center">Chức năng</th>
-              <th style="with:20px" class="text-center">ID</th>
+              <th class="text-center">ID</th>
             </tr>
           </thead>
           <tbody>
@@ -71,10 +73,6 @@ $list = Topic::where('Status', '!=', '0')->orderBy('CreatedAt', 'desc')->get();
             <?php endforeach; ?>
           </tbody>
         </table>
-      </div>
-      <!-- /.card-body -->
-      <div class="card-footer">
-        Footer
       </div>
     </div>
     <!-- /.card -->

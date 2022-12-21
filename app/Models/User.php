@@ -9,4 +9,9 @@ class User extends Model
     protected $primaryKey = 'Id';
     const CREATED_AT = 'CreatedAt';
     const UPDATED_AT = 'UpdatedAt';
+
+    public function images()
+    {
+        return $this->hasMany(UserImage::class, 'User_id', 'Avatar');
+    }
 }

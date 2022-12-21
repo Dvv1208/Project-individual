@@ -4,6 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 use App\Models\User;
+use App\Libraries\MyClass;
 
 $user = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
 
@@ -20,22 +21,35 @@ $user = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
     <meta name="keywords" content="<?php echo (isset($metadesc)) ? $metadesc : "Mô tả SEO"; ?>">
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/css/all.min.css">
+    <link rel="stylesheet" href="public/css/toastr.min.css">
     <link rel="stylesheet" href="public/css/layoutsite.css">
     <script src="public/js/bootstrap.bundle.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+    <link rel="icon" type="image/svg+xml" href="#">
+    <script src="public/js/toastr.min.js"></script>
+    <script>
+        window.toastr.options = {
+            "progressBar": true,
+            heading: 'Positioning',
+            position: 'top-right',
+            stack: false
+        };
+    </script>
+
 </head>
+<?php include_once('views/frontend/message_alert.php'); ?>
 
 <body class="o_connected_user">
-
     <header class="header">
         <div id="wrapwrap" class="container">
             <header id="top" data-anchor="true" data-name="Header" class="o_header_standard o_top_fixed_element">
                 <nav data-name="Navbar" class="navbar navbar-expand-lg navbar-light o_colored_level o_cc shadow-sm">
                     <div id="top_menu_container" class="container justify-content-start justify-content-lg-between">
                         <a href="/" class="navbar-brand logo mr-4">
-                            <span data-oe-model="website" data-oe-id="1" data-oe-field="logo" data-oe-type="image" data-oe-expression="website.logo" role="img" aria-label="Logo of My Website" title="My Website"><img src="/web/image/website/1/logo/My%20Website?unique=3e7f044" class="img img-fluid" alt="My Website" loading="lazy"></span>
+                            <span data-oe-model="website" data-oe-id="1" data-oe-field="logo" data-oe-type="image" data-oe-expression="website.logo" role="img" aria-label="Logo of My Website" title="My Website">
+                                <img src="" class="img img-fluid" alt="My Website" loading="lazy">
+                            </span>
                         </a>
                         <button type="button" data-toggle="collapse" data-target="#top_menu_collapse" data-oe-model="ir.ui.view" data-oe-id="4965" data-oe-field="arch" data-oe-xpath="/t[1]/button[1]" class="navbar-toggler ml-auto">
                             <span class="navbar-toggler-icon o_not_editable"></span>
@@ -64,7 +78,22 @@ $user = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
                                     </a>
                                 </li>
 
-                                <li class="o_wsale_my_cart nav-item mx-lg-3">
+                                <li class="nav-item mx-lg-3">
+                                    <?php
+                                    $count_heart = 0;
+                                    if (isset($_SESSION['heart'])) {
+                                        $heart = $_SESSION['heart'];
+                                        $count_heart = count($heart);
+                                    }
+                                    ?>
+                                    <a href="index.php?option=heart" class="nav-link" data-original-title="" title="Thêm vào yêu thích">
+                                        <i class="fas fa-heart"></i>
+
+                                        <sup class="badge bg-danger rounded-pill"><?php echo $count_heart; ?></sup>
+                                    </a>
+                                </li>
+
+                                <li class="o_wsale_my_cart nav-item">
                                     <?php
                                     $count_cart = 0;
                                     if (isset($_SESSION['cart'])) {

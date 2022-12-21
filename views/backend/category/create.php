@@ -1,15 +1,16 @@
 <?php
+
 use App\Models\Category;
 
 $list = Category::where('Status', '!=', '0')->get();
 $strparentid = "";
 $strorders = "";
-foreach($list as $item){
-  $strparentid .= "<option value = '" .$item['Id'] ."'>" .$item['Name'] . "</option>";
-  $strorders .="<option value='".$item['Orders']."'> Sau: ".$item['Name']."</option>";
+foreach ($list as $item) {
+    $strparentid .= "<option value = '" . $item['Id'] . "'>" . $item['Name'] . "</option>";
+    $strorders .= "<option value='" . $item['Orders'] . "'> Sau: " . $item['Name'] . "</option>";
 }
 
- ?>
+?>
 <?php require_once('../views/backend/header.php'); ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -20,11 +21,9 @@ foreach($list as $item){
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Thêm danh mục sản phẩm</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Bảng điều khiển</a></li>
+                        <ol class="breadcrumb float-sm-left">
+                            <li class="breadcrumb-item"><a href="index.php">Trang quản trị</a></li>
+                            <li class="breadcrumb-item active"><a href="index.php?option=category">Danh mục</a></li>
                             <li class="breadcrumb-item active">Thêm danh mục</li>
                         </ol>
                     </div>
@@ -54,18 +53,15 @@ foreach($list as $item){
                         <div class="col-md-9">
                             <div class="mb-3">
                                 <label for="name">Tên danh mục</label>
-                                <input name="data[Name]" id="name" type="text" class="form-control" required
-                                    placeholder="Nhập tên danh mục" />
+                                <input name="data[Name]" id="name" type="text" class="form-control" required placeholder="Nhập tên danh mục" />
                             </div>
                             <div class="mb-3">
                                 <label for="metakey">Từ khóa</label>
-                                <textarea name="data[Metakey]" id="metakey" class="form-control" required
-                                    rows="4"></textarea>
+                                <textarea name="data[Metakey]" id="metakey" class="form-control" required rows="4"></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="metadesc">Mô tả</label>
-                                <textarea name="data[Metadesc]" id="metadesc" class="form-control" required
-                                    rows="4"></textarea>
+                                <textarea name="data[Metadesc]" id="metadesc" class="form-control" required rows="4"></textarea>
                             </div>
                         </div>
                         <div class="col-md-3">

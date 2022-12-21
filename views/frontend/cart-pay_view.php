@@ -8,12 +8,29 @@ $title = 'Thanh toán';
 $username = User::find($_SESSION['user_id']);
 
 if (!isset($_SESSION['logincustomer'])) {
+    $_SESSION['checkout'] = true;
     header('location:index.php?option=customer-login');
+} else {
+    unset($_SESSION['checkout']);
 }
 
 ?>
 
 <?php require_once('views/frontend/header.php'); ?>
+<?php include_once('views/frontend/message_alert.php'); ?>
+<section class="breadcrumb p-0 m-0">
+    <div class="container">
+        <div class="row">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb my-3">
+                    <li class="breadcrumb-item"><a style="text-decoration: none" href="index.php">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a style="text-decoration: none" href="index.php?option=cart_view">Giỏ hàng</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><?php echo $title; ?></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</section>
 <section class="clearfix main mt-2">
     <div class="container">
         <div class="row">
@@ -50,11 +67,11 @@ if (!isset($_SESSION['logincustomer'])) {
                     </div>
                     <div class="form-group">
                         <div class="col-md-12 order-md-2 mb-4 text-end">
-                            <a class="btn btn-info" href="index.php?option=cart">Quay về giỏ hàng</a>
+                            <a class="btn btn-outline-info" href="index.php?option=cart">Quay về giỏ hàng</a>
                             <tr>
                                 <td>
                                     <input type="hidden" name="action" value="dathang">
-                                    <button class="btn btn-success" name="dathang" type="submit">Đặt hàng</button>
+                                    <button class="btn btn-outline-success" name="dathang" onclick="confirmOrder();" type="submit">Đặt hàng</button>
                                     </input>
                                 </td>
                             </tr>
@@ -88,8 +105,8 @@ if (!isset($_SESSION['logincustomer'])) {
                                     <td class="text-center"><?php echo number_format($rcart['Price'], 0, ',', '.'); ?><sup>đ</sup></td>
                                     <td class="text-center"><?php echo $rcart['qty'] ?></td>
                                     <td class="text-center">
-                                        <?php echo number_format($rcart['amount'] * $rcart['qty'], 0, ',', '.') ?><sup>đ</sup></td>
-                                    <?php $totalMoney += $rcart['amount'] * $rcart['qty']; ?>
+                                        <?php echo number_format($rcart['Price'] * $rcart['qty'], 0, ',', '.') ?><sup>đ</sup></td>
+                                    <?php $totalMoney += $rcart['amount'] ?>
                                 </tr>
                             <?php endforeach; ?>
                             <tr>

@@ -1,8 +1,9 @@
 <?php
+
 use App\Models\Page;
 
 $list = Page::where('Status', '!=', '0')->get();
- ?>
+?>
 <?php require_once('../views/backend/header.php'); ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -13,11 +14,9 @@ $list = Page::where('Status', '!=', '0')->get();
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Thêm trang đơn</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Bảng điều khiển</a></li>
+                        <ol class="breadcrumb float-sm-left">
+                            <li class="breadcrumb-item"><a href="index.php">Trang quản trị</a></li>
+                            <li class="breadcrumb-item active"><a href="index.php?option=page">Trang đơn</a></li>
                             <li class="breadcrumb-item active">Thêm trang đơn</li>
                         </ol>
                     </div>
@@ -48,8 +47,7 @@ $list = Page::where('Status', '!=', '0')->get();
                             <input name="id" type="hidden" />
                             <div class="mb-3">
                                 <label for="title">Tiêu đề</label>
-                                <input name="data[Title]" id="title" type="text" class="form-control" required
-                                    placeholder="Nhập tiêu đề bài viết" />
+                                <input name="data[Title]" id="title" type="text" class="form-control" required placeholder="Nhập tiêu đề bài viết" />
                             </div>
                             <div class="mb-3">
                                 <label for="detail">Chi Tiết </label>
@@ -57,13 +55,11 @@ $list = Page::where('Status', '!=', '0')->get();
                             </div>
                             <div class="mb-3">
                                 <label for="metakey">Từ khóa</label>
-                                <textarea name="data[Metakey]" id="metakey" class="form-control" required
-                                    rows="4"></textarea>
+                                <textarea name="data[Metakey]" id="metakey" class="form-control" required rows="4"></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="metadesc">Mô tả</label>
-                                <textarea name="data[Metadesc]" id="metadesc" class="form-control" required
-                                    rows="4"></textarea>
+                                <textarea name="data[Metadesc]" id="metadesc" class="form-control" required rows="4"></textarea>
                             </div>
                         </div>
                         <div class="col-md-3">

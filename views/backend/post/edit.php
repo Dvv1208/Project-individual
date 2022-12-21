@@ -1,37 +1,45 @@
 <?php
+
 use App\Models\Post;
+use App\Libraries\MyClass;
 
 $post = new Post();
 $id = $_REQUEST['id'];
 $list = Post::where('Status', '!=', '0')->get();
 $row = Post::find($id);
-if($row == null){
-    MyClass::set_flash("message", ['type'=> 'danger','msg'=> 'Mẫu tin không tồn tại !']);
+if ($row == null) {
+    MyClass::set_flash("message", ['type' => 'danger', 'msg' => 'Mẫu tin không tồn tại !']);
     header("location:index.php?option=post");
 }
-$strcatid='';
-foreach($list as $item)
-{
-    $strcatid .= "<option value = '" .$item['Id'] ."'>" .$item['Name'] . "</option>";
+$strcatid = '';
+foreach ($list as $item) {
+    $strcatid .= "<option value = '" . $item['Id'] . "'>" . $item['Name'] . "</option>";
 }
- ?>
+?>
 <?php require_once('../views/backend/header.php'); ?>
 
 <!-- Content Wrapper. Contains page content -->
 <form name="form1" action="index.php?option=post&cat=process" method="post" enctype="multipart/form-data">
     <div class="content-wrapper py-2">
-        <!-- Content Header (Page header) -->
-
-        <!-- Main content -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-left">
+                            <li class="breadcrumb-item"><a href="index.php">Trang quản trị</a></li>
+                            <li class="breadcrumb-item active"><a href="index.php?option=post">Bài viết</a></li>
+                            <li class="breadcrumb-item active">Cập nhật bài viết</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
         <section class="content">
 
             <!-- Default box -->
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-6">
-                            <strong class="text-danger">Cập nhật danh mục</strong>
-                        </div>
                         <div class="col-md-6 text-right">
                             <a href="index.php?option=post" class="btn btn-sm btn-info">
                                 <i class="fas fa-undo"></i> Quay về danh sách
@@ -46,10 +54,9 @@ foreach($list as $item)
                     <div class="row">
                         <input name="id" value="<?php echo $row['Id']; ?>" type="hidden" />
                         <div class="col-md-9">
-                        <div class="mb-3">
+                            <div class="mb-3">
                                 <label for="title">Tiêu đề</label>
-                                <input name="data[Title]" id="title" type="text" class="form-control" required
-                                    placeholder="Nhập tiêu đề bài viết" />
+                                <input name="data[Title]" id="title" type="text" class="form-control" required placeholder="Nhập tiêu đề bài viết" />
                             </div>
                             <div class="mb-3">
                                 <label for="detail">Chi Tiết bài viết</label>
@@ -57,24 +64,22 @@ foreach($list as $item)
                             </div>
                             <div class="mb-3">
                                 <label for="metakey">Từ khóa</label>
-                                <textarea name="data[Metakey]" id="metakey" class="form-control" required
-                                    rows="4"></textarea>
+                                <textarea name="data[Metakey]" id="metakey" class="form-control" required rows="4"></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="metadesc">Mô tả</label>
-                                <textarea name="data[Metadesc]" id="metadesc" class="form-control" required
-                                    rows="4"></textarea>
+                                <textarea name="data[Metadesc]" id="metadesc" class="form-control" required rows="4"></textarea>
                             </div>
                         </div>
                         <div class="col-md-3">
-                        <div class="mb-3">
-              <label for="type">Kiểu bài viết</label>
-            <select id="Type" name="type" class="form-control">
-            <option value="1">Tin tức</option>
-              <option value="2">giới thiệu</option>
-              <option value="3">dịch vụ</option>
-</select>
-              </div>
+                            <div class="mb-3">
+                                <label for="type">Kiểu bài viết</label>
+                                <select id="Type" name="type" class="form-control">
+                                    <option value="1">Tin tức</option>
+                                    <option value="2">giới thiệu</option>
+                                    <option value="3">dịch vụ</option>
+                                </select>
+                            </div>
                             <div class="mb-3">
                                 <label for="img">Hình</label>
                                 <input type="file" name="img" id="img" class="form-control">

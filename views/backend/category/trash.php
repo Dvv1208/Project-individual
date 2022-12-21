@@ -6,7 +6,7 @@ use App\Libraries\MyClass;
 $list = Category::where('Status', '=', '0')->orderBy('CreatedAt', 'desc')->get();
 ?>
 
-<?php require_once('../views/backend/header.php');?>
+<?php require_once('../views/backend/header.php'); ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -14,11 +14,9 @@ $list = Category::where('Status', '=', '0')->orderBy('CreatedAt', 'desc')->get()
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Thùng rác danh mục</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Bảng điều khiển</a></li>
+                    <ol class="breadcrumb float-sm-left">
+                        <li class="breadcrumb-item"><a href="index.php">Trang quản trị</a></li>
+                        <li class="breadcrumb-item active"><a href="index.php?option=category">Danh mục</a></li>
                         <li class="breadcrumb-item active">Thùng rác danh mục</li>
                     </ol>
                 </div>
@@ -39,7 +37,7 @@ $list = Category::where('Status', '=', '0')->orderBy('CreatedAt', 'desc')->get()
                 </div>
             </div>
             <div class="card-body">
-                <?php include_once('../message_alert.php');?>
+                <?php include_once('../message_alert.php'); ?>
                 <table class="table table-bordered" id="myTable">
                     <thead>
                         <tr>
@@ -56,33 +54,30 @@ $list = Category::where('Status', '=', '0')->orderBy('CreatedAt', 'desc')->get()
                     </thead>
                     <tbody>
                         <?php foreach ($list as $row) : ?>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="checkId[]">
-                            </td>
-                            <td class="text-center"><?php echo $row['Slug'];?></td>
-                            <td class="text-center"><?php echo $row['Name'];?></td>
-                            <td class="text-center"><?php echo $row['Slug'];?></td>
-                            <td class="text-center"><?php echo $row['CreatedAt'];?></td>
-                            <td class="text-center">
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="checkId[]">
+                                </td>
+                                <td class="text-center"><?php echo $row['Slug']; ?></td>
+                                <td class="text-center"><?php echo $row['Name']; ?></td>
+                                <td class="text-center"><?php echo $row['Slug']; ?></td>
+                                <td class="text-center"><?php echo $row['CreatedAt']; ?></td>
+                                <td class="text-center">
 
-                                <a href="index.php?option=category&cat=detail&id=<?php echo $row['Id'];?>"
-                                    title="Chi tiết" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-eye"></i>
-                                </a>
+                                    <a href="index.php?option=category&cat=detail&id=<?php echo $row['Id']; ?>" title="Chi tiết" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
 
-                                <a href="index.php?option=category&cat=retrash&id=<?php echo $row['Id'];?>"
-                                    title="Cập nhật" class="btn btn-sm btn-info">
-                                    <i class="fas fa-undo"></i>
-                                </a>
+                                    <a href="index.php?option=category&cat=retrash&id=<?php echo $row['Id']; ?>" title="Cập nhật" class="btn btn-sm btn-info">
+                                        <i class="fas fa-undo"></i>
+                                    </a>
 
-                                <a href="index.php?option=category&cat=del&id=<?php echo $row['Id'];?>"
-                                    title="Xóa vào thùng rác" class="btn btn-sm btn-danger">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </td>
-                            <td><?php echo $row['Id'];?></td>
-                        </tr>
+                                    <a href="index.php?option=category&cat=del&id=<?php echo $row['Id']; ?>" title="Xóa vào thùng rác" class="btn btn-sm btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                                <td><?php echo $row['Id']; ?></td>
+                            </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
@@ -97,9 +92,9 @@ $list = Category::where('Status', '=', '0')->orderBy('CreatedAt', 'desc')->get()
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<?php require_once('../views/backend/footer.php');?>
+<?php require_once('../views/backend/footer.php'); ?>
 <script>
-$(document).ready(function() {
-    $('#myTable').DataTable();
-});
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    });
 </script>
