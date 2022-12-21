@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 16, 2022 at 10:56 AM
+-- Generation Time: Dec 21, 2022 at 09:42 AM
 -- Server version: 8.0.30
 -- PHP Version: 7.4.33
 
@@ -11676,10 +11676,9 @@ CREATE TABLE `tttn_order` (
 --
 
 INSERT INTO `tttn_order` (`Id`, `Code`, `User_id`, `CreatedAt`, `Diachi`, `Name`, `Phone`, `Email`, `Pttt`, `OrderStatus`, `UpdatedAt`) VALUES
-(1, '1670919953', 21, '2022-12-13 01:25:53', '97 đường số 11, Phường Trường Thọ, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', 'Võ Văn Dương', '0985781353', 'vovanduong175@gmail.com', 'Khi nhận hàng', '0', '2022-12-16 10:01:02'),
-(2, '1670919979', 21, '2022-12-13 01:26:19', '97 đường số 11, Phường Trường Thọ, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', 'Võ Văn Dương', '0985781353', 'vovanduong175@gmail.com', 'Thanh toán bằng VnPay', '2', '2022-12-13 09:45:02'),
-(3, '1670920035', 21, '2022-12-13 01:27:15', '97 đường số 11, Phường Trường Thọ, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', 'Võ Văn Dương', '0985781353', 'vovanduong175@gmail.com', 'Thanh toán bằng Momo', '2', '2022-12-16 03:55:36'),
-(4, '1671186527', 21, '2022-12-16 10:28:47', '97 đường số 11, Phường Trường Thọ, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', 'Võ Văn Dương', '0985781353', 'vovanduong258@gmail.com', 'Khi nhận hàng', '0', '2022-12-16 10:30:56');
+(1, '1670919953', 2, '2022-12-13 01:25:53', '97 đường số 11, Phường Trường Thọ, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', 'Võ Văn Dương', '0985781353', 'vovanduong175@gmail.com', 'Khi nhận hàng', '0', '2022-12-16 10:01:02'),
+(2, '1670919979', 2, '2022-12-13 01:26:19', '97 đường số 11, Phường Trường Thọ, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', 'Võ Văn Dương', '0985781353', 'vovanduong175@gmail.com', 'Thanh toán bằng VnPay', '2', '2022-12-13 09:45:02'),
+(3, '1670920035', 2, '2022-12-13 01:27:15', '97 đường số 11, Phường Trường Thọ, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', 'Võ Văn Dương', '0985781353', 'vovanduong175@gmail.com', 'Thanh toán bằng Momo', '2', '2022-12-16 03:55:36');
 
 -- --------------------------------------------------------
 
@@ -11725,8 +11724,7 @@ CREATE TABLE `tttn_orderdetail` (
 INSERT INTO `tttn_orderdetail` (`Id`, `Orderid`, `Productid`, `Price`, `Quantity`, `Amount`) VALUES
 (1, 1670919953, 1670222935, 100000.00, 1, 100000.00),
 (2, 1670919979, 1669113634, 100000.00, 1, 100000.00),
-(3, 1670920035, 9, 4000000.00, 1, 4000000.00),
-(4, 1671186527, 9, 4000000.00, 1, 4000000.00);
+(3, 1670920035, 9, 4000000.00, 1, 4000000.00);
 
 -- --------------------------------------------------------
 
@@ -12104,8 +12102,8 @@ CREATE TABLE `tttn_user` (
 
 INSERT INTO `tttn_user` (`Id`, `Fullname`, `Username`, `Password`, `Email`, `Gender`, `Phone`, `Roles`, `Address`, `CreatedAt`, `CreatedBy`, `UpdatedAt`, `UpdatedBy`, `Status`) VALUES
 (1, 'Admin', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'vovanduong175@gmail.com', 0, '0987654367', '1', '97 đường số 11, Phường Trường Thọ, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', '2020-07-01 00:16:03', 1, '2022-12-06 21:53:06', 1, 1),
-(21, 'Võ Văn Dương', 'dvv1208', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'vovanduong258@gmail.com', 1, '0985781353', '0', '97 đường số 11, Phường Trường Thọ, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', '2022-11-30 21:53:51', 1, '2022-11-30 21:53:51', 1, 1),
-(44, 'Ngô Phi Thuận', 'npt1109', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'thuanngo1109@gmail.com', 1, '03335444712', '0', '97 đường số 11, Phường Phước Long B, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', '2022-12-16 01:30:53', 1, '2022-12-16 01:31:51', 1, 1);
+(2, 'Võ Văn Dương', 'dvv1208', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'vovanduong258@gmail.com', 1, '0985781353', '0', '97 đường số 11, Phường Trường Thọ, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', '2022-11-30 21:53:51', 1, '2022-11-30 21:53:51', 1, 1),
+(3, 'Ngô Phi Thuận', 'npt1109', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'thuanngo1109@gmail.com', 1, '03335444712', '0', '97 đường số 11, Phường Phước Long B, Thành phố Thủ Đức, Thành phố Hồ Chí Minh', '2022-12-16 01:30:53', 1, '2022-12-16 01:31:51', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -12126,9 +12124,9 @@ CREATE TABLE `tttn_userimage` (
 --
 
 INSERT INTO `tttn_userimage` (`Id`, `User_id`, `Avatar`, `CreatedAt`, `UpdatedAt`) VALUES
-(1, 21, '21_dvv1208.jpg', '2022-12-05 04:51:13', '2022-12-05 04:51:13'),
+(1, 2, '21_dvv1208.jpg', '2022-12-05 04:51:13', '2022-12-05 04:51:13'),
 (2, 1, '21_dvv1208.jpg', '2022-12-06 10:35:32', '2022-12-06 10:35:32'),
-(17, 44, '167115429244_npt1109.jpg', '2022-12-16 01:31:32', '2022-12-16 01:31:32');
+(3, 3, '167115429244_npt1109.jpg', '2022-12-16 01:31:32', '2022-12-16 01:31:32');
 
 --
 -- Indexes for dumped tables
@@ -12292,7 +12290,7 @@ ALTER TABLE `tttn_menu`
 -- AUTO_INCREMENT for table `tttn_order`
 --
 ALTER TABLE `tttn_order`
-  MODIFY `Id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Id đơn hàng', AUTO_INCREMENT=5;
+  MODIFY `Id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Id đơn hàng', AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tttn_ordercancel`
@@ -12304,7 +12302,7 @@ ALTER TABLE `tttn_ordercancel`
 -- AUTO_INCREMENT for table `tttn_orderdetail`
 --
 ALTER TABLE `tttn_orderdetail`
-  MODIFY `Id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Mã CT Đơn hàng', AUTO_INCREMENT=5;
+  MODIFY `Id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Mã CT Đơn hàng', AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tttn_product`
@@ -12352,13 +12350,13 @@ ALTER TABLE `tttn_ttvnpay`
 -- AUTO_INCREMENT for table `tttn_user`
 --
 ALTER TABLE `tttn_user`
-  MODIFY `Id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Mã tài khoản', AUTO_INCREMENT=45;
+  MODIFY `Id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Mã tài khoản', AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tttn_userimage`
 --
 ALTER TABLE `tttn_userimage`
-  MODIFY `Id` int NOT NULL AUTO_INCREMENT COMMENT 'Id hình', AUTO_INCREMENT=18;
+  MODIFY `Id` int NOT NULL AUTO_INCREMENT COMMENT 'Id hình', AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
