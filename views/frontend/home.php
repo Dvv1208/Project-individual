@@ -78,8 +78,21 @@ $list_slider = Slider::where([['Position', '=', 'slideshow'], ['Status', '=', '1
                                                         </a>
                                                     </h5>
                                                 </h3>
-                                                <h5 class="product-price"><?php echo number_format($row_product['Pricesale'], 0, ',', '.') . "<sup>đ</sup>"; ?>
-                                                    <del class="product-old-price"><?php echo number_format($row_product['Price'], 0, ',', '.') . "<sup>đ</sup>"; ?></del>
+                                                <h5 class="product-price">
+                                                    <?php
+                                                    if (($row_product['Price']) > ($row_product['Pricesale'])) {
+                                                        echo number_format($row_product['Pricesale'], 0, ',', '.') . "<sup>đ</sup>" . " ";
+                                                        echo "<del class='product-old-price' style='font-size: 60%;'>";
+                                                        echo number_format($row_product['Price'], 0, ',', '.') . "<sup>đ</sup>";
+                                                        "</del>";
+                                                    } elseif (($row_product['Price']) == ($row_product['Pricesale'])) {
+                                                        echo number_format($row_product['Pricesale'], 0, ',', '.') . "<sup>đ</sup>";
+                                                    } else {
+                                                        "<del class='product-old-price'>";
+                                                        echo number_format($row_product['Price'], 0, ',', '.') . "<sup>đ</sup>";
+                                                        "</del>";
+                                                    }
+                                                    ?>
                                                 </h5>
                                                 <div class="product-rating">
                                                 </div>

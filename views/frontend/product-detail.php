@@ -139,14 +139,16 @@ $reviews = Reviews::where('pro_id', '=', $row_pro['Id'])->get();
                                 <li><a href="#"><i class="fab fa-google-plus"></i></a></li>
                                 <li><a href="#"><i class="fas fa-envelope"></i></a></li>
                             </ul>
+                            <p>
+                            <div id="fb-root"></div>
+                            <div class="fb-like" data-href="index.php?option=product&id=<?php echo $slug; ?>" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true">
+                            </div>
+                            </p>
                         </div>
                         <br>
                         <h5>Chi tiết sản phẩm</h5>
                         <p><?php echo $row_pro['Detail']; ?></p>
-                        <!-- <p>
-                        <div class="fb-like" data-href="index.php?option=product&id=<?php echo $slug; ?>" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true">
-                        </div>
-                        </p> -->
+                        </p>
                     </div>
 
                     <!-- <div class="row">
@@ -301,8 +303,21 @@ $reviews = Reviews::where('pro_id', '=', $row_pro['Id'])->get();
                                                                     </a>
                                                                 </h5>
                                                             </h3>
-                                                            <h5 class="product-price"><?php echo number_format($row_product['Pricesale'], 0, ',', '.') . "<sup>đ</sup>"; ?>
-                                                                <del class="product-old-price"><?php echo number_format($row_product['Price'], 0, ',', '.') . "<sup>đ</sup>"; ?></del>
+                                                            <h5 class="product-price">
+                                                                <?php
+                                                                if (($row_product['Price']) > ($row_product['Pricesale'])) {
+                                                                    echo number_format($row_product['Pricesale'], 0, ',', '.') . "<sup>đ</sup>" . " ";
+                                                                    echo "<del class='product-old-price' style='font-size: 60%;'>";
+                                                                    echo number_format($row_product['Price'], 0, ',', '.') . "<sup>đ</sup>";
+                                                                    "</del>";
+                                                                } elseif (($row_product['Price']) == ($row_product['Pricesale'])) {
+                                                                    echo number_format($row_product['Pricesale'], 0, ',', '.') . "<sup>đ</sup>";
+                                                                } else {
+                                                                    "<del class='product-old-price'>";
+                                                                    echo number_format($row_product['Price'], 0, ',', '.') . "<sup>đ</sup>";
+                                                                    "</del>";
+                                                                }
+                                                                ?>
                                                             </h5>
                                                             <div class="product-rating">
                                                             </div>
@@ -382,6 +397,7 @@ $reviews = Reviews::where('pro_id', '=', $row_pro['Id'])->get();
 <script src="public/home/js/main.js"></script>
 <script src="public/home/js/bootstrap.min.js"></script>
 <script src="public/js/reviews.js"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v15.0&appId=601476034305329&autoLogAppEvents=1" nonce="XZtqaHcq"></script>
 <style>
     .tabcontent {
         display: none;

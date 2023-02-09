@@ -37,7 +37,7 @@ $list = Category::where('Status', '=', '0')->orderBy('CreatedAt', 'desc')->get()
                 </div>
             </div>
             <div class="card-body">
-                <?php include_once('../message_alert.php'); ?>
+                <?php include_once('../views/backend/message_alert.php'); ?>
                 <table class="table table-bordered" id="myTable">
                     <thead>
                         <tr>

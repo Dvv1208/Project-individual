@@ -44,11 +44,11 @@ $user = (isset($_SESSION['logincustomer'])) ?  $_SESSION['logincustomer'] : [];
     <header class="header">
         <div id="wrapwrap" class="container">
             <header id="top" data-anchor="true" data-name="Header" class="o_header_standard o_top_fixed_element">
-                <nav data-name="Navbar" class="navbar navbar-expand-lg navbar-light o_colored_level o_cc shadow-sm">
+                <nav data-name="Navbar" class="navbar navbar-expand-lg navbar-light o_colored_level o_cc shadow-sm" style="width: auto; height: 100px;">
                     <div id="top_menu_container" class="container justify-content-start justify-content-lg-between">
-                        <a href="/" class="navbar-brand logo mr-4">
+                        <a href="index.php" class="navbar-brand logo mr-4">
                             <span data-oe-model="website" data-oe-id="1" data-oe-field="logo" data-oe-type="image" data-oe-expression="website.logo" role="img" aria-label="Logo of My Website" title="My Website">
-                                <img src="" class="img img-fluid" alt="My Website" loading="lazy">
+                                <img src="public/images/DuongStore.gif" style="width: auto; height: 100px;" class="img img-fluid" alt="My Website" loading="lazy">
                             </span>
                         </a>
                         <button type="button" data-toggle="collapse" data-target="#top_menu_collapse" data-oe-model="ir.ui.view" data-oe-id="4965" data-oe-field="arch" data-oe-xpath="/t[1]/button[1]" class="navbar-toggler ml-auto">

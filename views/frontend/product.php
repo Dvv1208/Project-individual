@@ -104,8 +104,21 @@ $price_asc = Product::where('Status', '=', '1')
                                                     </a>
                                                 </h5>
                                             </h3>
-                                            <h5 class="product-price"><?php echo number_format($row_product['Pricesale'], 0, ',', '.') . "<sup>đ</sup>"; ?>
-                                                <del class="product-old-price"><?php echo number_format($row_product['Price'], 0, ',', '.') . "<sup>đ</sup>"; ?></del>
+                                            <h5 class="product-price">
+                                                <?php
+                                                if (($row_product['Price']) > ($row_product['Pricesale'])) {
+                                                    echo number_format($row_product['Pricesale'], 0, ',', '.') . "<sup>đ</sup>" . " ";
+                                                    echo "<del class='product-old-price' style='font-size: 60%;'>";
+                                                    echo number_format($row_product['Price'], 0, ',', '.') . "<sup>đ</sup>";
+                                                    "</del>";
+                                                } elseif (($row_product['Price']) == ($row_product['Pricesale'])) {
+                                                    echo number_format($row_product['Pricesale'], 0, ',', '.') . "<sup>đ</sup>";
+                                                } else {
+                                                    "<del class='product-old-price'>";
+                                                    echo number_format($row_product['Price'], 0, ',', '.') . "<sup>đ</sup>";
+                                                    "</del>";
+                                                }
+                                                ?>
                                             </h5>
                                             <div class="product-rating">
                                             </div>
@@ -145,8 +158,21 @@ $price_asc = Product::where('Status', '=', '1')
                                                     </a>
                                                 </h5>
                                             </h3>
-                                            <h5 class="product-price"><?php echo number_format($row_nameasc['Pricesale'], 0, ',', '.') . "<sup>đ</sup>"; ?>
-                                                <del class="product-old-price"><?php echo number_format($row_nameasc['Price'], 0, ',', '.') . "<sup>đ</sup>"; ?></del>
+                                            <h5 class="product-price">
+                                                <?php
+                                                if (($row_nameasc['Price']) > ($row_nameasc['Pricesale'])) {
+                                                    echo number_format($row_nameasc['Pricesale'], 0, ',', '.') . "<sup>đ</sup>" . " ";
+                                                    echo "<del class='product-old-price' style='font-size: 60%;'>";
+                                                    echo number_format($row_nameasc['Price'], 0, ',', '.') . "<sup>đ</sup>";
+                                                    "</del>";
+                                                } elseif (($row_nameasc['Price']) == ($row_nameasc['Pricesale'])) {
+                                                    echo number_format($row_nameasc['Pricesale'], 0, ',', '.') . "<sup>đ</sup>";
+                                                } else {
+                                                    "<del class='product-old-price'>";
+                                                    echo number_format($row_nameasc['Price'], 0, ',', '.') . "<sup>đ</sup>";
+                                                    "</del>";
+                                                }
+                                                ?>
                                             </h5>
                                             <div class="product-rating">
                                             </div>
@@ -186,8 +212,21 @@ $price_asc = Product::where('Status', '=', '1')
                                                     </a>
                                                 </h5>
                                             </h3>
-                                            <h5 class="product-price"><?php echo number_format($row_namedesc['Pricesale'], 0, ',', '.') . "<sup>đ</sup>"; ?>
-                                                <del class="product-old-price"><?php echo number_format($row_namedesc['Price'], 0, ',', '.') . "<sup>đ</sup>"; ?></del>
+                                            <h5 class="product-price">
+                                                <?php
+                                                if (($row_namedesc['Price']) > ($row_namedesc['Pricesale'])) {
+                                                    echo number_format($row_namedesc['Pricesale'], 0, ',', '.') . "<sup>đ</sup>" . " ";
+                                                    echo "<del class='product-old-price' style='font-size: 60%;'>";
+                                                    echo number_format($row_namedesc['Price'], 0, ',', '.') . "<sup>đ</sup>";
+                                                    "</del>";
+                                                } elseif (($row_namedesc['Price']) == ($row_namedesc['Pricesale'])) {
+                                                    echo number_format($row_namedesc['Pricesale'], 0, ',', '.') . "<sup>đ</sup>";
+                                                } else {
+                                                    "<del class='product-old-price'>";
+                                                    echo number_format($row_namedesc['Price'], 0, ',', '.') . "<sup>đ</sup>";
+                                                    "</del>";
+                                                }
+                                                ?>
                                             </h5>
                                             <div class="product-rating">
                                             </div>
@@ -227,8 +266,21 @@ $price_asc = Product::where('Status', '=', '1')
                                                     </a>
                                                 </h5>
                                             </h3>
-                                            <h5 class="product-price"><?php echo number_format($row_price_asc['Pricesale'], 0, ',', '.') . "<sup>đ</sup>"; ?>
-                                                <del class="product-old-price"><?php echo number_format($row_price_asc['Price'], 0, ',', '.') . "<sup>đ</sup>"; ?></del>
+                                            <h5 class="product-price">
+                                                <?php
+                                                if (($row_price_asc['Price']) > ($row_price_asc['Pricesale'])) {
+                                                    echo number_format($row_price_asc['Pricesale'], 0, ',', '.') . "<sup>đ</sup>" . " ";
+                                                    echo "<del class='product-old-price' style='font-size: 60%;'>";
+                                                    echo number_format($row_price_asc['Price'], 0, ',', '.') . "<sup>đ</sup>";
+                                                    "</del>";
+                                                } elseif (($row_price_asc['Price']) == ($row_price_asc['Pricesale'])) {
+                                                    echo number_format($row_price_asc['Pricesale'], 0, ',', '.') . "<sup>đ</sup>";
+                                                } else {
+                                                    "<del class='product-old-price'>";
+                                                    echo number_format($row_price_asc['Price'], 0, ',', '.') . "<sup>đ</sup>";
+                                                    "</del>";
+                                                }
+                                                ?>
                                             </h5>
                                             <div class="product-rating">
                                             </div>
@@ -268,8 +320,21 @@ $price_asc = Product::where('Status', '=', '1')
                                                     </a>
                                                 </h5>
                                             </h3>
-                                            <h5 class="product-price"><?php echo number_format($row_price_desc['Pricesale'], 0, ',', '.') . "<sup>đ</sup>"; ?>
-                                                <del class="product-old-price"><?php echo number_format($row_price_desc['Price'], 0, ',', '.') . "<sup>đ</sup>"; ?></del>
+                                            <h5 class="product-price">
+                                                <?php
+                                                if (($row_price_desc['Price']) > ($row_price_desc['Pricesale'])) {
+                                                    echo number_format($row_price_desc['Pricesale'], 0, ',', '.') . "<sup>đ</sup>" . " ";
+                                                    echo "<del class='product-old-price' style='font-size: 60%;'>";
+                                                    echo number_format($row_price_desc['Price'], 0, ',', '.') . "<sup>đ</sup>";
+                                                    "</del>";
+                                                } elseif (($row_price_desc['Price']) == ($row_price_desc['Pricesale'])) {
+                                                    echo number_format($row_price_desc['Pricesale'], 0, ',', '.') . "<sup>đ</sup>";
+                                                } else {
+                                                    "<del class='product-old-price'>";
+                                                    echo number_format($row_price_desc['Price'], 0, ',', '.') . "<sup>đ</sup>";
+                                                    "</del>";
+                                                }
+                                                ?>
                                             </h5>
                                             <div class="product-rating">
                                             </div>

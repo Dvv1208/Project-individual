@@ -123,7 +123,7 @@ require_once("config/google.php");
                             <button name="DANGNHAP" id="btnDn" type="submit" class="btn btn-primary btn-block">Đăng Nhập</button>
                         </div>
                     </div>
-                    <a type="button" onclick="window.location = '<?php echo $login_url ?>'" class="btn btn-google btn-user btn-block my-3">
+                    <a type="button" onclick="window.location = '<?php echo ($login_url) ?>'" class="btn btn-google btn-user btn-block my-3">
                         <i class="fab fa-google fa-fw"></i> Đăng nhập với Google
                     </a>
                     <a href="index.php?option=facebook" class="btn btn-facebook btn-user btn-facebook btn-block">

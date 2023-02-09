@@ -111,6 +111,9 @@ switch ($_POST['action']) {
                             "allow_self_signed" => true
                         )
                     ));
+                    // echo "<pre>";
+                    // var_dump($mail->Body);
+                    // echo "</pre>";
                     $mail->send();
                     echo 'Đã gửi mail thành công';
                 } catch (Exception $e) {
