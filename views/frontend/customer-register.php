@@ -104,10 +104,10 @@
     <script>
         $(document).ready(function() {
             $.ajax({
-                url: "http://localhost/JavaScript/php/index.php?option=tinh",
+                url: window.location.origin + "/index.php?option=tinh",
                 dataType: 'json',
                 success: function(data) {
-                    $("#tinh").html("");
+                    // $("#tinh").html("");
                     for (i = 0; i < data.length; i++) {
                         var tinh = data[i];
                         var str = ` 
@@ -120,7 +120,7 @@
                     });
                 }
             });
-            $("#tinh").select2();
+            // $("#tinh").select2();
         })
     </script>
     <!-- script lấy huyện trong tỉnh -->
@@ -128,7 +128,7 @@
         function layHuyen() {
             var matp = $("#tinh").val();
             $.ajax({
-                url: "http://localhost/JavaScript/php/index.php?option=huyen&matp=" + matp,
+                url: window.location.origin + "/index.php?option=huyen&matp=" + matp,
                 dataType: 'json',
                 success: function(data) {
                     $("#huyen").html("");
@@ -144,7 +144,7 @@
                     });
                 }
             });
-            $("#huyen").select2();
+            // $("#huyen").select2();
         }
     </script>
     <!-- script lấy xã trong huyện -->
@@ -152,7 +152,7 @@
         function layXa() {
             var maqh = $("#huyen").val();
             $.ajax({
-                url: "http://localhost/JavaScript/php/index.php?option=xa&maqh=" + maqh,
+                url: window.location.origin + "/index.php?option=xa&maqh=" + maqh,
                 dataType: 'json',
                 success: function(data) {
                     $("#xa").html("");
@@ -165,7 +165,7 @@
                     }
                 }
             });
-            $("#xa").select2();
+            // $("#xa").select2();
         }
     </script>
     </div>

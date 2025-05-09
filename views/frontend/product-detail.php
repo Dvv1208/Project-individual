@@ -113,23 +113,29 @@ $reviews = Reviews::where('pro_id', '=', $row_pro['Id'])->get();
                             </div>
                             <div class="add-to-cart">
                                 <form id="addcart" action="index.php?option=addcart" method="post">
-                                    <div class="qty-label">
-                                        Số lượng
-                                        <div class="input-number">
-                                            <input type="number" name="qty" id="qty" value="1" min="1" max="10" style="width:80%" aria-describedby="basic-addon2">
-                                            <span class="qty-up">+</span>
-                                            <span class="qty-down">-</span>
+                                    <?php if ($row_pro['Number']): ?>
+                                        <div class="qty-label">
+                                            Số lượng
+                                            <div class="input-number">
+                                                <input type="number" name="qty" id="qty" value="1" min="1" max="10" style="width:80%" aria-describedby="basic-addon2">
+                                                <span class="qty-up">+</span>
+                                                <span class="qty-down">-</span>
+                                            </div>
+                                        </div><br><br>
+                                        <ul class="product-btns" role="group" aria-label="Basic example">
+                                            <li>
+                                                <button type="submit" name="addheartFromdetail" class="btn btn-outline-danger"><i class="fas fa-heart"></i> THÊM VÀO YÊU THÍCH</button>
+                                            </li>
+                                            <li>
+                                                <input type="hidden" value="<?php echo $row_pro['Id']; ?>" name="proid" id="proid" />
+                                                <button type="submit" name="addcartFromdetail" id="addcartFromdetail" class="btn btn-outline-info"><i class="fas fa-shopping-cart"></i> THÊM VÀO GIỎ HÀNG</button>
+                                            </li>
+                                        </ul>
+                                    <?php else: ?>
+                                        <div class="out-of-stock">
+                                            <span>Sản phẩm hiện đang hết hàng</span>
                                         </div>
-                                    </div><br><br>
-                                    <ul class="product-btns" role="group" aria-label="Basic example">
-                                        <li>
-                                            <button type="submit" name="addheartFromdetail" class="btn btn-outline-danger"><i class="fas fa-heart"></i> THÊM VÀO YÊU THÍCH</button>
-                                        </li>
-                                        <li>
-                                            <input type="hidden" value="<?php echo $row_pro['Id']; ?>" name="proid" id="proid" />
-                                            <button type="submit" name="addcartFromdetail" id="addcartFromdetail" class="btn btn-outline-info"><i class="fas fa-shopping-cart"></i> THÊM VÀO GIỎ HÀNG</button>
-                                        </li>
-                                    </ul>
+                                    <?php endif; ?>
                                 </form>
                             </div>
                             <ul class="product-links">

@@ -237,6 +237,8 @@ $.fn.pageMe = function (opts) {
     pager.find('.prev_link').hide();
     if (numPages <= 1) {
         pager.find('.next_link').hide();
+        pager.find('.page_link:first').hide();
+        pager.hide();
     }
     pager.children().eq(1).addClass("active");
 
